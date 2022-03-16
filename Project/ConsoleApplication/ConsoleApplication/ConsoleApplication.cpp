@@ -16,6 +16,14 @@ double* foo()
     return arr;
 }
 
+struct USER
+{
+    size_t id;
+    string name;
+    string email;
+    uint8_t age;
+};
+
 int main()
 {
     //
