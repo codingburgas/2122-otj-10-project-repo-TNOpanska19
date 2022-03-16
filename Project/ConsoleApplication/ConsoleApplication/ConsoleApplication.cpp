@@ -43,4 +43,9 @@ int main()
         {1, "user1", "user@gmail.com", 18},
         {1, "user1", "user@gmail.com", 19}
     };
+
+
+    auto sum = [](int a, int b) { return a + b; };
+    int c = sum(5, 6);
+    cout << c;
 }
