@@ -45,6 +45,14 @@ int main()
         {1, "user1", "user@gmail.com", 19}
     };
 
+    sort(users.begin(), users.end(),
+        [](USER u1, USER u2) {return u1.age > u2.age; });
+
+    for (auto user : users)
+    {
+        cout << user.id << " " << user.name << " " << user.age << endl;
+    }
+
     vector <int> numbers = { 4, 6, 1, 8, 4 };
 
     auto it = find_if(numbers.begin(), numbers.end(),
@@ -59,6 +67,16 @@ int main()
     {
         cout << "The element was not found" << endl;
     }
+
+    /*
+    sort(numbers.begin(), numbers.end(),
+        [](int a, int b) {return a > b; });
+
+    for (auto num : numbers)
+    {
+
+    }
+    */
 
     auto sum = [](int a, int b) { return a + b; };
     int c = sum(5, 6);
