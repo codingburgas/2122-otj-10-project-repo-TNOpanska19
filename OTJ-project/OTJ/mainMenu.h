@@ -9,5 +9,5 @@ namespace mainMenu
 
 	void choice(int user_choice);
 
-	void registerUser();
+	void registerMenu();
 }

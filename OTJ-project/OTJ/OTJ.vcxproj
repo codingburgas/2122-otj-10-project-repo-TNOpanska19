@@ -24,6 +24,7 @@
     <ProjectGuid>{b607cacb-59c4-49aa-b276-e5925cfa237c}</ProjectGuid>
     <RootNamespace>OTJ</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>pm.consoleApplication</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

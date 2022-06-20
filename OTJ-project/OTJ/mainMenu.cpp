@@ -62,11 +62,10 @@ void mainMenu::choice(int user_choice)    // Takes the user to the different ope
     switch (user_choice)
     {
     case 1:
-        registerUser();
         break;
 
     case 2:
-        // printSpecies();
+        mainMenu::registerMenu();
         break;
 
     case 3:
@@ -76,18 +75,24 @@ void mainMenu::choice(int user_choice)    // Takes the user to the different ope
     }
 }
 
-void registerUser()
+void mainMenu::registerMenu()
 {
     std::string firstName, lastName, email, password;
     int age;
+
+    std::cin.clear();
+    std::cin.ignore(1000, '\n');
 
     std::cout << "==============================" << std::endl;
     std::cout << "           REGISTER           " << std::endl;
     std::cout << "==============================" << std::endl;
     std::cout << "                              " << std::endl;
     std::cout << "             Enter           " << std::endl;
-    std::cout << "     First Name: "; std::cin >> firstName; std::cout << std::endl;
-    std::cout << "         3) Exit              " << std::endl;
+    std::cout << "     First Name: "; std::getline(std::cin, firstName);
+    std::cout << "     Last Name: "; std::getline(std::cin, lastName);
+    std::cout << "     Email: "; std::cin >> email;
+    std::cout << "     Age: "; std::cin >> age;
+    std::cout << "     Password: "; std::cin >> password;
     std::cout << "                              " << std::endl;
     std::cout << "==============================" << std::endl;
 }
