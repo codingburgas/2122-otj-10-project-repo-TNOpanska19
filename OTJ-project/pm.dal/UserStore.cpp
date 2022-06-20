@@ -3,6 +3,8 @@
 
 std::vector<pm::types::User> users;
 
+// make get users functinality that will work with files
+
 size_t generateNewId()
 {
 	size_t maxId = 0;
@@ -29,6 +31,8 @@ void pm::dal::UserStore::create(pm::types::User& user)
 	user.id = generateNewId();
 
 	users.push_back(user);
+
+	// add new user to file
 }
 
 pm::types::User pm::dal::UserStore::getById(size_t id)
