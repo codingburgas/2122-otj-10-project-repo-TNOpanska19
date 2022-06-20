@@ -2,6 +2,7 @@
 #include "mainMenu.h"
 #include "../pm.types/User.h"
 #include "../pm.dal/UserStore.h"
+#include "../pm.bll/userManager.h"
 
 void mainMenu::displayMenu()
 {
@@ -90,9 +91,11 @@ void mainMenu::registerMenu()
     std::cout << "             Enter           " << std::endl;
     std::cout << "     First Name: "; std::getline(std::cin, firstName);
     std::cout << "     Last Name: "; std::getline(std::cin, lastName);
-    std::cout << "     Email: "; std::cin >> email;
     std::cout << "     Age: "; std::cin >> age;
+    std::cout << "     Email: "; std::cin >> email;
     std::cout << "     Password: "; std::cin >> password;
     std::cout << "                              " << std::endl;
     std::cout << "==============================" << std::endl;
+
+    pm::bll::UserManager::registerUser(firstName, lastName, age, email, password);
 }

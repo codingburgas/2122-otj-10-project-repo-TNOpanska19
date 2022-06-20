@@ -26,9 +26,6 @@
     <ClCompile Include="pm.dal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="pch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="UserStore.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
