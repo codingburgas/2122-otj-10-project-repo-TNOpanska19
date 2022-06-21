@@ -7,6 +7,7 @@ namespace pm::bll
 	struct UserManager
 	{
 		pm::dal::UserStore m_userStore;
+
 		std::string hashString(std::string str);
 
 		void registerUser(std::string firstName, std::string lastName, uint8_t age, std::string email, std::string password);

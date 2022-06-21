@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "mainMenu.h"
 #include "../pm.types/User.h"
 #include "../pm.dal/UserStore.h"
