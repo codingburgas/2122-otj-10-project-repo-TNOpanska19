@@ -6,6 +6,7 @@ std::vector<pm::types::User> users;
 
 // make get users functinality that will work with files
 
+/*
 size_t generateNewId()
 {
 	size_t maxId = 0;
@@ -98,26 +99,49 @@ void pm::dal::UserStore::update(pm::types::User user)
 	u.email = user.email;
 	u.age = user.age;
 }
+*/
 
 // finish with previous example
 
-void pm::dal::UserStore::openFile()	// Starts reading the Records.txt file so it can input information into it
+void pm::dal::UserStore::getData()	// Starts reading the Records.txt file so it can input information into it
 {
-	std::string line;
-	std::ifstream file("../Users.txt");
+	std::ifstream file("../Users.txt", std::fstream::in);
+
+	std::string id, firstName, lastName, email, age, password, next;
 
 	if (file.is_open())	// The file is successfully opened
 	{
-		int i = 0;
-
-		while (getline(file, line))
+		while (std::getline(file, id, ','))
 		{
-			users.
+			std::getline(file, firstName, ',');
+			std::getline(file, lastName, ',');
+			std::getline(file, email, ',');
+			std::getline(file, age, ',');
+			std::getline(file, password, ',');
+			std::getline(file, next, '\n');
+
+			addToUsers(stoi(id), firstName, lastName, email, stoi(age), password);
 		}
+
+		file.close();
 	}
 
 	else	// There is a problem with the file
 	{
-		cout << "Enable to open the file!" << endl;
+		std::cout << "Enable to open the file!" << std::endl;
 	}
+}
+
+void pm::dal::UserStore::addToUsers(int id, std::string firstName, std::string lastName, std::string email, int age, std::string password)
+{
+	pm::types::User user;
+
+	user.id = id;
+	user.firstName = firstName;
+	user.lastName = lastName;
+	user.email = email;
+	user.age = age;
+	user.passwordHash = password;
+
+	users.push_back(user);
 }
