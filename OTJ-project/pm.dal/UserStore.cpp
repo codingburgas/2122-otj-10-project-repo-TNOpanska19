@@ -1,3 +1,4 @@
+#include <fstream>
 #include "pch.h"
 #include "UserStore.h"
 
@@ -96,4 +97,27 @@ void pm::dal::UserStore::update(pm::types::User user)
 	u.lastName = user.lastName;
 	u.email = user.email;
 	u.age = user.age;
+}
+
+// finish with previous example
+
+void pm::dal::UserStore::openFile()	// Starts reading the Records.txt file so it can input information into it
+{
+	std::string line;
+	std::ifstream file("../Users.txt");
+
+	if (file.is_open())	// The file is successfully opened
+	{
+		int i = 0;
+
+		while (getline(file, line))
+		{
+			users.
+		}
+	}
+
+	else	// There is a problem with the file
+	{
+		cout << "Enable to open the file!" << endl;
+	}
 }
