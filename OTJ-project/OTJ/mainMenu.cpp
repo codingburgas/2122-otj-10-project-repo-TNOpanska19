@@ -44,12 +44,12 @@ void mainMenu::loginMenu()
 		mainMenu::loginMenu();
 	}
 
-	mainMenu::registerMenu();
-	// takes user to register, update, remove users menu
+	mainMenu::adminOptionsMenu();
+	// takes user to register, update, remove users menu if actve user's privilage is 1
 }
 
 
-void mainMenu::registerMenu()
+void mainMenu::adminOptionsMenu()
 {
 	system("CLS");
 
