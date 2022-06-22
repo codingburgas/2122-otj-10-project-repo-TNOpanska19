@@ -10,9 +10,18 @@ std::vector<pm::types::User> users;
 
 void mainMenu::loginMenu()
 {
-    pm::dal::UserStore users;
-    users.getData();
+    pm::dal::UserStore u;
+    u.getData();
+	u.displayUsers();
 
+	/*std::cout << users.size();
+
+	for (int i = 0; i < users.size(); i++)
+	{
+		std::cout << users[i].userName << std::endl;
+	}*/
+
+	/*
     std::cout << "==============================" << std::endl;
     std::cout << "           Log In             " << std::endl;
     std::cout << "==============================" << std::endl;
@@ -22,6 +31,7 @@ void mainMenu::loginMenu()
     std::cout << "     Password:" << std::endl;
     std::cout << "                              " << std::endl;
     std::cout << "==============================" << std::endl;
+	*/
 }
 
 
@@ -53,7 +63,7 @@ void mainMenu::registerMenu()
 
 void pm::dal::UserStore::getData()	// Starts reading the Records.txt file so it can input information into it
 {
-	std::ifstream file("Users.txt");
+	std::ifstream file("Users.txt", std::fstream::in);
 
 	std::string id, userName, firstName, lastName, email, /* dateOfCreation, idOfCreator, dateOfLastChange, idOfChange, */ privilage, password, next;
 
@@ -75,6 +85,8 @@ void pm::dal::UserStore::getData()	// Starts reading the Records.txt file so it 
 			std::getline(file, password, ',');
 			std::getline(file, next, '\n');
 
+			// std::cout << id << std::endl;
+			
 			addToUsers(stoi(id), userName, firstName, lastName, email, stoi(privilage), password);
 		}
 
@@ -100,4 +112,12 @@ void pm::dal::UserStore::addToUsers(int id, std::string userName, std::string fi
 	user.passwordHash = password;
 
 	users.push_back(user);
+}
+
+void pm::dal::UserStore::displayUsers()
+{
+	for (int i = 0; i < users.size(); i++)
+	{
+		std::cout << users[i].userName << std::endl;
+	}
 }

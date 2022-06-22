@@ -7,7 +7,29 @@ namespace mainMenu
 	void registerMenu();
 }
 
-// will remove later
+// Za User.h
+
+namespace pm::types
+{
+	struct User
+	{
+		size_t id;
+		std::string userName;
+		std::string firstName;
+		std::string lastName;
+		std::string email;
+		/*
+		time_t dateOfCreation;
+		size_t idOfCreator;
+		time_t dateOfLastChange;
+		size_t idOfChange;
+		*/
+		bool privilage;
+		std::string passwordHash;
+	};
+}
+
+// Za UserStore.h
 
 namespace pm::dal
 {
@@ -30,25 +52,8 @@ namespace pm::dal
 		void getData();
 
 		void addToUsers(int id, std::string userName, std::string firstName, std::string lastName, std::string email, bool privilage, std::string password);
+
+		void displayUsers();
 	};
 }
 
-namespace pm::types
-{
-	struct User
-	{
-		size_t id;
-		std::string userName;
-		std::string firstName;
-		std::string lastName;
-		std::string email;
-		/*
-		time_t dateOfCreation;
-		size_t idOfCreator;
-		time_t dateOfLastChange;
-		size_t idOfChange;
-		*/
-		bool privilage;
-		std::string passwordHash;
-	};
-}

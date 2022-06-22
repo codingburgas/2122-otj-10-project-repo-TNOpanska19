@@ -1,1 +1,6 @@
-1, admin, admin, admin, admin@codingburgas.bg, 1, adminpass
+1,admin,admin,admin,admin@codingburgas.bg,1,adminpass,
+2,test,test,test,test@hotmail.com,0,test,
+3,test,test,test,test@hotmail.com,0,test,
+4,test,test,test,test@hotmail.com,0,test,
+5,test,test,test,test@hotmail.com,0,test,
+6,test,test,test,test@hotmail.com,0,test,
