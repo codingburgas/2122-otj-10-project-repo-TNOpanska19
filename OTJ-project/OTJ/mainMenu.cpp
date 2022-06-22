@@ -8,6 +8,8 @@
 
 std::vector<pm::types::User> users;
 
+pm::types::User activeUser;
+
 void mainMenu::loginMenu()
 {
     pm::dal::UserStore u_store;
@@ -19,7 +21,7 @@ void mainMenu::loginMenu()
 	std::string username, password;
 
     std::cout << "  ==============================" << std::endl;
-    std::cout << "             Log In             " << std::endl;
+    std::cout << "             LOG IN             " << std::endl;
     std::cout << "  ==============================" << std::endl;
     std::cout << "                                " << std::endl;
     std::cout << "              Enter             " << std::endl;
@@ -32,6 +34,7 @@ void mainMenu::loginMenu()
 	if (u_manager.loginUser(username, password))
 	{
 		std::cout << "user exists";
+		// get user functionality
 	}
 
 	else
@@ -40,31 +43,31 @@ void mainMenu::loginMenu()
 		std::cout << " User does not exist. Please try to log in again." << std::endl << std::endl;
 		mainMenu::loginMenu();
 	}
+
+	mainMenu::registerMenu();
+	// takes user to register, update, remove users menu
 }
 
 
 void mainMenu::registerMenu()
 {
-    std::string firstName, lastName, email, password;
-    int age;
+	system("CLS");
 
-    std::cin.clear();
-    std::cin.ignore(1000, '\n');
-
-    std::cout << "==============================" << std::endl;
-    std::cout << "           REGISTER           " << std::endl;
-    std::cout << "==============================" << std::endl;
-    std::cout << "                              " << std::endl;
-    std::cout << "             Enter           " << std::endl;
-    std::cout << "     First Name: "; std::getline(std::cin, firstName);
-    std::cout << "     Last Name: "; std::getline(std::cin, lastName);
-    std::cout << "     Age: "; std::cin >> age;
-    std::cout << "     Email: "; std::cin >> email;
-    std::cout << "     Password: "; std::cin >> password;
-    std::cout << "                              " << std::endl;
-    std::cout << "==============================" << std::endl;
-
-    // pm::bll::UserManager::registerUser(firstName, lastName, age, email, password);
+    std::cout << "  ==============================" << std::endl;
+    std::cout << "               MENU             " << std::endl;
+    std::cout << "  ==============================" << std::endl;
+    std::cout << "                                " << std::endl;
+    std::cout << "          Choose option         " << std::endl;
+	std::cout << "                                " << std::endl;
+	std::cout << "       1) Register new user     " << std::endl;
+	std::cout << "       2) Update user           " << std::endl;
+	std::cout << "       3) Remove user           " << std::endl;
+	std::cout << "       4) View current user     " << std::endl;
+	std::cout << "       5) View all users        " << std::endl;
+	std::cout << "       6) Advanced options      " << std::endl;
+	std::cout << "       7) Exit                  " << std::endl;
+    std::cout << "                                " << std::endl;
+    std::cout << "  ==============================" << std::endl;
 }
 
 // za UserStore.cpp
