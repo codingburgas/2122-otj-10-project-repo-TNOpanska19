@@ -4,7 +4,7 @@ namespace mainMenu
 {
 	void loginMenu();
 
-	void registerMenu();
+	void adminOptionsMenu();
 }
 
 // Za User.h
