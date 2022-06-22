@@ -1,81 +1,29 @@
 #include <iostream>
+#include <string>
+#include <vector>
 #include <fstream>
 #include "mainMenu.h"
-#include "../pm.types/User.h"
-#include "../pm.dal/UserStore.h"
-#include "../pm.bll/userManager.h"
+//#include "../pm.types/User.h"
+//#include "../pm.bll/userManager.h"
 
-void mainMenu::displayMenu()
+std::vector<pm::types::User> users;
+
+void mainMenu::loginMenu()
 {
+    pm::dal::UserStore users;
+    users.getData();
+
     std::cout << "==============================" << std::endl;
-    std::cout << "             MENU             " << std::endl;
+    std::cout << "           Log In             " << std::endl;
     std::cout << "==============================" << std::endl;
     std::cout << "                              " << std::endl;
-    std::cout << "         1) Login             " << std::endl;
-    std::cout << "         2) Register          " << std::endl;
-    std::cout << "         3) Exit              " << std::endl;
+    std::cout << "            Enter             " << std::endl;
+    std::cout << "     Username:" << std::endl;
+    std::cout << "     Password:" << std::endl;
     std::cout << "                              " << std::endl;
     std::cout << "==============================" << std::endl;
-
-    std::cout << std::endl << "Select >> ";
-
-    choice(mainMenu::inputChoice());
 }
 
-int mainMenu::inputChoice()   // Takes the user's choice
-{
-    int user_choice;
-    bool check_num = false;
-
-    while (check_num == false)
-    {
-        if (std::cin >> user_choice)
-        {
-            if (user_choice > 3 || user_choice < 1) // Invalid input
-            {
-                std::cout << std::endl << "You entered an invalid operation. Please try again." << std::endl << std::endl;
-                std::cout << "Select >> ";
-                check_num = false;
-            }
-
-            else    // Valid input
-            {
-                check_num = true;
-            }
-        }
-
-        else    // The user entered a character
-        {
-            std::cout << std::endl << "You entered an invalid operation. Please try again." << std::endl;
-            std::cout << "Select >> ";
-            std::cin.clear();
-            std::cin.ignore(1000, '\n');
-            check_num = false;
-        }
-    }
-
-    return user_choice;
-}
-
-void mainMenu::choice(int user_choice)    // Takes the user to the different operations depending on their choice
-{
-    system("CLS");
-
-    switch (user_choice)
-    {
-    case 1:
-        break;
-
-    case 2:
-        mainMenu::registerMenu();
-        break;
-
-    case 3:
-        system("CLS");
-        // cout << "Thank you for using our program! :)" << endl;
-        exit(0);
-    }
-}
 
 void mainMenu::registerMenu()
 {
@@ -98,5 +46,58 @@ void mainMenu::registerMenu()
     std::cout << "                              " << std::endl;
     std::cout << "==============================" << std::endl;
 
-    pm::bll::UserManager::registerUser(firstName, lastName, age, email, password);
+    // pm::bll::UserManager::registerUser(firstName, lastName, age, email, password);
+}
+
+// za UserStore.cpp
+
+void pm::dal::UserStore::getData()	// Starts reading the Records.txt file so it can input information into it
+{
+	std::ifstream file("Users.txt");
+
+	std::string id, userName, firstName, lastName, email, /* dateOfCreation, idOfCreator, dateOfLastChange, idOfChange, */ privilage, password, next;
+
+	if (file.is_open())	// The file is successfully opened
+	{
+		while (std::getline(file, id, ','))
+		{
+			std::getline(file, userName, ',');
+			std::getline(file, firstName, ',');
+			std::getline(file, lastName, ',');
+			std::getline(file, email, ',');
+
+			/*std::getline(file, dateofcreation, ',');
+			std::getline(file, idofcreator, ',');
+			std::getline(file, dateoflastchange, ',');
+			std::getline(file, idofchange, ',');*/
+
+			std::getline(file, privilage, ',');
+			std::getline(file, password, ',');
+			std::getline(file, next, '\n');
+
+			addToUsers(stoi(id), userName, firstName, lastName, email, stoi(privilage), password);
+		}
+
+		file.close();
+	}
+
+	else	// there is a problem with the file
+	{
+		std::cout << "Enable to open the file!" << std::endl;
+	}
+}
+
+void pm::dal::UserStore::addToUsers(int id, std::string userName, std::string firstName, std::string lastName, std::string email, bool privilage, std::string password)
+{
+	pm::types::User user;
+
+	user.id = id;
+	user.userName = userName;
+	user.firstName = firstName;
+	user.lastName = lastName;
+	user.email = email;
+	user.privilage = privilage;
+	user.passwordHash = password;
+
+	users.push_back(user);
 }

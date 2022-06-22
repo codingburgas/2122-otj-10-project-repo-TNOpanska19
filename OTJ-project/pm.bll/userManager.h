@@ -6,6 +6,7 @@ namespace pm::bll
 {
 	struct UserManager
 	{
+		/*
 		pm::dal::UserStore m_userStore;
 
 		std::string hashString(std::string str);
@@ -21,5 +22,6 @@ namespace pm::bll
 		void removeUser(size_t id);
 
 		void updateUser(pm::types::User);
+		*/
 	};
 }

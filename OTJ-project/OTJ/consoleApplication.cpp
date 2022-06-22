@@ -3,5 +3,5 @@
 
 int main()
 {
-	mainMenu::displayMenu();
+	mainMenu::loginMenu();
 }

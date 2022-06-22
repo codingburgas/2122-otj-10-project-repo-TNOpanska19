@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "userManager.h"
 
+/*
 std::string pm::bll::UserManager::hashString(std::string str)
 {
 	
@@ -56,3 +57,4 @@ void pm::bll::UserManager::updateUser(pm::types::User user)
 {
 	m_userStore.update(user);
 }
+*/

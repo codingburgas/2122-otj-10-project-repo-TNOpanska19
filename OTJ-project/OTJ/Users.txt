@@ -1,0 +1,1 @@
+1, admin, admin, admin, admin@codingburgas.bg, 1, adminpass

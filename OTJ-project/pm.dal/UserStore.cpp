@@ -105,42 +105,51 @@ void pm::dal::UserStore::update(pm::types::User user)
 
 void pm::dal::UserStore::getData()	// Starts reading the Records.txt file so it can input information into it
 {
-	std::ifstream file("../Users.txt", std::fstream::in);
+	std::ifstream file("Users.txt");
 
-	std::string id, firstName, lastName, email, age, password, next;
+	std::string id, userName, firstName, lastName, email, /* dateOfCreation, idOfCreator, dateOfLastChange, idOfChange, */ privilage, password, next;
 
 	if (file.is_open())	// The file is successfully opened
 	{
+		std::cout << "testing";
 		while (std::getline(file, id, ','))
 		{
+			std::getline(file, userName, ',');
 			std::getline(file, firstName, ',');
 			std::getline(file, lastName, ',');
 			std::getline(file, email, ',');
-			std::getline(file, age, ',');
+			
+			/*std::getline(file, dateofcreation, ',');
+			std::getline(file, idofcreator, ',');
+			std::getline(file, dateoflastchange, ',');
+			std::getline(file, idofchange, ',');*/
+			
+			std::getline(file, privilage, ',');
 			std::getline(file, password, ',');
 			std::getline(file, next, '\n');
 
-			addToUsers(stoi(id), firstName, lastName, email, stoi(age), password);
+			addToUsers(stoi(id), userName, firstName, lastName, email, stoi(privilage), password);
 		}
 
 		file.close();
 	}
 
-	else	// There is a problem with the file
+	else	// there is a problem with the file
 	{
-		std::cout << "Enable to open the file!" << std::endl;
+		std::cout << "enable to open the file!" << std::endl;
 	}
 }
 
-void pm::dal::UserStore::addToUsers(int id, std::string firstName, std::string lastName, std::string email, int age, std::string password)
+void pm::dal::UserStore::addToUsers(int id, std::string userName, std::string firstName, std::string lastName, std::string email, bool privilage, std::string password)
 {
 	pm::types::User user;
 
 	user.id = id;
+	user.userName = userName;
 	user.firstName = firstName;
 	user.lastName = lastName;
 	user.email = email;
-	user.age = age;
+	user.privilage = privilage;
 	user.passwordHash = password;
 
 	users.push_back(user);
