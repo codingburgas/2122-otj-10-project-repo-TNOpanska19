@@ -10,28 +10,36 @@ std::vector<pm::types::User> users;
 
 void mainMenu::loginMenu()
 {
-    pm::dal::UserStore u;
-    u.getData();
-	u.displayUsers();
+    pm::dal::UserStore u_store;
+	pm::bll::UserManager u_manager;
 
-	/*std::cout << users.size();
+    u_store.getData();
+	// u.displayUsers();
 
-	for (int i = 0; i < users.size(); i++)
+	std::string username, password;
+
+    std::cout << "  ==============================" << std::endl;
+    std::cout << "             Log In             " << std::endl;
+    std::cout << "  ==============================" << std::endl;
+    std::cout << "                                " << std::endl;
+    std::cout << "              Enter             " << std::endl;
+	std::cout << "                                " << std::endl;
+	std::cout << "       Username: "; std::getline(std::cin, username); std::cout << std::endl;
+	std::cout << "       Password: ";  std::getline(std::cin, password); std::cout << std::endl;
+    std::cout << "                                " << std::endl;
+    std::cout << "  ==============================" << std::endl;
+
+	if (u_manager.loginUser(username, password))
 	{
-		std::cout << users[i].userName << std::endl;
-	}*/
+		std::cout << "user exists";
+	}
 
-	/*
-    std::cout << "==============================" << std::endl;
-    std::cout << "           Log In             " << std::endl;
-    std::cout << "==============================" << std::endl;
-    std::cout << "                              " << std::endl;
-    std::cout << "            Enter             " << std::endl;
-    std::cout << "     Username:" << std::endl;
-    std::cout << "     Password:" << std::endl;
-    std::cout << "                              " << std::endl;
-    std::cout << "==============================" << std::endl;
-	*/
+	else
+	{
+		system("CLS");
+		std::cout << " User does not exist. Please try to log in again." << std::endl << std::endl;
+		mainMenu::loginMenu();
+	}
 }
 
 
@@ -60,6 +68,19 @@ void mainMenu::registerMenu()
 }
 
 // za UserStore.cpp
+
+bool pm::dal::UserStore::getByUsername(std::string username)
+{
+	for (unsigned i = 0; i < users.size(); i++)
+	{
+		if (users[i].username == username)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
 
 void pm::dal::UserStore::getData()	// Starts reading the Records.txt file so it can input information into it
 {
@@ -99,12 +120,12 @@ void pm::dal::UserStore::getData()	// Starts reading the Records.txt file so it 
 	}
 }
 
-void pm::dal::UserStore::addToUsers(int id, std::string userName, std::string firstName, std::string lastName, std::string email, bool privilage, std::string password)
+void pm::dal::UserStore::addToUsers(int id, std::string username, std::string firstName, std::string lastName, std::string email, bool privilage, std::string password)
 {
 	pm::types::User user;
 
 	user.id = id;
-	user.userName = userName;
+	user.username = username;
 	user.firstName = firstName;
 	user.lastName = lastName;
 	user.email = email;
@@ -116,8 +137,33 @@ void pm::dal::UserStore::addToUsers(int id, std::string userName, std::string fi
 
 void pm::dal::UserStore::displayUsers()
 {
-	for (int i = 0; i < users.size(); i++)
+	for (unsigned i = 0; i < users.size(); i++)
 	{
-		std::cout << users[i].userName << std::endl;
+		std::cout << users[i].username << std::endl;
 	}
+}
+
+// za userManager.cpp
+
+bool pm::bll::UserManager::loginUser(std::string username, std::string password)
+{
+	// getByUsername will be bool and after that we'll check the password too, after which we'll find out if the user exists
+	
+	bool flag1 = m_userStore.getByUsername(username);
+
+	/*
+	std::string passHash = hashString(password);
+
+	if (user.passwordHash != passHash)
+	{
+		throw std::logic_error("Invalid password!");
+	}
+	*/
+
+	if (flag1 /* && flag2 */)
+	{
+		return true;
+	}
+
+	return false;
 }

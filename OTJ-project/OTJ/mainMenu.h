@@ -13,8 +13,8 @@ namespace pm::types
 {
 	struct User
 	{
-		size_t id;
-		std::string userName;
+		int id;
+		std::string username;
 		std::string firstName;
 		std::string lastName;
 		std::string email;
@@ -40,7 +40,7 @@ namespace pm::dal
 
 		pm::types::User getById(size_t id);
 
-		pm::types::User getByEmail(std::string email);
+		
 
 		std::vector<pm::types::User> getAll();
 
@@ -48,6 +48,8 @@ namespace pm::dal
 
 		void update(pm::types::User user);
 		*/
+
+		bool getByUsername(std::string username);
 
 		void getData();
 
@@ -57,3 +59,30 @@ namespace pm::dal
 	};
 }
 
+// Za userManager.h
+
+namespace pm::bll
+{
+	struct UserManager
+	{
+		pm::dal::UserStore m_userStore;
+
+		bool loginUser(std::string username, std::string password);
+		/*
+
+		std::string hashString(std::string str);
+
+		void registerUser(std::string firstName, std::string lastName, uint8_t age, std::string email, std::string password);
+
+		pm::types::User loginUser(std::string username, std::string password);
+
+		std::vector<pm::types::User> getRegisteredUsers();
+
+		void seedDatabase();
+
+		void removeUser(size_t id);
+
+		void updateUser(pm::types::User);
+		*/
+	};
+}
