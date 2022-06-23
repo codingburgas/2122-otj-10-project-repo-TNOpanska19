@@ -18,6 +18,7 @@ void mainMenu::loginMenu()
     u_store.getData();
 	// u.displayUsers();
 
+	/*
 	std::string username, password;
 
     std::cout << "  ==============================" << std::endl;
@@ -46,6 +47,13 @@ void mainMenu::loginMenu()
 
 	mainMenu::adminOptionsMenu();
 	// takes user to register, update, remove users menu if actve user's privilage is 1
+	*/
+
+	int uid;
+	std::cout << "Enter id: "; std::cin >> uid;
+
+	pm::types::User userche = u_store.getById(uid);
+	std::cout << std::endl << userche.id << " " << userche.username << " " << userche.firstName;
 }
 
 
@@ -83,6 +91,19 @@ bool pm::dal::UserStore::getByUsername(std::string username)
 	}
 
 	return false;
+}
+
+pm::types::User pm::dal::UserStore::getById(size_t id)
+{
+	pm::types::User rUser;
+
+	for (unsigned i = 0; i < users.size(); i++)
+	{
+		if (users[i].id == id)
+		{
+			return users[i];
+		}
+	}
 }
 
 void pm::dal::UserStore::getData()	// Starts reading the Records.txt file so it can input information into it

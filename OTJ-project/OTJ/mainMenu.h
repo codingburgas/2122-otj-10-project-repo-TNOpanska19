@@ -38,16 +38,14 @@ namespace pm::dal
 		/*
 		void create(pm::types::User& user);
 
-		pm::types::User getById(size_t id);
-
-		
-
 		std::vector<pm::types::User> getAll();
 
 		void remove(size_t id);
 
 		void update(pm::types::User user);
 		*/
+
+		pm::types::User getById(size_t id);
 
 		bool getByUsername(std::string username);
 
