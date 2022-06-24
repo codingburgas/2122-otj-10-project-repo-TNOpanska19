@@ -1,10 +1,16 @@
 #include <iostream>
+#include <conio.h>
+#include <windows.h>
+#include <cstdlib>
 #include <string>
 #include <vector>
 #include <fstream>
 #include "mainMenu.h"
 //#include "../pm.types/User.h"
 //#include "../pm.bll/userManager.h"
+
+HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE); // used for goto
+COORD CursorPosition; // used for goto
 
 std::vector<pm::types::User> users;
 pm::dal::UserStore uStore;
@@ -15,10 +21,7 @@ pm::types::User activeUser;
 void mainMenu::loginMenu()
 {
     uStore.getData();
-
-	uStore.displayUsers();
-
-	/*
+	
 	std::string username, password;
 
     std::cout << "  ==============================" << std::endl;
@@ -40,13 +43,13 @@ void mainMenu::loginMenu()
 
 	else
 	{
-		// system("CLS");
+		system("CLS");
 		std::cout << " User does not exist. Please try to log in again." << std::endl << std::endl;
 		mainMenu::loginMenu();
 	}
 
 	mainMenu::usersManagementView();
-	*/
+	
 	
 	// takes user to register, update, remove users menu if actve user's privilage is 1
 	
@@ -58,9 +61,6 @@ void mainMenu::loginMenu()
 	pm::types::User userche = u_store.getById(uid);
 	std::cout << std::endl << userche.id << " " << userche.username << " " << userche.firstName;
 	*/
-
-	mainMenu::createUserMenu();
-	uStore.displayUsers();
 }
 
 
@@ -68,21 +68,83 @@ void mainMenu::usersManagementView()
 {
 	system("CLS");
 
-    std::cout << "  ==============================" << std::endl;
-    std::cout << "         USERS MANAGEMENT       " << std::endl;
-    std::cout << "  ==============================" << std::endl;
-    std::cout << "                                " << std::endl;
-    std::cout << "          Choose option         " << std::endl;
-	std::cout << "                                " << std::endl;
-	std::cout << "       1) Create new user     " << std::endl;
-	std::cout << "       2) Update user           " << std::endl;
-	std::cout << "       3) Remove user           " << std::endl;
-	std::cout << "       4) View current user     " << std::endl;
-	std::cout << "       5) View all users        " << std::endl;
-	std::cout << "       6) Advanced options      " << std::endl;
-	std::cout << "       7) Exit                  " << std::endl;
-    std::cout << "                                " << std::endl;
-    std::cout << "  ==============================" << std::endl;
+	int menu_item = 0, run, y = 6;
+	bool running = true;
+
+	gotoXY(2, 0); std::cout << "===============================";
+	gotoXY(9, 1); std::cout << "USERS MANAGEMENT";
+	gotoXY(2, 2); std::cout << "===============================";
+	gotoXY(11, 4); std::cout << "Choose option";
+
+	gotoXY(6, 6); std::cout << "->";
+
+	while (running)
+	{
+		gotoXY(9, 6); std::cout << "Create new user";
+		gotoXY(9, 7); std::cout << "Update user";
+		gotoXY(9, 8); std::cout << "Remove user";
+		gotoXY(9, 9); std::cout << "View current user";
+		gotoXY(9, 10); std::cout << "View all users";
+		gotoXY(9, 11); std::cout << "Advanced options";
+		gotoXY(9, 12); std::cout << "Exit";
+
+		system("pause>nul"); // the >nul bit causes it the print no message
+
+		if (GetAsyncKeyState(VK_DOWN) && y != 12) //down button pressed
+		{
+			gotoXY(6, y); std::cout << "  ";
+			y++;
+			gotoXY(6, y); std::cout << "->";
+			menu_item++;
+			continue;
+
+		}
+
+		if (GetAsyncKeyState(VK_UP) && y != 6) //up button pressed
+		{
+			gotoXY(6, y); std::cout << "  ";
+			y--;
+			gotoXY(6, y); std::cout << "->";
+			menu_item--;
+			continue;
+		}
+
+		if (GetAsyncKeyState(VK_RETURN))
+		{ // Enter key pressed
+
+			switch (menu_item) {
+
+			case 0:
+				mainMenu::createUserMenu();
+				break;
+			case 1:
+				break;
+			case 2:
+				break;
+			case 3: 
+				break;
+			case 4:
+				break;
+			case 5:
+				break;
+			case 6:
+				break;
+			case 7:
+				break;
+
+			}
+
+			break;
+		}
+
+	}
+}
+
+void mainMenu::gotoXY(int x, int y)
+{
+	CursorPosition.X = x;
+	CursorPosition.Y = y;
+	SetConsoleCursorPosition(console, CursorPosition);
 }
 
 void mainMenu::createUserMenu()
@@ -204,7 +266,7 @@ int pm::bll::UserManager::hashString(std::string key)
 	int hashCode = 0;
 
 	for (int i = 0; i < key.length(); i++) {
-		hashCode += key[i] * pow(31, i);
+		hashCode += key[i] * pow(300, i);
 	}
 
 	return hashCode;
