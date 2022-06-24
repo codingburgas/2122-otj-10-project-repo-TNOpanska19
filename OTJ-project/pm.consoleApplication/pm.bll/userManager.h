@@ -22,13 +22,15 @@ namespace pm::bll
 
 		pm::types::User getActiveUser(std::string username);
 
+		void removeUser();
+
 		void createUser(int id, std::string username, std::string firstName, std::string lastName, std::string email, bool privilage, std::string password);
 		/*
 		pm::types::User loginUser(std::string username, std::string password);
 
 		void seedDatabase();
 
-		void removeUser(size_t id);
+		
 
 		void updateUser(pm::types::User);
 		*/

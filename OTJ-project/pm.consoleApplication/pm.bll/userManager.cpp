@@ -76,6 +76,20 @@ pm::types::User pm::bll::UserManager::getActiveUser(std::string username)
 	}
 }
 
+void pm::bll::UserManager::removeUser()
+{
+	system("CLS");
+	int id;
+
+	std::cout << "Delete user with Id: "; std::cin >> id;
+	uStore.remove(id);
+	std::cout << std::endl << std::endl;
+
+	std::cout << "  Press any key to go back to menu...";
+	_getch();
+	mainMenu::usersManagementView();
+}
+
 void pm::bll::UserManager::createUser(int id, std::string username, std::string firstName, std::string lastName, std::string email, bool privilage, std::string password)
 {
 	pm::types::User newUser;

@@ -129,6 +129,7 @@ void mainMenu::usersManagementView()
 			case 1:
 				break;
 			case 2:
+				uManager.removeUser();
 				break;
 			case 3:
 				currentUserInformation();

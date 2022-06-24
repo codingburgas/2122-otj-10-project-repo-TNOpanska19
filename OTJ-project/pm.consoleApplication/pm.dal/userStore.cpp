@@ -36,10 +36,44 @@ void pm::dal::UserStore::createNewUser(pm::types::User& user)
 	file.close();
 }
 
+void pm::dal::UserStore::remove(int delId)
+{
+	int index = -1;
+	userStore.getData();
+
+	for (int i = 0; i < users.size(); i++)
+	{
+		if (users[i].id == delId)
+		{
+			index = i;
+			break;
+		}
+	}
+
+	if (index == -1)
+	{
+		std::cout << "There is no user with such Id!" << std::endl;
+		return;
+	}
+
+	users.erase(users.begin() + index);
+
+	std::ofstream file("../../data/Users.txt", std::ios::in | std::ios::trunc);
+
+
+	for (unsigned i = 0; i < users.size(); i++)
+	{
+		pm::types::User user = users[i];
+
+		file << user.id << ',' << user.username << ',' << user.firstName << ',' << user.lastName <<
+			',' << user.email << ',' << user.privilage << ',' << user.passwordHash << ',' << '\n';
+	}
+
+	file.close();
+}
+
 pm::types::User pm::dal::UserStore::getById(size_t id)
 {
-	pm::types::User rUser;
-
 	for (unsigned i = 0; i < users.size(); i++)
 	{
 		if (users[i].id == id)

@@ -12,9 +12,9 @@ namespace pm::dal
 
 		void createNewUser(pm::types::User& user);
 
-		/*
-		void remove(size_t id);
+		void remove(int delId);
 
+		/*
 		void update(pm::types::User user);
 		*/
 
