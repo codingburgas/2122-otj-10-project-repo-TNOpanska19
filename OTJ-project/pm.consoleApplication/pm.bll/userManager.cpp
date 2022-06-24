@@ -1,4 +1,6 @@
 #include "pch.h"
+#include <conio.h>
+#include "../pm.consoleApplication/mainMenu.h"
 #include "userManager.h"
 
 pm::dal::UserStore uStore;
@@ -50,9 +52,14 @@ void pm::bll::UserManager::displayUsers()
 
 	for (unsigned i = 0; i < userList.size(); i++)
 	{
-		std::cout << "  " << userList[i].id << " " << userList[i].username << " " << userList[i].firstName << " " << userList[i].lastName << " " 
-			<< userList[i].email << " " << userList[i].privilage << std::endl << std::endl;
+		std::cout << "  " << userList[i].id << ", " << userList[i].username << ", " << userList[i].firstName << ", " << userList[i].lastName << ", " 
+			<< userList[i].email << ", " << userList[i].privilage << std::endl << std::endl;
 	}
+
+	std::cout << "  ======================================" << std::endl << std::endl; 
+	std::cout << "  Press any key to go back to menu...";
+	_getch();
+	mainMenu::usersManagementView();
 }
 
 pm::types::User pm::bll::UserManager::getActiveUser(std::string username)
@@ -73,7 +80,7 @@ void pm::bll::UserManager::createUser(int id, std::string username, std::string 
 {
 	pm::types::User newUser;
 
-	newUser.id = 6;
+	newUser.id = uStore.generateNewId();
 	newUser.username = username;
 	newUser.firstName = firstName;
 	newUser.lastName = lastName;
@@ -82,6 +89,8 @@ void pm::bll::UserManager::createUser(int id, std::string username, std::string 
 	newUser.passwordHash = pm::bll::UserManager::hashString(password);
 
 	uStore.createNewUser(newUser);
+
+	mainMenu::usersManagementView();
 }
 
 

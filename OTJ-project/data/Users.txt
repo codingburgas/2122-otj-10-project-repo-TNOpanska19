@@ -4,3 +4,4 @@
 4,stoyan,test,test,test@hotmail.com,1,6d09815ae37a09869d28f4510fda935a,
 5,tereza,test,test,test@hotmail.com,0,558ec3dcf944035e11a4996a20eb5912,
 6,pesho,test,test,test@hotmail.com,0,098f6bcd4621d373cade4e832627b4f6,6,nikolay,niki,opanski,burgas69@abv.bg,0,55d9bc93eba0dc889b08f7f2d2b71a37,
+7,TNOpanska,Tereza,Opanska,TNOpanska19@codingburgas.bg,0,9d06665b502e4c5b75b2c187167dbf75,

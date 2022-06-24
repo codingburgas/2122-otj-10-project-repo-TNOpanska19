@@ -8,6 +8,8 @@ namespace pm::dal
 {
 	struct UserStore
 	{
+		int generateNewId();
+
 		void createNewUser(pm::types::User& user);
 
 		/*

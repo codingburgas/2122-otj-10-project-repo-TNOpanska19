@@ -6,6 +6,25 @@
 #include "../pm.types/user.h"
 
 std::vector<pm::types::User> users;
+pm::dal::UserStore userStore;
+
+int pm::dal::UserStore::generateNewId()
+{
+	int maxId = 0;
+
+	userStore.getData();
+	users = userStore.getAll();
+
+	for (auto user : users)
+	{
+		if (user.id > maxId)
+		{
+			maxId = user.id;
+		}
+	}
+
+	return maxId + 1;
+}
 
 void pm::dal::UserStore::createNewUser(pm::types::User& user)
 {
