@@ -19,16 +19,16 @@ void mainMenu::loginMenu()
 {
 	std::string username, password;
 
-	std::cout << "  ==============================" << std::endl;
-	std::cout << "             LOG IN             " << std::endl;
-	std::cout << "  ==============================" << std::endl;
+	std::cout << "  ======================================" << std::endl;
+	std::cout << "                  LOG IN            " << std::endl;
+	std::cout << "  ======================================" << std::endl;
 	std::cout << "                                " << std::endl;
-	std::cout << "              Enter             " << std::endl;
+	std::cout << "                  Enter             " << std::endl;
 	std::cout << "                                " << std::endl;
 	std::cout << "       Username: "; std::getline(std::cin, username); std::cout << std::endl;
 	std::cout << "       Password: ";  std::getline(std::cin, password); std::cout << std::endl;
 	std::cout << "                                " << std::endl;
-	std::cout << "  ==============================" << std::endl;
+	std::cout << "  ======================================" << std::endl;
 
 	if (uManager.loginUser(username, password))
 	{
@@ -50,7 +50,7 @@ void mainMenu::loginMenu()
 
 	else
 	{
-		// current user info
+		currentUserInformation();
 	}
 
 	/*int uid;
@@ -68,22 +68,24 @@ void mainMenu::usersManagementView()
 	int menu_item = 0, y = 6;
 	bool running = true;
 
-	gotoXY(2, 0); std::cout << "===============================";
-	gotoXY(9, 1); std::cout << "USERS MANAGEMENT";
-	gotoXY(2, 2); std::cout << "===============================";
-	gotoXY(11, 4); std::cout << "Choose option";
+	gotoXY(2, 0); std::cout << "======================================";
+	gotoXY(13, 1); std::cout << "USERS MANAGEMENT";
+	gotoXY(2, 2); std::cout << "======================================";
+	gotoXY(15, 4); std::cout << "Choose option";
 
-	gotoXY(6, 6); std::cout << "->";
+	gotoXY(2, 14); std::cout << "======================================";
+
+	gotoXY(10, 6); std::cout << "->";
 
 	while (running)
 	{
-		gotoXY(9, 6); std::cout << "Create new user";
-		gotoXY(9, 7); std::cout << "Update user";
-		gotoXY(9, 8); std::cout << "Remove user";
-		gotoXY(9, 9); std::cout << "View current user";
-		gotoXY(9, 10); std::cout << "View all users";
-		gotoXY(9, 11); std::cout << "Advanced options";
-		gotoXY(9, 12); std::cout << "Exit";
+		gotoXY(13, 6); std::cout << "Create new user";
+		gotoXY(13, 7); std::cout << "Update user";
+		gotoXY(13, 8); std::cout << "Remove user";
+		gotoXY(13, 9); std::cout << "View profile";
+		gotoXY(13, 10); std::cout << "View all users";
+		gotoXY(13, 11); std::cout << "Advanced options";
+		gotoXY(13, 12); std::cout << "Exit";
 
 		system("pause>nul"); // the >nul bit causes it the print no message
 
@@ -99,9 +101,9 @@ void mainMenu::usersManagementView()
 
 		if (GetAsyncKeyState(VK_DOWN) && y != 12) //down button pressed
 		{
-			gotoXY(6, y); std::cout << "  ";
+			gotoXY(10, y); std::cout << "  ";
 			y++;
-			gotoXY(6, y); std::cout << "->";
+			gotoXY(10, y); std::cout << "->";
 			menu_item++;
 			continue;
 
@@ -109,9 +111,9 @@ void mainMenu::usersManagementView()
 
 		if (GetAsyncKeyState(VK_UP) && y != 6) //up button pressed
 		{
-			gotoXY(6, y); std::cout << "  ";
+			gotoXY(10, y); std::cout << "  ";
 			y--;
-			gotoXY(6, y); std::cout << "->";
+			gotoXY(10, y); std::cout << "->";
 			menu_item--;
 			continue;
 		}
@@ -122,13 +124,14 @@ void mainMenu::usersManagementView()
 			switch (menu_item)
 			{
 			case 0:
-				mainMenu::createUserMenu();
+				createUserMenu();
 				break;
 			case 1:
 				break;
 			case 2:
 				break;
 			case 3:
+				currentUserInformation();
 				break;
 			case 4:
 				uManager.displayUsers();
@@ -160,11 +163,11 @@ void mainMenu::createUserMenu()
 	std::string username, firstName, lastName, email, password;
 	bool privilage;
 
-	std::cout << "  ==============================" << std::endl;
-	std::cout << "           CREATE USER          " << std::endl;
-	std::cout << "  ==============================" << std::endl;
+	std::cout << "  ======================================" << std::endl;
+	std::cout << "               CREATE USER            " << std::endl;
+	std::cout << "  ======================================" << std::endl;
 	std::cout << "                                " << std::endl;
-	std::cout << "              Enter             " << std::endl;
+	std::cout << "                   Enter             " << std::endl;
 	std::cout << "                                " << std::endl;
 	std::cout << "       Username: "; std::getline(std::cin, username); std::cout << std::endl;
 	std::cout << "       First name: "; std::getline(std::cin, firstName); std::cout << std::endl;
@@ -176,4 +179,36 @@ void mainMenu::createUserMenu()
 	std::cout << "       Password: ";  std::getline(std::cin, password); std::cout << std::endl;
 
 	uManager.createUser(id, username, firstName, lastName, email, privilage, uManager.hashString(password));
+}
+
+void mainMenu::currentUserInformation()
+{
+	system("CLS");
+
+	std::cout << "  ======================================" << std::endl;
+	std::cout << "               YOUR PROFILE        " << std::endl;
+	std::cout << "  ======================================" << std::endl;
+	std::cout << "                                " << std::endl;
+	std::cout << "        User Information        " << std::endl;
+	std::cout << "                                " << std::endl;
+	std::cout << "       Username: " << activeUser.username << std::endl;
+	std::cout << "       First name: " << activeUser.firstName << std::endl;
+	std::cout << "       Last name: " << activeUser.lastName << std::endl;
+	std::cout << "       Email: " << activeUser.email << std::endl;
+	std::cout << "       Privilage: ";
+
+	if (activeUser.privilage == 0)
+		std::cout << "user";
+
+	else if (activeUser.privilage == 1)
+		std::cout << "admin";
+
+	std::cout << std::endl << std::endl << "  ======================================" << std::endl;
+
+	if (activeUser.privilage == 1)
+	{
+		std::cout << "  Press any key to go back to menu...";
+		_getch();
+		mainMenu::usersManagementView();
+	}
 }

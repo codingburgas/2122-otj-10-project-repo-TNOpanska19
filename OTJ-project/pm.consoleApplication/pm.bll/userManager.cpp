@@ -45,9 +45,9 @@ void pm::bll::UserManager::displayUsers()
 	uStore.getData();
 	userList = userManager.getRegisteredUsers();
 
-	std::cout << "  ======================================" << std::endl;
-	std::cout << "                 USER LIST              " << std::endl;
-	std::cout << "  ======================================" << std::endl;
+	std::cout << "  =============================================" << std::endl;
+	std::cout << "                    USER LIST                    " << std::endl;
+	std::cout << "  =============================================" << std::endl;
 	std::cout << "   id, username, first name, last name," << std::endl << "           email, privilage" << std::endl << std::endl;
 
 	for (unsigned i = 0; i < userList.size(); i++)
@@ -56,7 +56,7 @@ void pm::bll::UserManager::displayUsers()
 			<< userList[i].email << ", " << userList[i].privilage << std::endl << std::endl;
 	}
 
-	std::cout << "  ======================================" << std::endl << std::endl; 
+	std::cout << "  =============================================" << std::endl << std::endl; 
 	std::cout << "  Press any key to go back to menu...";
 	_getch();
 	mainMenu::usersManagementView();
@@ -92,5 +92,3 @@ void pm::bll::UserManager::createUser(int id, std::string username, std::string 
 
 	mainMenu::usersManagementView();
 }
-
-

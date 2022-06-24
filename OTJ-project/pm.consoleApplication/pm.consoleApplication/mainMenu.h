@@ -8,5 +8,7 @@ namespace mainMenu
 
 	void createUserMenu();
 
+	void currentUserInformation();
+
 	void gotoXY(int x, int y);
 }
