@@ -16,9 +16,8 @@ void mainMenu::loginMenu()
 {
     uStore.getData();
 
-	// u.displayUsers();
+	// uStore.displayUsers();
 
-	
 	std::string username, password;
 
     std::cout << "  ==============================" << std::endl;
@@ -40,12 +39,13 @@ void mainMenu::loginMenu()
 
 	else
 	{
-		system("CLS");
+		// system("CLS");
 		std::cout << " User does not exist. Please try to log in again." << std::endl << std::endl;
 		mainMenu::loginMenu();
 	}
 
 	mainMenu::adminOptionsMenu();
+	
 	// takes user to register, update, remove users menu if actve user's privilage is 1
 	
 
@@ -108,9 +108,9 @@ void mainMenu::createUserMenu()
 	std::cout << "                                " << std::endl;
 	std::cout << "  ==============================" << std::endl;
 
-	// hash the password
+	
 
-	uStore.addToUsers(id, username, firstName, lastName, email, privilage, password);
+	uStore.addToUsers(id, username, firstName, lastName, email, privilage, uManager.hashString(password));
 }
 
 // za UserStore.cpp
@@ -158,10 +158,8 @@ void pm::dal::UserStore::getData()	// Starts reading the Records.txt file so it 
 			std::getline(file, privilage, ',');
 			std::getline(file, password, ',');
 			std::getline(file, next, '\n');
-
-			// std::cout << id << std::endl;
 			
-			addToUsers(stoi(id), userName, firstName, lastName, email, stoi(privilage), password);
+			addToUsers(stoi(id), userName, firstName, lastName, email, stoi(privilage), stoi(password));
 		}
 
 		file.close();
@@ -173,10 +171,9 @@ void pm::dal::UserStore::getData()	// Starts reading the Records.txt file so it 
 	}
 }
 
-void pm::dal::UserStore::addToUsers(int id, std::string username, std::string firstName, std::string lastName, std::string email, bool privilage, std::string password)
+void pm::dal::UserStore::addToUsers(int id, std::string username, std::string firstName, std::string lastName, std::string email, bool privilage, int password)
 {
 	pm::types::User user;
-	int hashPass = uManager.hashString(password);
 
 	user.id = id;
 	user.username = username;
@@ -184,7 +181,7 @@ void pm::dal::UserStore::addToUsers(int id, std::string username, std::string fi
 	user.lastName = lastName;
 	user.email = email;
 	user.privilage = privilage;
-	user.passwordHash = hashPass;
+	user.passwordHash = password;
 
 	users.push_back(user);
 }
@@ -193,7 +190,8 @@ void pm::dal::UserStore::displayUsers()
 {
 	for (unsigned i = 0; i < users.size(); i++)
 	{
-		std::cout << users[i].username << std::endl;
+		std::cout << users[i].username << " " << users[i].firstName << " " << users[i].lastName << " " << users[i].email << " " << 
+			users[i].privilage << " " << users[i].passwordHash << " " << std::endl;
 	}
 }
 
@@ -216,10 +214,12 @@ bool pm::bll::UserManager::loginUser(std::string username, std::string password)
 	
 	int passHash = hashString(password);
 
-	for (unsigned i = 0; i < users.size(); i++)
+	for (int i = 0; i < users.size(); i++)
 	{
 		if (users[i].username == username)
 		{
+			std::cout << users[i].username << " " << users[i].passwordHash << " " << passHash << std::endl;
+
 			if (users[i].passwordHash == passHash)
 			{
 				return true;
