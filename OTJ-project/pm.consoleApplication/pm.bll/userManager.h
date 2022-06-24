@@ -18,6 +18,8 @@ namespace pm::bll
 
 		std::vector<pm::types::User> getRegisteredUsers();
 
+		void displayUsers();
+
 		/*
 		void registerUser(std::string firstName, std::string lastName, uint8_t age, std::string email, std::string password);
 

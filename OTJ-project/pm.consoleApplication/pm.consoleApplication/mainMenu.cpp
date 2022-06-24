@@ -12,14 +12,11 @@
 HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE); // used for goto
 COORD CursorPosition; // used for goto
 
-//pm::dal::UserStore uStore;
 pm::bll::UserManager uManager;
 pm::types::User activeUser;
 
 void mainMenu::loginMenu()
 {
-	//uStore.getData();
-
 	std::string username, password;
 
 	std::cout << "  ==============================" << std::endl;
@@ -120,8 +117,8 @@ void mainMenu::usersManagementView()
 		if (GetAsyncKeyState(VK_RETURN))
 		{ // Enter key pressed
 
-			switch (menu_item) {
-
+			switch (menu_item)
+			{
 			case 0:
 				mainMenu::createUserMenu();
 				break;
@@ -132,18 +129,17 @@ void mainMenu::usersManagementView()
 			case 3:
 				break;
 			case 4:
+				uManager.displayUsers();
 				break;
 			case 5:
 				break;
 			case 6:
-				break;
-			case 7:
-				break;
+				system("CLS");
+				std::cout << "Thanks for using my program! :)" << std::endl;
+				exit(0);
 			}
-
 			break;
 		}
-
 	}
 }
 

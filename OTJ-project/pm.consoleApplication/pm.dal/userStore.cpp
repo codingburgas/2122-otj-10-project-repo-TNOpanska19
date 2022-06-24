@@ -76,12 +76,3 @@ void pm::dal::UserStore::addToUsers(int id, std::string username, std::string fi
 
 	users.push_back(user);
 }
-
-void pm::dal::UserStore::displayUsers()
-{
-	for (unsigned i = 0; i < users.size(); i++)
-	{
-		std::cout << users[i].username << " " << users[i].firstName << " " << users[i].lastName << " " << users[i].email << " " <<
-			users[i].privilage << " " << users[i].passwordHash << " " << std::endl;
-	}
-}

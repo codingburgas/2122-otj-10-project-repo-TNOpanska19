@@ -36,3 +36,23 @@ std::vector<pm::types::User> pm::bll::UserManager::getRegisteredUsers()
 {
    return uStore.getAll();
 }
+
+void pm::bll::UserManager::displayUsers()
+{
+	system("CLS");
+	uStore.getData();
+	userList = userManager.getRegisteredUsers();
+
+	std::cout << "  ======================================" << std::endl;
+	std::cout << "                 USER LIST              " << std::endl;
+	std::cout << "  ======================================" << std::endl;
+	std::cout << "   id, username, first name, last name," << std::endl << "           email, privilage" << std::endl << std::endl;
+
+	for (unsigned i = 0; i < userList.size(); i++)
+	{
+		std::cout << "  " << userList[i].id << " " << userList[i].username << " " << userList[i].firstName << " " << userList[i].lastName << " " 
+			<< userList[i].email << " " << userList[i].privilage << std::endl << std::endl;
+	}
+}
+
+

@@ -25,7 +25,5 @@ namespace pm::dal
 		void getData();
 
 		void addToUsers(int id, std::string username, std::string firstName, std::string lastName, std::string email, bool privilage, std::string password);
-
-		void displayUsers();
 	};
 }
