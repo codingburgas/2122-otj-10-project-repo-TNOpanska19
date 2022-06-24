@@ -55,4 +55,33 @@ void pm::bll::UserManager::displayUsers()
 	}
 }
 
+pm::types::User pm::bll::UserManager::getActiveUser(std::string username)
+{
+	uStore.getData();
+	userList = userManager.getRegisteredUsers();
+
+	for (unsigned i = 0; i < userList.size(); i++)
+	{
+		if (userList[i].username == username)
+		{
+			return userList[i];
+		}
+	}
+}
+
+void pm::bll::UserManager::createUser(int id, std::string username, std::string firstName, std::string lastName, std::string email, bool privilage, std::string password)
+{
+	pm::types::User newUser;
+
+	newUser.id = 6;
+	newUser.username = username;
+	newUser.firstName = firstName;
+	newUser.lastName = lastName;
+	newUser.email = email;
+	newUser.privilage = privilage;
+	newUser.passwordHash = pm::bll::UserManager::hashString(password);
+
+	uStore.createNewUser(newUser);
+}
+
 

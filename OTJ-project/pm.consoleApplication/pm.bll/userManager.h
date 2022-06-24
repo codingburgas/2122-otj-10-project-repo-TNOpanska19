@@ -20,9 +20,10 @@ namespace pm::bll
 
 		void displayUsers();
 
-		/*
-		void registerUser(std::string firstName, std::string lastName, uint8_t age, std::string email, std::string password);
+		pm::types::User getActiveUser(std::string username);
 
+		void createUser(int id, std::string username, std::string firstName, std::string lastName, std::string email, bool privilage, std::string password);
+		/*
 		pm::types::User loginUser(std::string username, std::string password);
 
 		void seedDatabase();

@@ -8,9 +8,9 @@ namespace pm::dal
 {
 	struct UserStore
 	{
-		/*
-		void create(pm::types::User& user);
+		void createNewUser(pm::types::User& user);
 
+		/*
 		void remove(size_t id);
 
 		void update(pm::types::User user);

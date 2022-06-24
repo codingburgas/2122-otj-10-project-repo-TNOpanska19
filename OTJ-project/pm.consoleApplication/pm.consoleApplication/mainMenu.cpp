@@ -33,7 +33,7 @@ void mainMenu::loginMenu()
 	if (uManager.loginUser(username, password))
 	{
 		std::cout << "user exists";
-		// get user functionality
+		activeUser = uManager.getActiveUser(username);
 	}
 
 	else
@@ -43,19 +43,21 @@ void mainMenu::loginMenu()
 		mainMenu::loginMenu();
 	}
 
-	mainMenu::usersManagementView();
+	if (activeUser.privilage == 1)
+	{
+		mainMenu::usersManagementView();
+	}
 
+	else
+	{
+		// current user info
+	}
 
-	// takes user to register, update, remove users menu if actve user's privilage is 1
-
-
-	/*
-	int uid;
+	/*int uid;
 	std::cout << "Enter id: "; std::cin >> uid;
 
 	pm::types::User userche = u_store.getById(uid);
-	std::cout << std::endl << userche.id << " " << userche.username << " " << userche.firstName;
-	*/
+	std::cout << std::endl << userche.id << " " << userche.username << " " << userche.firstName;*/
 }
 
 
@@ -172,10 +174,6 @@ void mainMenu::createUserMenu()
 	std::cin.clear();
 	std::cin.ignore(1000, '\n');
 	std::cout << "       Password: ";  std::getline(std::cin, password); std::cout << std::endl;
-	std::cout << "                                " << std::endl;
-	std::cout << "  ==============================" << std::endl;
 
-
-
-	// uStore.addToUsers(id, username, firstName, lastName, email, privilage, uManager.hashString(password));
+	uManager.createUser(id, username, firstName, lastName, email, privilage, uManager.hashString(password));
 }

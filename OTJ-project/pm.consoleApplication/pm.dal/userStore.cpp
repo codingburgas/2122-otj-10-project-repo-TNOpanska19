@@ -7,6 +7,16 @@
 
 std::vector<pm::types::User> users;
 
+void pm::dal::UserStore::createNewUser(pm::types::User& user)
+{
+	std::ofstream file("../../data/Users.txt", std::ios::in | std::ios::ate);
+
+	file << user.id << ',' << user.username << ',' << user.firstName << ',' << user.lastName << 
+		',' << user.email << ',' << user.privilage << ',' << user.passwordHash << ',' << '\n';
+
+	file.close();
+}
+
 pm::types::User pm::dal::UserStore::getById(size_t id)
 {
 	pm::types::User rUser;
