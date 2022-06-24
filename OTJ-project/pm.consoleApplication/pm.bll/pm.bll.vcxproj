@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{7291d6a6-5c4c-43eb-b440-2312a0b81f8c}</ProjectGuid>
+    <ProjectGuid>{e818cae8-928d-4eb5-8df5-0d47ec80139e}</ProjectGuid>
     <RootNamespace>pmbll</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -91,7 +91,6 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>E:\2122-otj-10-project-repo-TNOpanska19\OTJ-project\OTJ;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -109,6 +108,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -144,6 +144,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -166,6 +167,17 @@
     </ClCompile>
     <ClCompile Include="pm.bll.cpp" />
     <ClCompile Include="userManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\pm.dal\pm.dal.vcxproj">
+      <Project>{88cc6013-44b4-419d-9a8c-bfef3f660e1c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\pm.tools\pm.tools.vcxproj">
+      <Project>{3c1a1a8e-696c-4faf-b4dd-0fd64abf5808}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\pm.types\pm.types.vcxproj">
+      <Project>{79ff033e-1b8f-4e7e-95d1-a9b54c9cd2c5}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

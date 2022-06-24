@@ -8,6 +8,5 @@
 #define PCH_H
 
 // add headers that you want to pre-compile here
-#include "UserStore.h"
 
 #endif //PCH_H

@@ -1,0 +1,6 @@
+1,admin,admin,admin,admin@codingburgas.bg,1,25e4ee4e9229397b6b17776bfceaf8e7,
+2,gosho,test,test,test@hotmail.com,0,81dc9bdb52d04dc20036dbd8313ed055,
+3,borko,test,test,test@hotmail.com,0,c13367945d5d4c91047b3b50234aa7ab,
+4,stoyan,test,test,test@hotmail.com,1,6d09815ae37a09869d28f4510fda935a,
+5,tereza,test,test,test@hotmail.com,0,558ec3dcf944035e11a4996a20eb5912,
+6,pesho,test,test,test@hotmail.com,0,098f6bcd4621d373cade4e832627b4f6,
