@@ -16,8 +16,9 @@ void mainMenu::loginMenu()
 {
     uStore.getData();
 
-	// uStore.displayUsers();
+	uStore.displayUsers();
 
+	/*
 	std::string username, password;
 
     std::cout << "  ==============================" << std::endl;
@@ -44,7 +45,8 @@ void mainMenu::loginMenu()
 		mainMenu::loginMenu();
 	}
 
-	mainMenu::adminOptionsMenu();
+	mainMenu::usersManagementView();
+	*/
 	
 	// takes user to register, update, remove users menu if actve user's privilage is 1
 	
@@ -57,17 +59,17 @@ void mainMenu::loginMenu()
 	std::cout << std::endl << userche.id << " " << userche.username << " " << userche.firstName;
 	*/
 
-	// mainMenu::createUserMenu();
-	// uStore.displayUsers();
+	mainMenu::createUserMenu();
+	uStore.displayUsers();
 }
 
 
-void mainMenu::adminOptionsMenu()
+void mainMenu::usersManagementView()
 {
 	system("CLS");
 
     std::cout << "  ==============================" << std::endl;
-    std::cout << "               MENU             " << std::endl;
+    std::cout << "         USERS MANAGEMENT       " << std::endl;
     std::cout << "  ==============================" << std::endl;
     std::cout << "                                " << std::endl;
     std::cout << "          Choose option         " << std::endl;
@@ -210,8 +212,6 @@ int pm::bll::UserManager::hashString(std::string key)
 
 bool pm::bll::UserManager::loginUser(std::string username, std::string password)
 {
-	// getByUsername will be bool and after that we'll check the password too, after which we'll find out if the user exists
-	
 	int passHash = hashString(password);
 
 	for (int i = 0; i < users.size(); i++)

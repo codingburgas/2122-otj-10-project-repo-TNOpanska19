@@ -4,7 +4,7 @@ namespace mainMenu
 {
 	void loginMenu();
 
-	void adminOptionsMenu();
+	void usersManagementView();
 
 	void createUserMenu();
 }
