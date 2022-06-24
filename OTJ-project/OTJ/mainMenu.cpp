@@ -18,7 +18,7 @@ void mainMenu::loginMenu()
 
 	// u.displayUsers();
 
-	/*
+	
 	std::string username, password;
 
     std::cout << "  ==============================" << std::endl;
@@ -32,7 +32,7 @@ void mainMenu::loginMenu()
     std::cout << "                                " << std::endl;
     std::cout << "  ==============================" << std::endl;
 
-	if (u_manager.loginUser(username, password))
+	if (uManager.loginUser(username, password))
 	{
 		std::cout << "user exists";
 		// get user functionality
@@ -47,7 +47,7 @@ void mainMenu::loginMenu()
 
 	mainMenu::adminOptionsMenu();
 	// takes user to register, update, remove users menu if actve user's privilage is 1
-	*/
+	
 
 	/*
 	int uid;
@@ -57,8 +57,8 @@ void mainMenu::loginMenu()
 	std::cout << std::endl << userche.id << " " << userche.username << " " << userche.firstName;
 	*/
 
-	mainMenu::createUserMenu();
-	uStore.displayUsers();
+	// mainMenu::createUserMenu();
+	// uStore.displayUsers();
 }
 
 
@@ -115,18 +115,12 @@ void mainMenu::createUserMenu()
 
 // za UserStore.cpp
 
-bool pm::dal::UserStore::getByUsername(std::string username)
+/*
+bool pm::dal::UserStore::getByUsername(std::string username, int password)
 {
-	for (unsigned i = 0; i < users.size(); i++)
-	{
-		if (users[i].username == username)
-		{
-			return true;
-		}
-	}
-
-	return false;
+	
 }
+*/
 
 pm::types::User pm::dal::UserStore::getById(size_t id)
 {
@@ -182,6 +176,7 @@ void pm::dal::UserStore::getData()	// Starts reading the Records.txt file so it 
 void pm::dal::UserStore::addToUsers(int id, std::string username, std::string firstName, std::string lastName, std::string email, bool privilage, std::string password)
 {
 	pm::types::User user;
+	int hashPass = uManager.hashString(password);
 
 	user.id = id;
 	user.username = username;
@@ -189,7 +184,7 @@ void pm::dal::UserStore::addToUsers(int id, std::string username, std::string fi
 	user.lastName = lastName;
 	user.email = email;
 	user.privilage = privilage;
-	user.passwordHash = password;
+	user.passwordHash = hashPass;
 
 	users.push_back(user);
 }
@@ -204,24 +199,32 @@ void pm::dal::UserStore::displayUsers()
 
 // za userManager.cpp
 
+int pm::bll::UserManager::hashString(std::string key) 
+{
+	int hashCode = 0;
+
+	for (int i = 0; i < key.length(); i++) {
+		hashCode += key[i] * pow(31, i);
+	}
+
+	return hashCode;
+}
+
 bool pm::bll::UserManager::loginUser(std::string username, std::string password)
 {
 	// getByUsername will be bool and after that we'll check the password too, after which we'll find out if the user exists
 	
-	bool flag1 = m_userStore.getByUsername(username);
+	int passHash = hashString(password);
 
-	/*
-	std::string passHash = hashString(password);
-
-	if (user.passwordHash != passHash)
+	for (unsigned i = 0; i < users.size(); i++)
 	{
-		throw std::logic_error("Invalid password!");
-	}
-	*/
-
-	if (flag1 /* && flag2 */)
-	{
-		return true;
+		if (users[i].username == username)
+		{
+			if (users[i].passwordHash == passHash)
+			{
+				return true;
+			}
+		}
 	}
 
 	return false;

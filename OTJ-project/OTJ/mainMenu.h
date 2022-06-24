@@ -27,7 +27,7 @@ namespace pm::types
 		size_t idOfChange;
 		*/
 		bool privilage;
-		std::string passwordHash;
+		int passwordHash;
 	};
 }
 
@@ -49,7 +49,7 @@ namespace pm::dal
 
 		pm::types::User getById(size_t id);
 
-		bool getByUsername(std::string username);
+		// bool getByUsername(std::string username, int password);
 
 		void getData();
 
@@ -67,11 +67,11 @@ namespace pm::bll
 	{
 		pm::dal::UserStore m_userStore;
 
+		int hashString(std::string str);
+
 		bool loginUser(std::string username, std::string password);
 		/*
-
-		std::string hashString(std::string str);
-
+* 
 		void registerUser(std::string firstName, std::string lastName, uint8_t age, std::string email, std::string password);
 
 		pm::types::User loginUser(std::string username, std::string password);
