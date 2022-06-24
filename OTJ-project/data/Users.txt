@@ -4,3 +4,4 @@
 4,stoyan,Stoyan,Ivanov,SSIvanov19@codingburgas.bg,1,6d09815ae37a09869d28f4510fda935a,
 5,TNOpanska19,Tereza,Opanska,TNOpanska19@codingburgas.bg,0,558ec3dcf944035e11a4996a20eb5912,
 6,coder,Petar,Georgiev,hack@gmail.com,0,098f6bcd4621d373cade4e832627b4f6,
+7,Pesho,Petar,Kodera,hackerman@ghostmail.de,1,c93b4f4197b4afcdac5e59114d830d53,
