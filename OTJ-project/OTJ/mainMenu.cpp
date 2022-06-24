@@ -7,15 +7,15 @@
 //#include "../pm.bll/userManager.h"
 
 std::vector<pm::types::User> users;
+pm::dal::UserStore uStore;
+pm::bll::UserManager uManager;
 
 pm::types::User activeUser;
 
 void mainMenu::loginMenu()
 {
-    pm::dal::UserStore u_store;
-	pm::bll::UserManager u_manager;
+    uStore.getData();
 
-    u_store.getData();
 	// u.displayUsers();
 
 	/*
@@ -49,11 +49,16 @@ void mainMenu::loginMenu()
 	// takes user to register, update, remove users menu if actve user's privilage is 1
 	*/
 
+	/*
 	int uid;
 	std::cout << "Enter id: "; std::cin >> uid;
 
 	pm::types::User userche = u_store.getById(uid);
 	std::cout << std::endl << userche.id << " " << userche.username << " " << userche.firstName;
+	*/
+
+	mainMenu::createUserMenu();
+	uStore.displayUsers();
 }
 
 
@@ -67,7 +72,7 @@ void mainMenu::adminOptionsMenu()
     std::cout << "                                " << std::endl;
     std::cout << "          Choose option         " << std::endl;
 	std::cout << "                                " << std::endl;
-	std::cout << "       1) Register new user     " << std::endl;
+	std::cout << "       1) Create new user     " << std::endl;
 	std::cout << "       2) Update user           " << std::endl;
 	std::cout << "       3) Remove user           " << std::endl;
 	std::cout << "       4) View current user     " << std::endl;
@@ -76,6 +81,36 @@ void mainMenu::adminOptionsMenu()
 	std::cout << "       7) Exit                  " << std::endl;
     std::cout << "                                " << std::endl;
     std::cout << "  ==============================" << std::endl;
+}
+
+void mainMenu::createUserMenu()
+{
+	system("CLS");
+
+	int id = 69;
+	std::string username, firstName, lastName, email, password;
+	bool privilage;
+
+	std::cout << "  ==============================" << std::endl;
+	std::cout << "           CREATE USER          " << std::endl;
+	std::cout << "  ==============================" << std::endl;
+	std::cout << "                                " << std::endl;
+	std::cout << "              Enter             " << std::endl;
+	std::cout << "                                " << std::endl;
+	std::cout << "       Username: "; std::getline(std::cin, username); std::cout << std::endl;
+	std::cout << "       First name: "; std::getline(std::cin, firstName); std::cout << std::endl;
+	std::cout << "       Last name: "; std::getline(std::cin, lastName); std::cout << std::endl;
+	std::cout << "       Email: "; std::getline(std::cin, email); std::cout << std::endl;
+	std::cout << "       Privilage: "; std::cin >> privilage; std::cout << std::endl;
+	std::cin.clear();
+	std::cin.ignore(1000, '\n');
+	std::cout << "       Password: ";  std::getline(std::cin, password); std::cout << std::endl;
+	std::cout << "                                " << std::endl;
+	std::cout << "  ==============================" << std::endl;
+
+	// hash the password
+
+	uStore.addToUsers(id, username, firstName, lastName, email, privilage, password);
 }
 
 // za UserStore.cpp
