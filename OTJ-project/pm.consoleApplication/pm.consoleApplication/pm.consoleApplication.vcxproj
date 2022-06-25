@@ -145,9 +145,11 @@
   <ItemGroup>
     <ClCompile Include="mainMenu.cpp" />
     <ClCompile Include="pm.consoleApplication.cpp" />
+    <ClCompile Include="teamsMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mainMenu.h" />
+    <ClInclude Include="teamsMenu.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\pm.bll\pm.bll.vcxproj">

@@ -8,6 +8,7 @@
 #include "../pm.types/User.h"
 #include "../pm.bll/userManager.h"
 #include "mainMenu.h"
+#include "teamsMenu.h"
 
 HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE); // used for goto
 COORD CursorPosition; // used for goto
@@ -45,23 +46,16 @@ void mainMenu::loginMenu()
 
 	if (activeUser.privilege == 1)
 	{
-		mainMenu::usersManagementView();
+		mainMenu::managementView();
 	}
 
 	else
 	{
 		currentUserInformation();
 	}
-
-	/*int uid;
-	std::cout << "Enter id: "; std::cin >> uid;
-
-	pm::types::User userche = u_store.getById(uid);
-	std::cout << std::endl << userche.id << " " << userche.username << " " << userche.firstName;*/
 }
 
-
-void mainMenu::usersManagementView()
+void mainMenu::managementView()
 {
 	system("CLS");
 
@@ -69,27 +63,26 @@ void mainMenu::usersManagementView()
 	bool running = true;
 
 	gotoXY(2, 0); std::cout << "======================================";
-	gotoXY(13, 1); std::cout << "USERS MANAGEMENT";
+	gotoXY(12, 1); std::cout << "MANAGEMENT OPTIONS";
 	gotoXY(2, 2); std::cout << "======================================";
 	gotoXY(15, 4); std::cout << "Choose option";
 
-	gotoXY(2, 14); std::cout << "======================================";
+	gotoXY(2, 13); std::cout << "======================================";
 
 	gotoXY(10, 6); std::cout << "->";
 
 	while (running)
 	{
-		gotoXY(13, 6); std::cout << "Create new user";
-		gotoXY(13, 7); std::cout << "Update user";
-		gotoXY(13, 8); std::cout << "Remove user";
-		gotoXY(13, 9); std::cout << "View profile";
-		gotoXY(13, 10); std::cout << "View all users";
-		gotoXY(13, 11); std::cout << "Advanced options";
-		gotoXY(13, 12); std::cout << "Exit";
+		gotoXY(13, 6); std::cout << "Users Management";
+		gotoXY(13, 7); std::cout << "Teams Management";
+		gotoXY(13, 8); std::cout << "Projects Management";
+		gotoXY(13, 9); std::cout << "Task Managament";
+		gotoXY(13, 10); std::cout << "Work Log Management";
+		gotoXY(13, 11); std::cout << "Exit";
 
 		system("pause>nul"); // the >nul bit causes it the print no message
 
-		if (GetAsyncKeyState(VK_DOWN) && y + 1 > 12)
+		if (GetAsyncKeyState(VK_DOWN) && y + 1 > 11)
 		{
 			continue;
 		}
@@ -99,7 +92,7 @@ void mainMenu::usersManagementView()
 			continue;
 		}
 
-		if (GetAsyncKeyState(VK_DOWN) && y != 12) //down button pressed
+		if (GetAsyncKeyState(VK_DOWN) && y != 11) //down button pressed
 		{
 			gotoXY(10, y); std::cout << "  ";
 			y++;
@@ -124,6 +117,89 @@ void mainMenu::usersManagementView()
 			switch (menu_item)
 			{
 			case 0:
+				mainMenu::usersManagementView();
+				break;
+			case 1:
+				teamMenu::teamsManagementView();
+				break;
+			case 2:
+				break;
+			case 3:
+				break;
+			case 4:
+				break;
+			case 5:
+				system("CLS");
+				std::cout << "Thanks for using my program! :)" << std::endl;
+				exit(0);
+				break;
+			}
+		}
+	}
+}
+
+void mainMenu::usersManagementView()
+{
+	system("CLS");
+
+	int menuItem = 0, y = 6;
+	bool running = true;
+
+	gotoXY(2, 0); std::cout << "======================================";
+	gotoXY(13, 1); std::cout << "USERS MANAGEMENT";
+	gotoXY(2, 2); std::cout << "======================================";
+	gotoXY(15, 4); std::cout << "Choose option";
+
+	gotoXY(2, 13); std::cout << "======================================";
+
+	gotoXY(10, 6); std::cout << "->";
+
+	while (running)
+	{
+		gotoXY(13, 6); std::cout << "Create new user";
+		gotoXY(13, 7); std::cout << "Update user";
+		gotoXY(13, 8); std::cout << "Remove user";
+		gotoXY(13, 9); std::cout << "View profile";
+		gotoXY(13, 10); std::cout << "View all users";
+		gotoXY(13, 11); std::cout << "Go back";
+
+		system("pause>nul"); // the >nul bit causes it the print no message
+
+		if (GetAsyncKeyState(VK_DOWN) && y + 1 > 11)
+		{
+			continue;
+		}
+
+		if (GetAsyncKeyState(VK_UP) && y - 1 < 6)
+		{
+			continue;
+		}
+
+		if (GetAsyncKeyState(VK_DOWN) && y != 11) //down button pressed
+		{
+			gotoXY(10, y); std::cout << "  ";
+			y++;
+			gotoXY(10, y); std::cout << "->";
+			menuItem++;
+			continue;
+
+		}
+
+		if (GetAsyncKeyState(VK_UP) && y != 6) //up button pressed
+		{
+			gotoXY(10, y); std::cout << "  ";
+			y--;
+			gotoXY(10, y); std::cout << "->";
+			menuItem--;
+			continue;
+		}
+
+		if (GetAsyncKeyState(VK_RETURN))
+		{ // Enter key pressed
+
+			switch (menuItem)
+			{
+			case 0:
 				createUserMenu();
 				break;
 			case 1:
@@ -139,13 +215,9 @@ void mainMenu::usersManagementView()
 				uManager.displayUsers();
 				break;
 			case 5:
+				mainMenu::managementView();
 				break;
-			case 6:
-				system("CLS");
-				std::cout << "Thanks for using my program! :)" << std::endl;
-				exit(0);
 			}
-			break;
 		}
 	}
 }
