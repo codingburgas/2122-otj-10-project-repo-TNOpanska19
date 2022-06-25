@@ -80,10 +80,16 @@ void pm::bll::UserManager::removeUser()
 	system("CLS");
 	int id;
 
-	std::cout << "Delete user with Id: "; std::cin >> id;
-	mUserStore.remove(id);
-	std::cout << std::endl << std::endl;
+	std::cout << "  ======================================" << std::endl;
+	std::cout << "               REMOVE USER            " << std::endl;
+	std::cout << "  ======================================" << std::endl;
+	std::cout << "                                " << std::endl;
 
+	std::cout << "     Remove user with Id: "; std::cin >> id;
+	mUserStore.remove(id);
+	std::cout << std::endl << std::endl; 
+	
+	std::cout << "  ======================================" << std::endl << std::endl;
 	std::cout << "  Press any key to go back to menu...";
 	_getch();
 	mainMenu::usersManagementView();
@@ -153,7 +159,7 @@ void pm::bll::UserManager::updateUser()
 
 	else
 	{
-		std::cout << "     User does not exist!" << std::endl;
+		std::cout << "     User with ID " << id << " does not exist!" << std::endl;
 	}
 
 

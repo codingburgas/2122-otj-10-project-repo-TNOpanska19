@@ -191,7 +191,7 @@ void mainMenu::currentUserInformation()
 	std::cout << "               YOUR PROFILE        " << std::endl;
 	std::cout << "  ======================================" << std::endl;
 	std::cout << "                                " << std::endl;
-	std::cout << "        User Information        " << std::endl;
+	std::cout << "            User Information        " << std::endl;
 	std::cout << "                                " << std::endl;
 	std::cout << "       Username: " << activeUser.username << std::endl;
 	std::cout << "       First name: " << activeUser.firstName << std::endl;

@@ -52,11 +52,13 @@ void pm::dal::UserStore::remove(int delId)
 
 	if (index == -1)
 	{
-		std::cout << "There is no user with such Id!" << std::endl;
+		std::cout << std::endl << "     User with ID " << delId << " does not exist!";
 		return;
 	}
 
 	users.erase(users.begin() + index);
+
+	std::cout << std::endl << "     User successfully removed!";
 
 	std::ofstream file("../../data/Users.txt", std::ios::in | std::ios::trunc);
 
