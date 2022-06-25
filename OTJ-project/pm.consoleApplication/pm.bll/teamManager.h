@@ -14,7 +14,9 @@ namespace pm::bll
 		pm::dal::UserStore mUserStore;
 		
 		void createTeam(std::string title, pm::types::User activeUser);
+		
 
+		void displayTeams();
 		/*
 		void displayTeams();
 

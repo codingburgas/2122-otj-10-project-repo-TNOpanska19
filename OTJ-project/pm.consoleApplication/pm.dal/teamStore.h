@@ -10,9 +10,12 @@ namespace pm::dal
 	{
 		void createNewTeam(pm::types::Team& team);
 
+		void getData();
+
+		void addToTeams(int id, std::string title, /*std::string dateOfCreation, int idOfCreator, std::string dateOfLastChange, int idOfChange, */std::vector<std::string> members);
+
 		/*
 		int generateNewId();
-
 
 		void remove(int delId);
 
@@ -20,13 +23,8 @@ namespace pm::dal
 
 		pm::types::User getById(size_t id);
 
-		// bool getByUsername(std::string username, int password);
-
 		std::vector<pm::types::User> getAll();
 
-		void getData();
-
-		void addToUsers(int id, std::string username, std::string firstName, std::string lastName, std::string email, bool privilege, std::string password);
 		*/	
 	};
 }

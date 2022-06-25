@@ -77,6 +77,7 @@ void teamMenu::teamsManagementView(pm::types::User activeUser)
 			case 2:
 				break;
 			case 3:
+				tManager.displayTeams();
 				break;
 			case 4:
 				break;
