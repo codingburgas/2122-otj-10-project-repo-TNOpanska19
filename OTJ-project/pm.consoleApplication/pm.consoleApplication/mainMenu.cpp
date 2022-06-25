@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
-#include "../pm.types/User.h"
+#include "../pm.types/user.h"
 #include "../pm.bll/userManager.h"
 #include "mainMenu.h"
 #include "teamsMenu.h"
@@ -120,7 +120,7 @@ void mainMenu::managementView()
 				mainMenu::usersManagementView();
 				break;
 			case 1:
-				teamMenu::teamsManagementView();
+				teamMenu::teamsManagementView(activeUser);
 				break;
 			case 2:
 				break;
@@ -233,7 +233,6 @@ void mainMenu::createUserMenu()
 {
 	system("CLS");
 
-	int id = 69;
 	std::string username, firstName, lastName, email, password;
 	bool privilege;
 
@@ -252,7 +251,7 @@ void mainMenu::createUserMenu()
 	std::cin.ignore(1000, '\n');
 	std::cout << "       Password: ";  std::getline(std::cin, password); std::cout << std::endl;
 
-	uManager.createUser(id, username, firstName, lastName, email, privilege, uManager.hashString(password));
+	uManager.createUser(username, firstName, lastName, email, privilege, uManager.hashString(password));
 }
 
 void mainMenu::currentUserInformation()

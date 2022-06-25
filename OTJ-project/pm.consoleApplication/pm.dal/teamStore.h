@@ -2,15 +2,17 @@
 #include <vector>
 #include <string>
 #include <iostream>
-#include "../pm.types/user.h"
+#include "../pm.types/team.h"
 
 namespace pm::dal
 {
-	struct UserStore
+	struct TeamStore
 	{
+		void createNewTeam(pm::types::Team& team);
+
+		/*
 		int generateNewId();
 
-		void createNewUser(pm::types::User& user);
 
 		void remove(int delId);
 
@@ -25,5 +27,6 @@ namespace pm::dal
 		void getData();
 
 		void addToUsers(int id, std::string username, std::string firstName, std::string lastName, std::string email, bool privilege, std::string password);
+		*/	
 	};
 }

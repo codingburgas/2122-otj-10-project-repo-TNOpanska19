@@ -95,7 +95,7 @@ void pm::bll::UserManager::removeUser()
 	mainMenu::usersManagementView();
 }
 
-void pm::bll::UserManager::createUser(int id, std::string username, std::string firstName, std::string lastName, std::string email, bool privilege, std::string password)
+void pm::bll::UserManager::createUser(std::string username, std::string firstName, std::string lastName, std::string email, bool privilege, std::string password)
 {
 	pm::types::User newUser;
 

@@ -156,6 +156,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
+    <ClInclude Include="teamStore.h" />
     <ClInclude Include="userStore.h" />
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +167,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="pm.dal.cpp" />
+    <ClCompile Include="teamStore.cpp" />
     <ClCompile Include="userStore.cpp" />
   </ItemGroup>
   <ItemGroup>

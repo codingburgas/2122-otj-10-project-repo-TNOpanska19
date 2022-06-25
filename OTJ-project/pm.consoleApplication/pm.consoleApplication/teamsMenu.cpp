@@ -2,8 +2,13 @@
 #include <windows.h>
 #include "mainMenu.h"
 #include "teamsMenu.h"
+#include "../pm.types/team.h"
+#include "../pm.types/user.h"
+#include "../pm.bll/teamManager.h"
 
-void teamMenu::teamsManagementView()
+pm::bll::TeamManager tManager;
+
+void teamMenu::teamsManagementView(pm::types::User activeUser)
 {
 	system("CLS");
 
@@ -65,6 +70,7 @@ void teamMenu::teamsManagementView()
 			switch (menuItem)
 			{
 			case 0:
+				teamMenu::createTeamMenu(activeUser);
 				break;
 			case 1:
 				break;
@@ -80,4 +86,21 @@ void teamMenu::teamsManagementView()
 			}
 		}
 	}
+}
+
+void teamMenu::createTeamMenu(pm::types::User activeUser)
+{
+	system("CLS");
+
+	std::string title;
+
+	std::cout << "  ======================================" << std::endl;
+	std::cout << "               CREATE TEAM            " << std::endl;
+	std::cout << "  ======================================" << std::endl;
+	std::cout << "                                " << std::endl;
+	std::cout << "                   Enter             " << std::endl;
+	std::cout << "                                " << std::endl;
+	std::cout << "       Title: "; std::getline(std::cin, title); std::cout << std::endl;
+
+	tManager.createTeam(title, activeUser);
 }
