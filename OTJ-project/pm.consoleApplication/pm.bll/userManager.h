@@ -10,7 +10,7 @@ namespace pm::bll
 {
 	struct UserManager
 	{
-		//pm::dal::UserStore m_userStore;
+		pm::dal::UserStore mUserStore;
 
 		std::string hashString(std::string str);
 
@@ -25,14 +25,7 @@ namespace pm::bll
 		void removeUser();
 
 		void createUser(int id, std::string username, std::string firstName, std::string lastName, std::string email, bool privilage, std::string password);
-		/*
-		pm::types::User loginUser(std::string username, std::string password);
-
-		void seedDatabase();
-
-		
-
-		void updateUser(pm::types::User);
-		*/
+	
+		void updateUser();
 	};
 }

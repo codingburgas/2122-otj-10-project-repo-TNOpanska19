@@ -5,3 +5,6 @@
 5,TNOpanska19,Tereza,Opanska,TNOpanska19@codingburgas.bg,0,558ec3dcf944035e11a4996a20eb5912,
 6,coder,Petar,Georgiev,hack@gmail.com,0,098f6bcd4621d373cade4e832627b4f6,
 7,Pesho,Petar,Kodera,hackerman@ghostmail.de,1,c93b4f4197b4afcdac5e59114d830d53,
+8,Ilovecsumiribarsum,Lovec,Ribar,lovecaribar@abv.bg,0,18a9ad52d1e132739174502493133024,
+9,opa,nov,user,nqmadastanegotin,0,5b3ec5f4fb9670867a1d31b3c63341dc,
+10,Koder,Hodq,Da'kodq,kodenemodene@code.ru,1,3263f14324f13deba1c577677daeb596,

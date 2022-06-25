@@ -72,6 +72,22 @@ void pm::dal::UserStore::remove(int delId)
 	file.close();
 }
 
+void pm::dal::UserStore::update(std::vector<pm::types::User> users)
+{
+	std::ofstream file("../../data/Users.txt", std::ios::in | std::ios::trunc);
+
+
+	for (unsigned i = 0; i < users.size(); i++)
+	{
+		pm::types::User user = users[i];
+
+		file << user.id << ',' << user.username << ',' << user.firstName << ',' << user.lastName <<
+			',' << user.email << ',' << user.privilage << ',' << user.passwordHash << ',' << '\n';
+	}
+
+	file.close();
+}
+
 pm::types::User pm::dal::UserStore::getById(size_t id)
 {
 	for (unsigned i = 0; i < users.size(); i++)

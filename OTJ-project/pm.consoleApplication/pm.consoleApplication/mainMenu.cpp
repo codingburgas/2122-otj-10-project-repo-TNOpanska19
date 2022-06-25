@@ -127,6 +127,7 @@ void mainMenu::usersManagementView()
 				createUserMenu();
 				break;
 			case 1:
+				uManager.updateUser();
 				break;
 			case 2:
 				uManager.removeUser();

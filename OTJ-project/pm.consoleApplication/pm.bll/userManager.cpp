@@ -3,8 +3,7 @@
 #include "../pm.consoleApplication/mainMenu.h"
 #include "userManager.h"
 
-pm::dal::UserStore uStore;
-pm::bll::UserManager userManager;
+pm::bll::UserManager mUserManager;
 std::vector<pm::types::User> userList;
 
 std::string pm::bll::UserManager::hashString(std::string password)
@@ -15,8 +14,8 @@ std::string pm::bll::UserManager::hashString(std::string password)
 
 bool pm::bll::UserManager::loginUser(std::string username, std::string password)
 {
-	uStore.getData();
-	userList = userManager.getRegisteredUsers();
+	mUserStore.getData();
+	userList = mUserManager.getRegisteredUsers();
 
 	std::string passHash = pm::bll::UserManager::hashString(password);
 
@@ -36,14 +35,14 @@ bool pm::bll::UserManager::loginUser(std::string username, std::string password)
 
 std::vector<pm::types::User> pm::bll::UserManager::getRegisteredUsers()
 {
-   return uStore.getAll();
+   return mUserStore.getAll();
 }
 
 void pm::bll::UserManager::displayUsers()
 {
 	system("CLS");
-	uStore.getData();
-	userList = userManager.getRegisteredUsers();
+	mUserStore.getData();
+	userList = mUserManager.getRegisteredUsers();
 
 	std::cout << "  ========================================================" << std::endl;
 	std::cout << "                         USER LIST                    " << std::endl;
@@ -64,8 +63,8 @@ void pm::bll::UserManager::displayUsers()
 
 pm::types::User pm::bll::UserManager::getActiveUser(std::string username)
 {
-	uStore.getData();
-	userList = userManager.getRegisteredUsers();
+	mUserStore.getData();
+	userList = mUserManager.getRegisteredUsers();
 
 	for (unsigned i = 0; i < userList.size(); i++)
 	{
@@ -82,7 +81,7 @@ void pm::bll::UserManager::removeUser()
 	int id;
 
 	std::cout << "Delete user with Id: "; std::cin >> id;
-	uStore.remove(id);
+	mUserStore.remove(id);
 	std::cout << std::endl << std::endl;
 
 	std::cout << "  Press any key to go back to menu...";
@@ -94,7 +93,7 @@ void pm::bll::UserManager::createUser(int id, std::string username, std::string 
 {
 	pm::types::User newUser;
 
-	newUser.id = uStore.generateNewId();
+	newUser.id = mUserStore.generateNewId();
 	newUser.username = username;
 	newUser.firstName = firstName;
 	newUser.lastName = lastName;
@@ -102,7 +101,65 @@ void pm::bll::UserManager::createUser(int id, std::string username, std::string 
 	newUser.privilage = privilage;
 	newUser.passwordHash = pm::bll::UserManager::hashString(password);
 
-	uStore.createNewUser(newUser);
+	mUserStore.createNewUser(newUser);
 
+	mainMenu::usersManagementView();
+}
+
+void pm::bll::UserManager::updateUser()
+{
+	system("CLS");
+	int id;
+	bool flag = false;
+	std::string password;
+
+	std::cout << "  ======================================" << std::endl;
+	std::cout << "               UPDATE USER            " << std::endl;
+	std::cout << "  ======================================" << std::endl;
+	std::cout << "                                " << std::endl;
+	std::cout << "     Update user with id: "; std::cin >> id;
+	std::cout << std::endl;
+
+	userList.clear();
+	userList = mUserManager.getRegisteredUsers();
+
+	for (unsigned i = 0; i < userList.size(); i++)
+	{
+		if (userList[i].id == id)
+		{
+			std::cin.clear();
+			std::cin.ignore(1000, '\n');
+			std::cout << "                                " << std::endl;
+			std::cout << "     Update username: "; std::getline(std::cin, userList[i].username); std::cout << std::endl;
+			std::cout << "     Update first name: "; std::getline(std::cin, userList[i].firstName); std::cout << std::endl;
+			std::cout << "     Update last name: "; std::getline(std::cin, userList[i].lastName); std::cout << std::endl;
+			std::cout << "     Update email: "; std::getline(std::cin, userList[i].email); std::cout << std::endl;
+			std::cout << "     Update privilage: "; std::cin >> userList[i].privilage; std::cout << std::endl;
+			std::cin.clear();
+			std::cin.ignore(1000, '\n');
+			std::cout << "     Password: ";  std::getline(std::cin, password);
+			userList[i].passwordHash = hashString(password);
+
+			flag = true;
+			break;
+		}
+	}
+
+	if (flag)
+	{
+		mUserStore.update(userList);
+	}
+
+	else
+	{
+		std::cout << "     User does not exist!" << std::endl;
+	}
+
+
+
+	std::cout << std::endl << "  ======================================" << std::endl;
+
+	std::cout << std::endl << "  Press any key to go back to menu...";
+	_getch();
 	mainMenu::usersManagementView();
 }

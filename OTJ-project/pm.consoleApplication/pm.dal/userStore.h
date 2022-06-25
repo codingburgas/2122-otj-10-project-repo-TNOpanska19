@@ -14,9 +14,7 @@ namespace pm::dal
 
 		void remove(int delId);
 
-		/*
-		void update(pm::types::User user);
-		*/
+		void update(std::vector<pm::types::User> users);
 
 		pm::types::User getById(size_t id);
 
