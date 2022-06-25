@@ -7,7 +7,7 @@ namespace pm::types
 {
 	struct User
 	{
-		size_t id;
+		int id;
 		std::string username;
 		std::string firstName;
 		std::string lastName;
@@ -18,7 +18,7 @@ namespace pm::types
 		time_t dateOfLastChange;
 		size_t idOfChange;
 		*/
-		bool privilage;
+		bool privilege;
 		std::string passwordHash;
 	};
 }

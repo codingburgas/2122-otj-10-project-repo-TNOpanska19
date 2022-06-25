@@ -31,7 +31,7 @@ void pm::dal::UserStore::createNewUser(pm::types::User& user)
 	std::ofstream file("../../data/Users.txt", std::ios::in | std::ios::ate);
 
 	file << user.id << ',' << user.username << ',' << user.firstName << ',' << user.lastName << 
-		',' << user.email << ',' << user.privilage << ',' << user.passwordHash << ',' << '\n';
+		',' << user.email << ',' << user.privilege << ',' << user.passwordHash << ',' << '\n';
 
 	file.close();
 }
@@ -66,7 +66,7 @@ void pm::dal::UserStore::remove(int delId)
 		pm::types::User user = users[i];
 
 		file << user.id << ',' << user.username << ',' << user.firstName << ',' << user.lastName <<
-			',' << user.email << ',' << user.privilage << ',' << user.passwordHash << ',' << '\n';
+			',' << user.email << ',' << user.privilege << ',' << user.passwordHash << ',' << '\n';
 	}
 
 	file.close();
@@ -82,7 +82,7 @@ void pm::dal::UserStore::update(std::vector<pm::types::User> users)
 		pm::types::User user = users[i];
 
 		file << user.id << ',' << user.username << ',' << user.firstName << ',' << user.lastName <<
-			',' << user.email << ',' << user.privilage << ',' << user.passwordHash << ',' << '\n';
+			',' << user.email << ',' << user.privilege << ',' << user.passwordHash << ',' << '\n';
 	}
 
 	file.close();
@@ -109,7 +109,7 @@ void pm::dal::UserStore::getData()	// Starts reading the Records.txt file so it 
 	std::ifstream file("../../data/Users.txt", std::fstream::in);
 	users.clear();
 
-	std::string id, userName, firstName, lastName, email, /* dateOfCreation, idOfCreator, dateOfLastChange, idOfChange, */ privilage, password, next;
+	std::string id, userName, firstName, lastName, email, /* dateOfCreation, idOfCreator, dateOfLastChange, idOfChange, */ privilege, password, next;
 
 	if (file.is_open())	// The file is successfully opened
 	{
@@ -125,11 +125,11 @@ void pm::dal::UserStore::getData()	// Starts reading the Records.txt file so it 
 			std::getline(file, dateoflastchange, ',');
 			std::getline(file, idofchange, ',');*/
 
-			std::getline(file, privilage, ',');
+			std::getline(file, privilege, ',');
 			std::getline(file, password, ',');
 			std::getline(file, next, '\n');
 
-			addToUsers(stoi(id), userName, firstName, lastName, email, stoi(privilage), password);
+			addToUsers(stoi(id), userName, firstName, lastName, email, stoi(privilege), password);
 		}
 
 		file.close();
@@ -141,7 +141,7 @@ void pm::dal::UserStore::getData()	// Starts reading the Records.txt file so it 
 	}
 }
 
-void pm::dal::UserStore::addToUsers(int id, std::string username, std::string firstName, std::string lastName, std::string email, bool privilage, std::string password)
+void pm::dal::UserStore::addToUsers(int id, std::string username, std::string firstName, std::string lastName, std::string email, bool privilege, std::string password)
 {
 	pm::types::User user;
 
@@ -150,7 +150,7 @@ void pm::dal::UserStore::addToUsers(int id, std::string username, std::string fi
 	user.firstName = firstName;
 	user.lastName = lastName;
 	user.email = email;
-	user.privilage = privilage;
+	user.privilege = privilege;
 	user.passwordHash = password;
 
 	users.push_back(user);

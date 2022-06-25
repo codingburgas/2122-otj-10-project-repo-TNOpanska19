@@ -24,7 +24,7 @@ namespace pm::bll
 
 		void removeUser();
 
-		void createUser(int id, std::string username, std::string firstName, std::string lastName, std::string email, bool privilage, std::string password);
+		void createUser(int id, std::string username, std::string firstName, std::string lastName, std::string email, bool privilege, std::string password);
 	
 		void updateUser();
 	};

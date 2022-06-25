@@ -19,7 +19,7 @@ bool pm::bll::UserManager::loginUser(std::string username, std::string password)
 
 	std::string passHash = pm::bll::UserManager::hashString(password);
 
-	for (int i = 0; i < userList.size(); i++)
+	for (unsigned i = 0; i < userList.size(); i++)
 	{
 		if (userList[i].username == username)
 		{
@@ -47,12 +47,12 @@ void pm::bll::UserManager::displayUsers()
 	std::cout << "  ========================================================" << std::endl;
 	std::cout << "                         USER LIST                    " << std::endl;
 	std::cout << "  ========================================================" << std::endl << std::endl;
-	std::cout << "   id, username, first name, last name, email, privilage" << std::endl << std::endl << std::endl;
+	std::cout << "   id, username, first name, last name, email, privilege" << std::endl << std::endl << std::endl;
 
 	for (unsigned i = 0; i < userList.size(); i++)
 	{
 		std::cout << "   " << userList[i].id << ", " << userList[i].username << ", " << userList[i].firstName << ", " << userList[i].lastName << ", " 
-			<< userList[i].email << ", " << userList[i].privilage << std::endl << std::endl;
+			<< userList[i].email << ", " << userList[i].privilege << std::endl << std::endl;
 	}
 
 	std::cout << "  ========================================================" << std::endl << std::endl; 
@@ -89,7 +89,7 @@ void pm::bll::UserManager::removeUser()
 	mainMenu::usersManagementView();
 }
 
-void pm::bll::UserManager::createUser(int id, std::string username, std::string firstName, std::string lastName, std::string email, bool privilage, std::string password)
+void pm::bll::UserManager::createUser(int id, std::string username, std::string firstName, std::string lastName, std::string email, bool privilege, std::string password)
 {
 	pm::types::User newUser;
 
@@ -98,7 +98,7 @@ void pm::bll::UserManager::createUser(int id, std::string username, std::string 
 	newUser.firstName = firstName;
 	newUser.lastName = lastName;
 	newUser.email = email;
-	newUser.privilage = privilage;
+	newUser.privilege = privilege;
 	newUser.passwordHash = pm::bll::UserManager::hashString(password);
 
 	mUserStore.createNewUser(newUser);
@@ -109,6 +109,7 @@ void pm::bll::UserManager::createUser(int id, std::string username, std::string 
 void pm::bll::UserManager::updateUser()
 {
 	system("CLS");
+
 	int id;
 	bool flag = false;
 	std::string password;
@@ -134,10 +135,10 @@ void pm::bll::UserManager::updateUser()
 			std::cout << "     Update first name: "; std::getline(std::cin, userList[i].firstName); std::cout << std::endl;
 			std::cout << "     Update last name: "; std::getline(std::cin, userList[i].lastName); std::cout << std::endl;
 			std::cout << "     Update email: "; std::getline(std::cin, userList[i].email); std::cout << std::endl;
-			std::cout << "     Update privilage: "; std::cin >> userList[i].privilage; std::cout << std::endl;
+			std::cout << "     Update privilege: "; std::cin >> userList[i].privilege; std::cout << std::endl;
 			std::cin.clear();
 			std::cin.ignore(1000, '\n');
-			std::cout << "     Password: ";  std::getline(std::cin, password);
+			std::cout << "     Update password: ";  std::getline(std::cin, password);
 			userList[i].passwordHash = hashString(password);
 
 			flag = true;

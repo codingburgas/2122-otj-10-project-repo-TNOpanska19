@@ -43,7 +43,7 @@ void mainMenu::loginMenu()
 		mainMenu::loginMenu();
 	}
 
-	if (activeUser.privilage == 1)
+	if (activeUser.privilege == 1)
 	{
 		mainMenu::usersManagementView();
 	}
@@ -163,7 +163,7 @@ void mainMenu::createUserMenu()
 
 	int id = 69;
 	std::string username, firstName, lastName, email, password;
-	bool privilage;
+	bool privilege;
 
 	std::cout << "  ======================================" << std::endl;
 	std::cout << "               CREATE USER            " << std::endl;
@@ -175,12 +175,12 @@ void mainMenu::createUserMenu()
 	std::cout << "       First name: "; std::getline(std::cin, firstName); std::cout << std::endl;
 	std::cout << "       Last name: "; std::getline(std::cin, lastName); std::cout << std::endl;
 	std::cout << "       Email: "; std::getline(std::cin, email); std::cout << std::endl;
-	std::cout << "       Privilage: "; std::cin >> privilage; std::cout << std::endl;
+	std::cout << "       Privilege: "; std::cin >> privilege; std::cout << std::endl;
 	std::cin.clear();
 	std::cin.ignore(1000, '\n');
 	std::cout << "       Password: ";  std::getline(std::cin, password); std::cout << std::endl;
 
-	uManager.createUser(id, username, firstName, lastName, email, privilage, uManager.hashString(password));
+	uManager.createUser(id, username, firstName, lastName, email, privilege, uManager.hashString(password));
 }
 
 void mainMenu::currentUserInformation()
@@ -197,17 +197,17 @@ void mainMenu::currentUserInformation()
 	std::cout << "       First name: " << activeUser.firstName << std::endl;
 	std::cout << "       Last name: " << activeUser.lastName << std::endl;
 	std::cout << "       Email: " << activeUser.email << std::endl;
-	std::cout << "       Privilage: ";
+	std::cout << "       Privilege: ";
 
-	if (activeUser.privilage == 0)
+	if (activeUser.privilege == 0)
 		std::cout << "user";
 
-	else if (activeUser.privilage == 1)
+	else if (activeUser.privilege == 1)
 		std::cout << "admin";
 
 	std::cout << std::endl << std::endl << "  ======================================" << std::endl;
 
-	if (activeUser.privilage == 1)
+	if (activeUser.privilege == 1)
 	{
 		std::cout << "  Press any key to go back to menu...";
 		_getch();
