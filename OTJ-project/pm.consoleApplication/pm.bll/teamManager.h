@@ -14,16 +14,16 @@ namespace pm::bll
 		
 		void createTeam(std::string title, pm::types::User activeUser);
 
-		void displayTeams(pm::types::User activeUser);
-
-		std::vector<pm::types::Team> getRegisteredTeams();
-
 		void updateTeam(pm::types::User activeUser);
 
 		void removeTeam(pm::types::User activeUser);
 
-		void assignUsersToTeam(pm::types::User activeUser);
+		std::vector<pm::types::Team> getRegisteredTeams();
 
 		bool getTeamById(int id);
+
+		void assignUsersToTeam(pm::types::User activeUser);
+
+		void displayTeams(pm::types::User activeUser);
 	};
 }

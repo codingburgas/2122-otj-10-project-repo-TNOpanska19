@@ -6,13 +6,13 @@ namespace pm::dal
 {
 	struct UserStore
 	{
-		int generateNewId();
+		void getData();
+
+		void addToUsers(int id, std::string username, std::string firstName, std::string lastName, std::string email, time_t dateOfCreation, int idOdCreator, time_t dateOfLastChange, int idOfChange, bool privilege, std::string password);
 
 		void createNewUser(pm::types::User& user);
 
-		void remove(int delId);
-
-		void update(std::vector<pm::types::User> users);
+		int generateNewId();
 
 		pm::types::User getById(size_t id);
 
@@ -20,8 +20,8 @@ namespace pm::dal
 
 		std::vector<pm::types::User> getAll();
 
-		void getData();
+		void update(std::vector<pm::types::User> users);
 
-		void addToUsers(int id, std::string username, std::string firstName, std::string lastName, std::string email, time_t dateOfCreation, int idOdCreator, time_t dateOfLastChange, int idOfChange, bool privilege, std::string password);
+		void remove(int delId);
 	};
 }

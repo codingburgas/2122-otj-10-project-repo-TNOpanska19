@@ -9,7 +9,9 @@
 
 // add headers that you want to pre-compile here
 
+#include <iostream>
 #include <string>
+#include <time.h>
 #include <vector>
 #include <conio.h>
 
