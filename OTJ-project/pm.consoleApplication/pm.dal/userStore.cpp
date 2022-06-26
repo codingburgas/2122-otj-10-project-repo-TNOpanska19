@@ -30,8 +30,17 @@ void pm::dal::UserStore::createNewUser(pm::types::User& user)
 {
 	std::ofstream file("../../data/Users.txt", std::ios::in | std::ios::ate);
 
-	file << user.id << ',' << user.username << ',' << user.firstName << ',' << user.lastName << 
-		',' << user.email << ',' << user.privilege << ',' << user.passwordHash << ',' << '\n';
+	file << user.id << ',';
+	file << user.username << ',';
+	file << user.firstName << ',';
+	file << user.lastName << ',';
+	file << user.email << ',';
+	file << user.dateOfCreation << ',';
+	file << user.idOfCreator << ',';
+	file << user.dateOfLastChange << ',';
+	file << user.idOfChange << ',';
+	file << user.privilege << ',';
+	file << user.passwordHash << ',' << '\n';
 
 	file.close();
 }
@@ -67,8 +76,7 @@ void pm::dal::UserStore::remove(int delId)
 	{
 		pm::types::User user = users[i];
 
-		file << user.id << ',' << user.username << ',' << user.firstName << ',' << user.lastName <<
-			',' << user.email << ',' << user.privilege << ',' << user.passwordHash << ',' << '\n';
+		userStore.createNewUser(user);
 	}
 
 	file.close();
@@ -83,8 +91,7 @@ void pm::dal::UserStore::update(std::vector<pm::types::User> users)
 	{
 		pm::types::User user = users[i];
 
-		file << user.id << ',' << user.username << ',' << user.firstName << ',' << user.lastName <<
-			',' << user.email << ',' << user.privilege << ',' << user.passwordHash << ',' << '\n';
+		userStore.createNewUser(user);
 	}
 
 	file.close();
@@ -134,17 +141,15 @@ void pm::dal::UserStore::getData()	// Starts reading the Records.txt file so it 
 			std::getline(file, firstName, ',');
 			std::getline(file, lastName, ',');
 			std::getline(file, email, ',');
-			/*
 			std::getline(file, dateOfCreation, ',');
 			std::getline(file, idOfCreator, ',');
 			std::getline(file, dateOfLastChange, ',');
 			std::getline(file, idOfChange, ',');
-			*/
 			std::getline(file, privilege, ',');
 			std::getline(file, password, ',');
 			std::getline(file, next, '\n');
 
-			addToUsers(stoi(id), userName, firstName, lastName, email, stoi(privilege), password);
+			addToUsers(stoi(id), userName, firstName, lastName, email, stoi(dateOfCreation), stoi(idOfCreator), stoi(dateOfLastChange), stoi(idOfChange), stoi(privilege), password);
 		}
 
 		file.close();
@@ -156,7 +161,7 @@ void pm::dal::UserStore::getData()	// Starts reading the Records.txt file so it 
 	}
 }
 
-void pm::dal::UserStore::addToUsers(int id, std::string username, std::string firstName, std::string lastName, std::string email, bool privilege, std::string password)
+void pm::dal::UserStore::addToUsers(int id, std::string username, std::string firstName, std::string lastName, std::string email, time_t dateOfCreation, int idOdCreator, time_t dateOfLastChange, int idOfChange, bool privilege, std::string password)
 {
 	pm::types::User user;
 
@@ -165,6 +170,10 @@ void pm::dal::UserStore::addToUsers(int id, std::string username, std::string fi
 	user.firstName = firstName;
 	user.lastName = lastName;
 	user.email = email;
+	user.dateOfCreation = dateOfCreation;
+	user.idOfCreator = idOdCreator;
+	user.dateOfLastChange = dateOfLastChange;
+	user.idOfChange = idOfChange;
 	user.privilege = privilege;
 	user.passwordHash = password;
 

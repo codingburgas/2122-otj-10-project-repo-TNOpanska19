@@ -33,7 +33,6 @@ void mainMenu::loginMenu()
 
 	if (uManager.loginUser(username, password))
 	{
-		std::cout << "user exists";
 		activeUser = uManager.getActiveUser(username);
 	}
 
@@ -45,14 +44,10 @@ void mainMenu::loginMenu()
 	}
 
 	if (activeUser.privilege == 1)
-	{
 		mainMenu::managementView();
-	}
 
 	else
-	{
 		currentUserInformation();
-	}
 }
 
 void mainMenu::managementView()
@@ -203,7 +198,7 @@ void mainMenu::usersManagementView()
 				createUserMenu();
 				break;
 			case 1:
-				uManager.updateUser();
+				uManager.updateUser(activeUser);
 				break;
 			case 2:
 				uManager.removeUser();
@@ -251,12 +246,16 @@ void mainMenu::createUserMenu()
 	std::cin.ignore(1000, '\n');
 	std::cout << "       Password: ";  std::getline(std::cin, password); std::cout << std::endl;
 
-	uManager.createUser(username, firstName, lastName, email, privilege, uManager.hashString(password));
+	uManager.createUser(username, firstName, lastName, email, privilege, uManager.hashString(password), activeUser);
 }
 
 void mainMenu::currentUserInformation()
 {
 	system("CLS");
+
+	char buffer[80];
+	struct tm time;
+	const time_t* rawTime;
 
 	std::cout << "  ======================================" << std::endl;
 	std::cout << "               YOUR PROFILE        " << std::endl;
@@ -264,11 +263,23 @@ void mainMenu::currentUserInformation()
 	std::cout << "                                " << std::endl;
 	std::cout << "            User Information        " << std::endl;
 	std::cout << "                                " << std::endl;
-	std::cout << "       Username: " << activeUser.username << std::endl;
-	std::cout << "       First name: " << activeUser.firstName << std::endl;
-	std::cout << "       Last name: " << activeUser.lastName << std::endl;
-	std::cout << "       Email: " << activeUser.email << std::endl;
-	std::cout << "       Privilege: ";
+	std::cout << "     Username: " << activeUser.username << std::endl;
+	std::cout << "     First name: " << activeUser.firstName << std::endl;
+	std::cout << "     Last name: " << activeUser.lastName << std::endl;
+	
+	rawTime = &activeUser.dateOfCreation;
+	localtime_s(&time, rawTime);
+	strftime(buffer, 80, "%d/%m/%y | %I:%M %p", &time);
+	std::cout << "     Created on: " << buffer << std::endl;
+	std::cout << "     Id of creator: " << activeUser.idOfCreator << std::endl;
+
+	rawTime = &activeUser.dateOfLastChange;
+	localtime_s(&time, rawTime);
+	strftime(buffer, 80, "%d/%m/%y | %I:%M %p", &time);
+	std::cout << "     Last change on: " << buffer << std::endl;
+	std::cout << "     Id of user who made change: " << activeUser.idOfChange << std::endl;
+	std::cout << "     Email: " << activeUser.email << std::endl;
+	std::cout << "     Privilege: ";
 
 	if (activeUser.privilege == 0)
 		std::cout << "user";

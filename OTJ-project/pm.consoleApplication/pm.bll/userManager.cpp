@@ -95,24 +95,30 @@ void pm::bll::UserManager::removeUser()
 	mainMenu::usersManagementView();
 }
 
-void pm::bll::UserManager::createUser(std::string username, std::string firstName, std::string lastName, std::string email, bool privilege, std::string password)
+void pm::bll::UserManager::createUser(std::string username, std::string firstName, std::string lastName, std::string email, bool privilege, std::string password, pm::types::User activeUser)
 {
 	pm::types::User newUser;
+
+	std::cout << password << std::endl;
 
 	newUser.id = mUserStore.generateNewId();
 	newUser.username = username;
 	newUser.firstName = firstName;
 	newUser.lastName = lastName;
 	newUser.email = email;
+	newUser.dateOfCreation = time(NULL);
+	newUser.idOfCreator = activeUser.id;
+	newUser.dateOfLastChange = time(NULL);
+	newUser.idOfChange = activeUser.id;
 	newUser.privilege = privilege;
-	newUser.passwordHash = pm::bll::UserManager::hashString(password);
+	newUser.passwordHash = password;
 
 	mUserStore.createNewUser(newUser);
 
 	mainMenu::usersManagementView();
 }
 
-void pm::bll::UserManager::updateUser()
+void pm::bll::UserManager::updateUser(pm::types::User activeUser)
 {
 	system("CLS");
 
@@ -146,6 +152,9 @@ void pm::bll::UserManager::updateUser()
 			std::cin.ignore(1000, '\n');
 			std::cout << "     Update password: ";  std::getline(std::cin, password);
 			userList[i].passwordHash = hashString(password);
+
+			userList[i].dateOfLastChange = time(NULL);
+			userList[i].idOfChange = activeUser.id;
 
 			flag = true;
 			break;
