@@ -14,6 +14,8 @@ namespace pm::dal
 
 		void addToTeams(int id, std::string title, /*std::string dateOfCreation, int idOfCreator, std::string dateOfLastChange, int idOfChange, */std::vector<std::string> members);
 
+		std::vector<pm::types::Team> getAll();
+
 		/*
 		int generateNewId();
 
@@ -23,7 +25,7 @@ namespace pm::dal
 
 		pm::types::User getById(size_t id);
 
-		std::vector<pm::types::User> getAll();
+		
 
 		*/	
 	};

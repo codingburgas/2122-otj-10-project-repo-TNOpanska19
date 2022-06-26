@@ -17,6 +17,9 @@ namespace pm::bll
 		
 
 		void displayTeams();
+
+		std::vector<pm::types::Team> getRegisteredTeams();
+
 		/*
 		void displayTeams();
 
