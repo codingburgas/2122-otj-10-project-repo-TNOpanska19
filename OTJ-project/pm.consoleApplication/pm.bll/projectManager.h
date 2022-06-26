@@ -16,7 +16,7 @@ namespace pm::bll
 
 		void displayProjects(pm::types::User activeUser);
 
-		//std::vector<pm::types::Project> getRegisteredProjects();
+		std::vector<pm::types::Project> getRegisteredProjects();
 
 		/*
 		pm::dal::UserStore mUserStore;

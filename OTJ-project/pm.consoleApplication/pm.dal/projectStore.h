@@ -18,7 +18,7 @@ namespace pm::dal
 		
 		void remove(std::string title, pm::types::User);
 
-		//std::vector<pm::types::Project> getAllProjects();
+		std::vector<pm::types::Project> getAllProjects();
 
 		/*
 		void getData();

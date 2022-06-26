@@ -50,7 +50,7 @@ void pm::bll::ProjectManager::displayProjects(pm::types::User activeUser)
 {
 	system("CLS");
 	mProjectStore.getData();
-	//projectList = mProjectManager.getRegisteredProjects();
+	projectList = mProjectManager.getRegisteredProjects();
 
 	std::vector<pm::types::Team> teams = mTeamsManager.getRegisteredTeams();
 	std::string inTeams = "";
@@ -58,6 +58,8 @@ void pm::bll::ProjectManager::displayProjects(pm::types::User activeUser)
 	char buffer[80];
 	struct tm time;
 	const time_t* rawTime;
+
+	// nqkude s inTeams sstring-a e problema trqbva da se domisli
 
 	for (auto team : teams)
 	{
@@ -70,6 +72,8 @@ void pm::bll::ProjectManager::displayProjects(pm::types::User activeUser)
 	std::cout << "  ========================================================" << std::endl;
 	std::cout << "                       PROJECT LIST                    " << std::endl;
 	std::cout << "  ========================================================" << std::endl << std::endl;
+
+	std::cout << " " << inTeams << std::endl;
 
 	for (unsigned i = 0; i < projectList.size(); i++)
 	{
@@ -101,12 +105,7 @@ void pm::bll::ProjectManager::displayProjects(pm::types::User activeUser)
 	projectsMenu::projectsManagementView(activeUser);
 }
 
-/*
-* nqkuv ujas
-* 
-* 
 std::vector<pm::types::Project> pm::bll::ProjectManager::getRegisteredProjects()
 {
 	return mProjectStore.getAllProjects();
 }
-*/

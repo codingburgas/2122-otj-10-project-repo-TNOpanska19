@@ -126,10 +126,7 @@ void pm::dal::ProjectStore::remove(std::string title, pm::types::User activeUser
 	projectStore.update(projects);
 }
 
-/*
-std::vector<pm::types::Project> getAllProjects()
+std::vector<pm::types::Project> pm::dal::ProjectStore::getAllProjects()
 {
-	projectStore.getData();
-	return projects;
+	return std::vector<pm::types::Project>(projects);
 }
-*/
