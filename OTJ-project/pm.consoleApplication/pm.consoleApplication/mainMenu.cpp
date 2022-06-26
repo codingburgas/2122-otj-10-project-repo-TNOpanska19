@@ -280,7 +280,7 @@ void mainMenu::currentUserInformation()
 
 	if (activeUser.privilege == 1)
 	{
-		std::cout << "  Press any key to go back to menu...";
+		std::cout << std::endl << "  Press any key to go back to menu...";
 		_getch();
 		mainMenu::usersManagementView();
 	}

@@ -20,13 +20,12 @@ namespace pm::bll
 
 		std::vector<pm::types::Team> getRegisteredTeams();
 
+		void updateTeam(pm::types::User activeUser);
+
 		/*
-		void displayTeams();
 
 		void removeTeam();
-
 		
-		void updateTeam();
 		*/
 	};
 }

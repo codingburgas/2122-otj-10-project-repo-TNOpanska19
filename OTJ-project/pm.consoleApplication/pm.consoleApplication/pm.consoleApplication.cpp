@@ -8,6 +8,6 @@ HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 int main()
 {
 	SetConsoleTextAttribute(hConsole, 11);
-	std::cout << "A";
+	std::cout << "B";
 	mainMenu::loginMenu();
 }

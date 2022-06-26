@@ -73,6 +73,7 @@ void teamMenu::teamsManagementView(pm::types::User activeUser)
 				teamMenu::createTeamMenu(activeUser);
 				break;
 			case 1:
+				tManager.updateTeam(activeUser);
 				break;
 			case 2:
 				break;

@@ -23,6 +23,7 @@ void pm::dal::TeamStore::createNewTeam(pm::types::Team& team)
 
 std::vector<pm::types::Team> pm::dal::TeamStore::getAll()
 {
+	teamStore.getData();
 	return std::vector<pm::types::Team>(teams);
 }
 
@@ -118,4 +119,25 @@ void pm::dal::TeamStore::addToTeams(int id, std::string title, /*std::string dat
 	}
 
 	teams.push_back(team);
+}
+
+void pm::dal::TeamStore::update(std::vector<pm::types::Team> teams)
+{
+	std::ofstream file("../../data/Teams.txt", std::ios::in | std::ios::trunc);
+
+	for (unsigned i = 0; i < teams.size(); i++)
+	{
+		pm::types::Team team = teams[i];
+
+		file << team.id << ',' << team.title << ',';
+
+		for (auto member : team.members)
+		{
+			file << member << ';';
+		}
+
+		file << '\n';
+	}
+
+	file.close();
 }

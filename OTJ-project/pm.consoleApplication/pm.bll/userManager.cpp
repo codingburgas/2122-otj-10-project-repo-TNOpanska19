@@ -162,10 +162,7 @@ void pm::bll::UserManager::updateUser()
 		std::cout << "     User with ID " << id << " does not exist!" << std::endl;
 	}
 
-
-
 	std::cout << std::endl << "  ======================================" << std::endl;
-
 	std::cout << std::endl << "  Press any key to go back to menu...";
 	_getch();
 	mainMenu::usersManagementView();

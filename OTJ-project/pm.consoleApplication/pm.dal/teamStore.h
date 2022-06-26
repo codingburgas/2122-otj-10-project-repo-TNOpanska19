@@ -18,17 +18,12 @@ namespace pm::dal
 
 		int generateNewId();
 
-		/*
-		
+		void update(std::vector<pm::types::Team> teams);
 
+		/*
 		void remove(int delId);
 
-		void update(std::vector<pm::types::User> users);
-
 		pm::types::User getById(size_t id);
-
-		
-
 		*/	
 	};
 }
