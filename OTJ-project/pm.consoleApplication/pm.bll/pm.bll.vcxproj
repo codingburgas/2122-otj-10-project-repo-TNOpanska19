@@ -156,6 +156,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
+    <ClInclude Include="projectManager.h" />
     <ClInclude Include="teamManager.h" />
     <ClInclude Include="userManager.h" />
   </ItemGroup>
@@ -167,6 +168,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="pm.bll.cpp" />
+    <ClCompile Include="projectManager.cpp" />
     <ClCompile Include="teamManager.cpp" />
     <ClCompile Include="userManager.cpp" />
   </ItemGroup>

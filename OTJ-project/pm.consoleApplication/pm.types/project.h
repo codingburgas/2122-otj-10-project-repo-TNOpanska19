@@ -12,6 +12,6 @@ namespace pm::types
 		int idOfCreator;
 		time_t dateOfLastChange;
 		int idOfChange;
-		std::vector<std::string> members;
+		std::vector<std::string> teams;
 	};
 }

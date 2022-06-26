@@ -6,8 +6,9 @@
 #include "../pm.types/user.h"
 #include "../pm.bll/teamManager.h"
 #include "../pm.bll/userManager.h"
+#include "../pm.bll/projectManager.h"
 
-//pm::bll::ProjectManager pManager;
+pm::bll::ProjectManager pManager;
 
 void projectsMenu::projectsManagementView(pm::types::User activeUser)
 {
@@ -104,5 +105,5 @@ void projectsMenu::createProjectMenu(pm::types::User activeUser)
 	std::cout << "       Title: "; std::getline(std::cin, title); std::cout << std::endl;
 	std::cout << "       Description: "; std::getline(std::cin, description); std::cout << std::endl;
 
-	//pManager.createTeam(title, activeUser);
+	pManager.createProject(title, description, activeUser);
 }
