@@ -1,7 +1,5 @@
 #pragma once
-#include <vector>
-#include <string>
-#include <iostream>
+
 #include "../pm.types/user.h"
 
 namespace pm::dal

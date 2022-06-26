@@ -1,8 +1,4 @@
 #include "pch.h"
-#include <fstream>
-#include <sstream>
-#include <vector>
-#include <string>
 #include "teamStore.h"
 #include "../pm.types/team.h"
 

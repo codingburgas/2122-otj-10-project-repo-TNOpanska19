@@ -9,4 +9,8 @@
 
 // add headers that you want to pre-compile here
 
+#include <time.h>
+#include <vector>
+#include <string>
+
 #endif //PCH_H

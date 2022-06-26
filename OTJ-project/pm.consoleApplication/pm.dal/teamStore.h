@@ -1,7 +1,6 @@
 #pragma once
-#include <vector>
-#include <string>
-#include <iostream>
+
+#include "pch.h"
 #include "../pm.types/team.h"
 
 namespace pm::dal
