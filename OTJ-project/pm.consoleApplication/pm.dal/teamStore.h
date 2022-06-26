@@ -12,7 +12,7 @@ namespace pm::dal
 
 		void getData();
 
-		void addToTeams(int id, std::string title, /*std::string dateOfCreation, int idOfCreator, std::string dateOfLastChange, int idOfChange, */std::vector<std::string> members);
+		void addToTeams(int id, std::string title, time_t dateOfCreation, int idOfCreator, time_t dateOfLastChange, int idOfChange, std::vector<std::string> members);
 
 		std::vector<pm::types::Team> getAll();
 

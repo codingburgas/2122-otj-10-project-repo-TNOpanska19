@@ -15,12 +15,10 @@ void pm::bll::TeamManager::createTeam(std::string title, pm::types::User activeU
 
 	newTeam.id = mTeamStore.generateNewId();
 	newTeam.title = title;
-	/*
 	newTeam.dateOfCreation = time(NULL);
 	newTeam.idOfCreator = activeUser.id;
 	newTeam.dateOfLastChange = time(NULL);
 	newTeam.idOfChange = activeUser.id;
-	*/
 
 	mTeamStore.createNewTeam(newTeam);
 
@@ -57,6 +55,8 @@ void pm::bll::TeamManager::updateTeam(pm::types::User activeUser)
 			std::cin.ignore(1000, '\n');
 			std::cout << "                                " << std::endl;
 			std::cout << "     Update title: "; std::getline(std::cin, teamList[i].title);
+			teamList[i].dateOfLastChange = time(NULL);
+			teamList[i].idOfChange = activeUser.id;
 
 			flag = true;
 			break;
