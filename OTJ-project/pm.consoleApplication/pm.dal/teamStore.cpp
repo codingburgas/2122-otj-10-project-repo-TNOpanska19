@@ -77,7 +77,7 @@ int pm::dal::TeamStore::generateNewId()
 	int maxId = 0;
 
 	teamStore.getData();
-	teams = teamStore.getAll();
+	teams = teamStore.getAllTeams();
 
 	for (auto team : teams)
 	{
@@ -90,7 +90,7 @@ int pm::dal::TeamStore::generateNewId()
 	return maxId + 1;
 }
 
-std::vector<pm::types::Team> pm::dal::TeamStore::getAll()
+std::vector<pm::types::Team> pm::dal::TeamStore::getAllTeams()
 {
 	teamStore.getData();
 	return std::vector<pm::types::Team>(teams);
@@ -152,7 +152,7 @@ void pm::dal::TeamStore::remove(int delId)
 void pm::dal::TeamStore::assignUsers(int id, std::string user)
 {
 	teams.clear();
-	teams = teamStore.getAll();
+	teams = teamStore.getAllTeams();
 
 	for (unsigned i = 0; i < teams.size(); i++)
 	{

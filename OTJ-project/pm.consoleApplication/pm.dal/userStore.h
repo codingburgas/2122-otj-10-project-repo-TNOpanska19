@@ -18,7 +18,7 @@ namespace pm::dal
 
 		bool getByUsername(std::string username);
 
-		std::vector<pm::types::User> getAll();
+		std::vector<pm::types::User> getAllUsers();
 
 		void update(std::vector<pm::types::User> users);
 

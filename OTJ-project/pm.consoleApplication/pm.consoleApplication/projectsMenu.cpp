@@ -77,8 +77,10 @@ void projectsMenu::projectsManagementView(pm::types::User activeUser)
 			case 1:
 				break;
 			case 2:
+				pManager.removeProject(activeUser);
 				break;
 			case 3:
+				pManager.displayProjects(activeUser);
 				break;
 			case 4:
 				break;

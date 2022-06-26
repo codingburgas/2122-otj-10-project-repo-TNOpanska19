@@ -75,7 +75,7 @@ int pm::dal::UserStore::generateNewId()
 	int maxId = 0;
 
 	userStore.getData();
-	users = userStore.getAll();
+	users = userStore.getAllUsers();
 
 	for (auto user : users)
 	{
@@ -112,7 +112,7 @@ bool pm::dal::UserStore::getByUsername(std::string username)
 	return false;
 }
 
-std::vector<pm::types::User> pm::dal::UserStore::getAll()
+std::vector<pm::types::User> pm::dal::UserStore::getAllUsers()
 {
 	return std::vector<pm::types::User>(users);
 }

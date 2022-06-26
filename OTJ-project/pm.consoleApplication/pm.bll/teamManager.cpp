@@ -95,7 +95,7 @@ void pm::bll::TeamManager::removeTeam(pm::types::User activeUser)
 
 std::vector<pm::types::Team> pm::bll::TeamManager::getRegisteredTeams()
 {
-	return mTeamStore.getAll();
+	return mTeamStore.getAllTeams();
 }
 
 bool pm::bll::TeamManager::getTeamById(int id)
@@ -169,7 +169,9 @@ void pm::bll::TeamManager::displayTeams(pm::types::User activeUser)
 
 	for (unsigned i = 0; i < teamList.size(); i++)
 	{
-		std::cout << "   " << teamList[i].id << ", " << teamList[i].title << ", ";
+		std::cout << "   Id: " << teamList[i].id << std::endl;
+		std::cout << "   Title: " << teamList[i].title << std::endl;
+		std::cout << "   Members: ";
 
 		for (auto member : teamList[i].members)
 		{

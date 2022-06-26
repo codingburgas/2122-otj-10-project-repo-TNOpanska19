@@ -15,7 +15,7 @@ namespace pm::dal
 
 		int generateNewId();
 
-		std::vector<pm::types::Team> getAll();
+		std::vector<pm::types::Team> getAllTeams();
 
 		void update(std::vector<pm::types::Team> teams);
 

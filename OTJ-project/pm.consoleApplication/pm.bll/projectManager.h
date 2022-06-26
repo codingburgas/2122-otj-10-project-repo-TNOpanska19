@@ -12,6 +12,12 @@ namespace pm::bll
 	{
 		void createProject(std::string title, std::string description, pm::types::User activeUser);
 
+		void removeProject(pm::types::User activeUser);
+
+		void displayProjects(pm::types::User activeUser);
+
+		//std::vector<pm::types::Project> getRegisteredProjects();
+
 		/*
 		pm::dal::UserStore mUserStore;
 
@@ -19,7 +25,6 @@ namespace pm::bll
 
 		void updateTeam(pm::types::User activeUser);
 
-		void removeTeam(pm::types::User activeUser);
 
 		std::vector<pm::types::Team> getRegisteredTeams();
 

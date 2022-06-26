@@ -145,7 +145,7 @@ void pm::bll::UserManager::removeUser(pm::types::User activeUser)
 
 std::vector<pm::types::User> pm::bll::UserManager::getRegisteredUsers()
 {
-   return mUserStore.getAll();
+   return mUserStore.getAllUsers();
 }
 
 void pm::bll::UserManager::displayUsers(pm::types::User activeUser)
