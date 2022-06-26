@@ -1,5 +1,4 @@
 #include "pch.h"
-#include <conio.h>
 #include "../pm.consoleApplication/mainMenu.h"
 #include "../pm.consoleApplication/usersMenu.h"
 #include "userManager.h"
@@ -34,34 +33,6 @@ bool pm::bll::UserManager::loginUser(std::string username, std::string password)
 	return false;
 }
 
-std::vector<pm::types::User> pm::bll::UserManager::getRegisteredUsers()
-{
-   return mUserStore.getAll();
-}
-
-void pm::bll::UserManager::displayUsers(pm::types::User activeUser)
-{
-	system("CLS");
-	mUserStore.getData();
-	userList = mUserManager.getRegisteredUsers();
-
-	std::cout << "  ========================================================" << std::endl;
-	std::cout << "                         USER LIST                    " << std::endl;
-	std::cout << "  ========================================================" << std::endl << std::endl;
-	std::cout << "   id, username, first name, last name, email, privilege" << std::endl << std::endl << std::endl;
-
-	for (unsigned i = 0; i < userList.size(); i++)
-	{
-		std::cout << "   " << userList[i].id << ", " << userList[i].username << ", " << userList[i].firstName << ", " << userList[i].lastName << ", " 
-			<< userList[i].email << ", " << userList[i].privilege << std::endl << std::endl;
-	}
-
-	std::cout << "  ========================================================" << std::endl << std::endl; 
-	std::cout << "  Press any key to go back to menu...";
-	_getch();
-	userMenu::usersManagementView(activeUser);
-}
-
 pm::types::User pm::bll::UserManager::getActiveUser(std::string username)
 {
 	mUserStore.getData();
@@ -76,31 +47,9 @@ pm::types::User pm::bll::UserManager::getActiveUser(std::string username)
 	}
 }
 
-void pm::bll::UserManager::removeUser(pm::types::User activeUser)
-{
-	system("CLS");
-	int id;
-
-	std::cout << "  ======================================" << std::endl;
-	std::cout << "               REMOVE USER            " << std::endl;
-	std::cout << "  ======================================" << std::endl;
-	std::cout << "                                " << std::endl;
-
-	std::cout << "     Remove user with Id: "; std::cin >> id;
-	mUserStore.remove(id);
-	std::cout << std::endl << std::endl; 
-	
-	std::cout << "  ======================================" << std::endl << std::endl;
-	std::cout << "  Press any key to go back to menu...";
-	_getch();
-	userMenu::usersManagementView(activeUser);
-}
-
 void pm::bll::UserManager::createUser(std::string username, std::string firstName, std::string lastName, std::string email, bool privilege, std::string password, pm::types::User activeUser)
 {
 	pm::types::User newUser;
-
-	std::cout << password << std::endl;
 
 	newUser.id = mUserStore.generateNewId();
 	newUser.username = username;
@@ -115,7 +64,6 @@ void pm::bll::UserManager::createUser(std::string username, std::string firstNam
 	newUser.passwordHash = password;
 
 	mUserStore.createNewUser(newUser);
-
 	userMenu::usersManagementView(activeUser);
 }
 
@@ -129,8 +77,7 @@ void pm::bll::UserManager::updateUser(pm::types::User activeUser)
 
 	std::cout << "  ======================================" << std::endl;
 	std::cout << "               UPDATE USER            " << std::endl;
-	std::cout << "  ======================================" << std::endl;
-	std::cout << "                                " << std::endl;
+	std::cout << "  ======================================" << std::endl << std::endl;
 	std::cout << "     Update user with id: "; std::cin >> id;
 	std::cout << std::endl;
 
@@ -174,6 +121,71 @@ void pm::bll::UserManager::updateUser(pm::types::User activeUser)
 
 	std::cout << std::endl << "  ======================================" << std::endl;
 	std::cout << std::endl << "  Press any key to go back to menu...";
+	_getch();
+	userMenu::usersManagementView(activeUser);
+}
+
+void pm::bll::UserManager::removeUser(pm::types::User activeUser)
+{
+	system("CLS");
+	int id;
+
+	std::cout << "  ======================================" << std::endl;
+	std::cout << "               REMOVE USER            " << std::endl;
+	std::cout << "  ======================================" << std::endl << std::endl;
+	std::cout << "     Remove user with Id: "; std::cin >> id;
+	mUserStore.remove(id);
+	std::cout << std::endl << std::endl;
+
+	std::cout << "  ======================================" << std::endl << std::endl;
+	std::cout << "  Press any key to go back to menu...";
+	_getch();
+	userMenu::usersManagementView(activeUser);
+}
+
+std::vector<pm::types::User> pm::bll::UserManager::getRegisteredUsers()
+{
+   return mUserStore.getAll();
+}
+
+void pm::bll::UserManager::displayUsers(pm::types::User activeUser)
+{
+	system("CLS");
+	mUserStore.getData();
+	userList = mUserManager.getRegisteredUsers();
+
+	char buffer[80];
+	struct tm time;
+	const time_t* rawTime;
+
+	std::cout << "  ========================================================" << std::endl;
+	std::cout << "                         USER LIST                    " << std::endl;
+	std::cout << "  ========================================================" << std::endl << std::endl;
+
+	for (unsigned i = 0; i < userList.size(); i++)
+	{
+		std::cout << "   Id: " << userList[i].id << std::endl;
+		std::cout << "   Username: " << userList[i].username << std::endl;
+		std::cout << "   First name: " << userList[i].firstName << std::endl;
+		std::cout << "   Last name: " << userList[i].lastName << std::endl;
+
+		rawTime = &userList[i].dateOfCreation;
+		localtime_s(&time, rawTime);
+		strftime(buffer, 80, "%d/%m/%y | %I:%M %p", &time);
+		std::cout << "   Created on: " << buffer << std::endl;
+		std::cout << "   Id of creator: " << userList[i].idOfCreator << std::endl;
+
+		rawTime = &userList[i].dateOfLastChange;
+		localtime_s(&time, rawTime);
+		strftime(buffer, 80, "%d/%m/%y | %I:%M %p", &time);
+		std::cout << "   Last change on: " << buffer << std::endl;
+		std::cout << "   Id of user who made change: " << userList[i].idOfChange << std::endl;
+		std::cout << "   Email: " << userList[i].email << std::endl;
+		std::cout << "   Privilege: " << userList[i].privilege << std::endl << std::endl;
+	}
+
+	std::cout << "  ========================================================" << std::endl << std::endl;
+	std::cout << "  Press any key to go back to menu...";
 	_getch();
 	userMenu::usersManagementView(activeUser);
 }

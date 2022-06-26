@@ -1,3 +1,4 @@
+#include "pch.h"
 #include <iostream>
 #include <windows.h>
 #include "mainMenu.h"
@@ -6,6 +7,7 @@
 #include "../pm.types/team.h"
 #include "../pm.types/user.h"
 #include "../pm.bll/teamManager.h"
+#include "../pm.bll/userManager.h"
 
 pm::bll::UserManager userManager;
 

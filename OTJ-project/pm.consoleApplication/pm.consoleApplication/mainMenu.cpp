@@ -1,10 +1,4 @@
-#include <iostream>
-#include <conio.h>
-#include <windows.h>
-#include <cstdlib>
-#include <string>
-#include <vector>
-#include <fstream>
+#include "pch.h"
 #include "../pm.types/user.h"
 #include "../pm.bll/userManager.h"
 #include "mainMenu.h"

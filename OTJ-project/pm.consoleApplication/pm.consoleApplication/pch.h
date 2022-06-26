@@ -9,8 +9,12 @@
 
 // add headers that you want to pre-compile here
 
+#include <iostream>
+#include <windows.h>
+#include <conio.h>
+#include <cstdlib>
 #include <string>
 #include <vector>
-#include <conio.h>
+#include <fstream>
 
 #endif //PCH_H
