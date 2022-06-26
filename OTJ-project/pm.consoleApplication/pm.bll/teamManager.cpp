@@ -2,9 +2,11 @@
 #include <conio.h>
 #include "teamManager.h"
 #include "../pm.consoleApplication/teamsMenu.h"
+#include "../pm.dal/userStore.h"
 
 pm::bll::TeamManager mTeamManager;
 pm::dal::TeamStore mTeamStore;
+pm::dal::UserStore mUserStore;
 std::vector<pm::types::Team> teamList;
 
 void pm::bll::TeamManager::createTeam(std::string title, pm::types::User activeUser)
@@ -95,6 +97,64 @@ void pm::bll::TeamManager::removeTeam(pm::types::User activeUser)
 	std::cout << "  Press any key to go back to menu...";
 	_getch();
 	teamMenu::teamsManagementView(activeUser);
+}
+
+void pm::bll::TeamManager::assignUsersToTeam(pm::types::User activeUser)
+{
+	system("CLS");
+	int id;
+	std::string username;
+
+	std::cout << "  ======================================" << std::endl;
+	std::cout << "               ASSIGN USERS            " << std::endl;
+	std::cout << "  ======================================" << std::endl;
+	std::cout << "                                " << std::endl;
+	std::cout << "     Choose team with Id: "; std::cin >> id;
+
+	if (mTeamManager.getTeamById(id))
+	{
+		std::cin.clear();
+		std::cin.ignore(1000, '\n');
+		std::cout << "     Add user: "; std::getline(std::cin, username);
+		std::cout << std::endl;
+
+		if (mUserStore.getByUsername(username))
+		{
+			std::cout << "     User added to team!" << std::endl;
+			mTeamStore.assignUsers(id, username);
+		}
+
+		else
+		{
+			std::cout << std::endl << "     User doesn't exist!";
+		}
+	}
+
+	else
+	{
+		std::cout << std::endl << "     Team doesn't exist!" << std::endl;
+	}
+
+	std::cout << "  ========================================================" << std::endl << std::endl;
+	std::cout << "  Press any key to go back to menu...";
+	_getch();
+	teamMenu::teamsManagementView(activeUser);
+}
+
+bool pm::bll::TeamManager::getTeamById(int id)
+{
+	mTeamStore.getData();
+	teamList = mTeamManager.getRegisteredTeams();
+
+	for (unsigned i = 0; i < teamList.size(); i++)
+	{
+		if (teamList[i].id == id)
+		{
+			return true;
+		}
+	}
+
+	return false;
 }
 
 void pm::bll::TeamManager::displayTeams(pm::types::User activeUser)

@@ -14,7 +14,6 @@ namespace pm::bll
 		pm::dal::UserStore mUserStore;
 		
 		void createTeam(std::string title, pm::types::User activeUser);
-		
 
 		void displayTeams(pm::types::User activeUser);
 
@@ -23,5 +22,9 @@ namespace pm::bll
 		void updateTeam(pm::types::User activeUser);
 
 		void removeTeam(pm::types::User activeUser);
+
+		void assignUsersToTeam(pm::types::User activeUser);
+
+		bool getTeamById(int id);
 	};
 }

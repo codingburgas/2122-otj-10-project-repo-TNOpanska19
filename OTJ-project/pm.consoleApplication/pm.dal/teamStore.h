@@ -21,5 +21,7 @@ namespace pm::dal
 		void update(std::vector<pm::types::Team> teams);
 
 		void remove(int delId);
+
+		void assignUsers(int id, std::string user);
 	};
 }

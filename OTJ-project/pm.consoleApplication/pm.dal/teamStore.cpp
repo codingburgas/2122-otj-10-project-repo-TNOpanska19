@@ -52,7 +52,7 @@ void pm::dal::TeamStore::getData()	// Starts reading the Records.txt file so it 
 
 	std::string id, title, dateOfCreation, idOfCreator, dateOfLastChange, idOfChange, membersLine, next;
 	std::vector<std::string> members;
-
+	// time_t a;
 
 	if (file.is_open())	// The file is successfully opened
 	{
@@ -60,6 +60,8 @@ void pm::dal::TeamStore::getData()	// Starts reading the Records.txt file so it 
 		{
 			members.clear();
 			std::getline(file, title, ',');
+			//std::getline(file, dateOfCreation, ',');
+			// a = stoi(dateOfCreation);
 			/*
 			std::getline(file, dateOfCreation, ',');
 			std::getline(file, idOfCreator, ',');
@@ -124,7 +126,7 @@ void pm::dal::TeamStore::addToTeams(int id, std::string title, /*std::string dat
 void pm::dal::TeamStore::update(std::vector<pm::types::Team> teams)
 {
 	std::ofstream file("../../data/Teams.txt", std::ios::in | std::ios::trunc);
-
+	
 	for (unsigned i = 0; i < teams.size(); i++)
 	{
 		pm::types::Team team = teams[i];
@@ -147,7 +149,7 @@ void pm::dal::TeamStore::remove(int delId)
 	int index = -1;
 	teamStore.getData();
 
-	for (int i = 0; i < teams.size(); i++)
+	for (unsigned i = 0; i < teams.size(); i++)
 	{
 		if (teams[i].id == delId)
 		{
@@ -166,22 +168,21 @@ void pm::dal::TeamStore::remove(int delId)
 
 	std::cout << std::endl << "     Team successfully removed!";
 
-	std::ofstream file("../../data/Teams.txt", std::ios::in | std::ios::trunc);
+	teamStore.update(teams);
+}
 
+void pm::dal::TeamStore::assignUsers(int id, std::string user)
+{
+	teams.clear();
+	teams = teamStore.getAll();
 
 	for (unsigned i = 0; i < teams.size(); i++)
 	{
-		pm::types::Team team = teams[i];
-
-		file << team.id << ',' << team.title << ',';
-
-		for (auto member : team.members)
+		if (teams[i].id == id)
 		{
-			file << member << ';';
+			teams[i].members.push_back(user);
 		}
-
-		file << '\n';
 	}
 
-	file.close();
+	teamStore.update(teams);
 }
