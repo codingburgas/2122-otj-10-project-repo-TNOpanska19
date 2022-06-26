@@ -77,6 +77,26 @@ void pm::bll::TeamManager::updateTeam(pm::types::User activeUser)
 	teamMenu::teamsManagementView(activeUser);
 }
 
+void pm::bll::TeamManager::removeTeam(pm::types::User activeUser)
+{
+	system("CLS");
+	int id;
+
+	std::cout << "  ======================================" << std::endl;
+	std::cout << "               REMOVE TEAM            " << std::endl;
+	std::cout << "  ======================================" << std::endl;
+	std::cout << "                                " << std::endl;
+
+	std::cout << "     Remove team with Id: "; std::cin >> id;
+	mTeamStore.remove(id);
+	std::cout << std::endl << std::endl;
+
+	std::cout << "  ======================================" << std::endl << std::endl;
+	std::cout << "  Press any key to go back to menu...";
+	_getch();
+	teamMenu::teamsManagementView(activeUser);
+}
+
 void pm::bll::TeamManager::displayTeams(pm::types::User activeUser)
 {
 	system("CLS");

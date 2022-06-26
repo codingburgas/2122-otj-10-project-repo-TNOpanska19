@@ -101,6 +101,19 @@ pm::types::User pm::dal::UserStore::getById(size_t id)
 	}
 }
 
+bool pm::dal::UserStore::getByUsername(std::string username)
+{
+	for (unsigned i = 0; i < users.size(); i++)
+	{
+		if (users[i].username == username)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 std::vector<pm::types::User> pm::dal::UserStore::getAll()
 {
 	return std::vector<pm::types::User>(users);

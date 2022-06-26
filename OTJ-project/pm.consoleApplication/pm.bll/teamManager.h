@@ -22,10 +22,6 @@ namespace pm::bll
 
 		void updateTeam(pm::types::User activeUser);
 
-		/*
-
-		void removeTeam();
-		
-		*/
+		void removeTeam(pm::types::User activeUser);
 	};
 }

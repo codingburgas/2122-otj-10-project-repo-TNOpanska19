@@ -141,3 +141,47 @@ void pm::dal::TeamStore::update(std::vector<pm::types::Team> teams)
 
 	file.close();
 }
+
+void pm::dal::TeamStore::remove(int delId)
+{
+	int index = -1;
+	teamStore.getData();
+
+	for (int i = 0; i < teams.size(); i++)
+	{
+		if (teams[i].id == delId)
+		{
+			index = i;
+			break;
+		}
+	}
+
+	if (index == -1)
+	{
+		std::cout << std::endl << "     Team with ID " << delId << " does not exist!";
+		return;
+	}
+
+	teams.erase(teams.begin() + index);
+
+	std::cout << std::endl << "     Team successfully removed!";
+
+	std::ofstream file("../../data/Teams.txt", std::ios::in | std::ios::trunc);
+
+
+	for (unsigned i = 0; i < teams.size(); i++)
+	{
+		pm::types::Team team = teams[i];
+
+		file << team.id << ',' << team.title << ',';
+
+		for (auto member : team.members)
+		{
+			file << member << ';';
+		}
+
+		file << '\n';
+	}
+
+	file.close();
+}

@@ -18,7 +18,7 @@ namespace pm::dal
 
 		pm::types::User getById(size_t id);
 
-		// bool getByUsername(std::string username, int password);
+		bool getByUsername(std::string username);
 
 		std::vector<pm::types::User> getAll();
 

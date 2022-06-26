@@ -20,10 +20,6 @@ namespace pm::dal
 
 		void update(std::vector<pm::types::Team> teams);
 
-		/*
 		void remove(int delId);
-
-		pm::types::User getById(size_t id);
-		*/	
 	};
 }
