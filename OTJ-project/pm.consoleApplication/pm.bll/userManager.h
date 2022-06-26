@@ -18,11 +18,11 @@ namespace pm::bll
 
 		std::vector<pm::types::User> getRegisteredUsers();
 
-		void displayUsers();
+		void displayUsers(pm::types::User activeUser);
 
 		pm::types::User getActiveUser(std::string username);
 
-		void removeUser();
+		void removeUser(pm::types::User activeUser);
 
 		void createUser(std::string username, std::string firstName, std::string lastName, std::string email, bool privilege, std::string password, pm::types::User acttiveUser);
 	

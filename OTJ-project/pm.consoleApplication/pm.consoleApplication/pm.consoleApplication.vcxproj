@@ -146,10 +146,12 @@
     <ClCompile Include="mainMenu.cpp" />
     <ClCompile Include="pm.consoleApplication.cpp" />
     <ClCompile Include="teamsMenu.cpp" />
+    <ClCompile Include="usersMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mainMenu.h" />
     <ClInclude Include="teamsMenu.h" />
+    <ClInclude Include="usersMenu.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\pm.bll\pm.bll.vcxproj">

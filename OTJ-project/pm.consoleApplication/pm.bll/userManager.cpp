@@ -1,6 +1,7 @@
 #include "pch.h"
 #include <conio.h>
 #include "../pm.consoleApplication/mainMenu.h"
+#include "../pm.consoleApplication/usersMenu.h"
 #include "userManager.h"
 
 pm::bll::UserManager mUserManager;
@@ -38,7 +39,7 @@ std::vector<pm::types::User> pm::bll::UserManager::getRegisteredUsers()
    return mUserStore.getAll();
 }
 
-void pm::bll::UserManager::displayUsers()
+void pm::bll::UserManager::displayUsers(pm::types::User activeUser)
 {
 	system("CLS");
 	mUserStore.getData();
@@ -58,7 +59,7 @@ void pm::bll::UserManager::displayUsers()
 	std::cout << "  ========================================================" << std::endl << std::endl; 
 	std::cout << "  Press any key to go back to menu...";
 	_getch();
-	mainMenu::usersManagementView();
+	userMenu::usersManagementView(activeUser);
 }
 
 pm::types::User pm::bll::UserManager::getActiveUser(std::string username)
@@ -75,7 +76,7 @@ pm::types::User pm::bll::UserManager::getActiveUser(std::string username)
 	}
 }
 
-void pm::bll::UserManager::removeUser()
+void pm::bll::UserManager::removeUser(pm::types::User activeUser)
 {
 	system("CLS");
 	int id;
@@ -92,7 +93,7 @@ void pm::bll::UserManager::removeUser()
 	std::cout << "  ======================================" << std::endl << std::endl;
 	std::cout << "  Press any key to go back to menu...";
 	_getch();
-	mainMenu::usersManagementView();
+	userMenu::usersManagementView(activeUser);
 }
 
 void pm::bll::UserManager::createUser(std::string username, std::string firstName, std::string lastName, std::string email, bool privilege, std::string password, pm::types::User activeUser)
@@ -115,7 +116,7 @@ void pm::bll::UserManager::createUser(std::string username, std::string firstNam
 
 	mUserStore.createNewUser(newUser);
 
-	mainMenu::usersManagementView();
+	userMenu::usersManagementView(activeUser);
 }
 
 void pm::bll::UserManager::updateUser(pm::types::User activeUser)
@@ -174,5 +175,5 @@ void pm::bll::UserManager::updateUser(pm::types::User activeUser)
 	std::cout << std::endl << "  ======================================" << std::endl;
 	std::cout << std::endl << "  Press any key to go back to menu...";
 	_getch();
-	mainMenu::usersManagementView();
+	userMenu::usersManagementView(activeUser);
 }
