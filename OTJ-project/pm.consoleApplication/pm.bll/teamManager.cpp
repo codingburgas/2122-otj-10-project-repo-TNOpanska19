@@ -11,7 +11,7 @@ void pm::bll::TeamManager::createTeam(std::string title, pm::types::User activeU
 {
 	pm::types::Team newTeam;
 
-	newTeam.id = mUserStore.generateNewId(); // nova funkciq za teams
+	newTeam.id = mTeamStore.generateNewId();
 	newTeam.title = title;
 	/*
 	newTeam.dateOfCreation = time(NULL);
@@ -30,7 +30,7 @@ std::vector<pm::types::Team> pm::bll::TeamManager::getRegisteredTeams()
 	return mTeamStore.getAll();
 }
 
-void pm::bll::TeamManager::displayTeams()
+void pm::bll::TeamManager::displayTeams(pm::types::User activeUser)
 {
 	system("CLS");
 	mTeamStore.getData();
@@ -39,7 +39,7 @@ void pm::bll::TeamManager::displayTeams()
 	std::cout << "  ========================================================" << std::endl;
 	std::cout << "                         TEAM LIST                    " << std::endl;
 	std::cout << "  ========================================================" << std::endl << std::endl;
-	std::cout << "   id, title, members" << std::endl << std::endl << std::endl;
+	std::cout << "                     id, title, members" << std::endl << std::endl << std::endl;
 
 	for (unsigned i = 0; i < teamList.size(); i++)
 	{
@@ -56,5 +56,5 @@ void pm::bll::TeamManager::displayTeams()
 	std::cout << "  ========================================================" << std::endl << std::endl;
 	std::cout << "  Press any key to go back to menu...";
 	_getch();
-	//teamMenu::teamsManagementView(activeUser);
+	teamMenu::teamsManagementView(activeUser);
 }

@@ -16,7 +16,7 @@ namespace pm::bll
 		void createTeam(std::string title, pm::types::User activeUser);
 		
 
-		void displayTeams();
+		void displayTeams(pm::types::User activeUser);
 
 		std::vector<pm::types::Team> getRegisteredTeams();
 

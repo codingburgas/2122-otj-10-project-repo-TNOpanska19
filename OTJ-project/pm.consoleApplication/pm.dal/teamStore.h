@@ -16,8 +16,10 @@ namespace pm::dal
 
 		std::vector<pm::types::Team> getAll();
 
-		/*
 		int generateNewId();
+
+		/*
+		
 
 		void remove(int delId);
 

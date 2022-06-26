@@ -7,6 +7,7 @@
 #include "../pm.types/team.h"
 
 std::vector<pm::types::Team> teams;
+pm::dal::TeamStore teamStore;
 
 void pm::dal::TeamStore::createNewTeam(pm::types::Team& team)
 {
@@ -23,6 +24,24 @@ void pm::dal::TeamStore::createNewTeam(pm::types::Team& team)
 std::vector<pm::types::Team> pm::dal::TeamStore::getAll()
 {
 	return std::vector<pm::types::Team>(teams);
+}
+
+int pm::dal::TeamStore::generateNewId()
+{
+	int maxId = 0;
+
+	teamStore.getData();
+	teams = teamStore.getAll();
+
+	for (auto team : teams)
+	{
+		if (team.id > maxId)
+		{
+			maxId = team.id;
+		}
+	}
+
+	return maxId + 1;
 }
 
 void pm::dal::TeamStore::getData()	// Starts reading the Records.txt file so it can input information into it
