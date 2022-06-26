@@ -115,7 +115,7 @@ void pm::bll::TeamManager::assignUsersToTeam(pm::types::User activeUser)
 	{
 		std::cin.clear();
 		std::cin.ignore(1000, '\n');
-		std::cout << "     Add user: "; std::getline(std::cin, username);
+		std::cout << std::endl << "     Add user: "; std::getline(std::cin, username);
 		std::cout << std::endl;
 
 		if (mUserStore.getByUsername(username))
@@ -126,16 +126,16 @@ void pm::bll::TeamManager::assignUsersToTeam(pm::types::User activeUser)
 
 		else
 		{
-			std::cout << std::endl << "     User doesn't exist!";
+			std::cout << "     User does not exist!" << std::endl;
 		}
 	}
 
 	else
 	{
-		std::cout << std::endl << "     Team doesn't exist!" << std::endl;
+		std::cout << std::endl << "     Team does not exist!" << std::endl;
 	}
 
-	std::cout << "  ========================================================" << std::endl << std::endl;
+	std::cout << std::endl << "  ======================================" << std::endl << std::endl;
 	std::cout << "  Press any key to go back to menu...";
 	_getch();
 	teamMenu::teamsManagementView(activeUser);

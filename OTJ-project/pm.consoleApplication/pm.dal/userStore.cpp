@@ -124,7 +124,7 @@ void pm::dal::UserStore::getData()	// Starts reading the Records.txt file so it 
 	std::ifstream file("../../data/Users.txt", std::fstream::in);
 	users.clear();
 
-	std::string id, userName, firstName, lastName, email, /* dateOfCreation, idOfCreator, dateOfLastChange, idOfChange, */ privilege, password, next;
+	std::string id, userName, firstName, lastName, email, dateOfCreation, idOfCreator, dateOfLastChange, idOfChange, privilege, password, next;
 
 	if (file.is_open())	// The file is successfully opened
 	{
@@ -134,12 +134,12 @@ void pm::dal::UserStore::getData()	// Starts reading the Records.txt file so it 
 			std::getline(file, firstName, ',');
 			std::getline(file, lastName, ',');
 			std::getline(file, email, ',');
-
-			/*std::getline(file, dateofcreation, ',');
-			std::getline(file, idofcreator, ',');
-			std::getline(file, dateoflastchange, ',');
-			std::getline(file, idofchange, ',');*/
-
+			/*
+			std::getline(file, dateOfCreation, ',');
+			std::getline(file, idOfCreator, ',');
+			std::getline(file, dateOfLastChange, ',');
+			std::getline(file, idOfChange, ',');
+			*/
 			std::getline(file, privilege, ',');
 			std::getline(file, password, ',');
 			std::getline(file, next, '\n');

@@ -12,12 +12,10 @@ namespace pm::types
 		std::string firstName;
 		std::string lastName;
 		std::string email;
-		/*
 		time_t dateOfCreation;
 		size_t idOfCreator;
 		time_t dateOfLastChange;
 		size_t idOfChange;
-		*/
 		bool privilege;
 		std::string passwordHash;
 	};
