@@ -21,7 +21,7 @@ void pm::bll::TeamManager::createTeam(std::string title, pm::types::User activeU
 
 	mTeamStore.createNewTeam(newTeam);
 
-	teamMenu::teamsManagementView(activeUser);
+	teamsMenu::teamsManagementView(activeUser);
 }
 
 void pm::bll::TeamManager::updateTeam(pm::types::User activeUser)
@@ -70,7 +70,7 @@ void pm::bll::TeamManager::updateTeam(pm::types::User activeUser)
 	std::cout << std::endl << "  ======================================" << std::endl;
 	std::cout << std::endl << "  Press any key to go back to menu...";
 	_getch();
-	teamMenu::teamsManagementView(activeUser);
+	teamsMenu::teamsManagementView(activeUser);
 }
 
 void pm::bll::TeamManager::removeTeam(pm::types::User activeUser)
@@ -90,7 +90,7 @@ void pm::bll::TeamManager::removeTeam(pm::types::User activeUser)
 	std::cout << "  ======================================" << std::endl << std::endl;
 	std::cout << "  Press any key to go back to menu...";
 	_getch();
-	teamMenu::teamsManagementView(activeUser);
+	teamsMenu::teamsManagementView(activeUser);
 }
 
 std::vector<pm::types::Team> pm::bll::TeamManager::getRegisteredTeams()
@@ -153,7 +153,7 @@ void pm::bll::TeamManager::assignUsersToTeam(pm::types::User activeUser)
 	std::cout << std::endl << "  ======================================" << std::endl << std::endl;
 	std::cout << "  Press any key to go back to menu...";
 	_getch();
-	teamMenu::teamsManagementView(activeUser);
+	teamsMenu::teamsManagementView(activeUser);
 }
 
 void pm::bll::TeamManager::displayTeams(pm::types::User activeUser)
@@ -182,5 +182,5 @@ void pm::bll::TeamManager::displayTeams(pm::types::User activeUser)
 	std::cout << "  ========================================================" << std::endl << std::endl;
 	std::cout << "  Press any key to go back to menu...";
 	_getch();
-	teamMenu::teamsManagementView(activeUser);
+	teamsMenu::teamsManagementView(activeUser);
 }

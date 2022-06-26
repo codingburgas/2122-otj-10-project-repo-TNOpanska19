@@ -3,7 +3,7 @@
 #include "pch.h"
 #include "../pm.types/user.h"
 
-namespace userMenu
+namespace usersMenu
 {
 	void usersManagementView(pm::types::User activeUser);
 

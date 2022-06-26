@@ -24,6 +24,9 @@
     <ClInclude Include="team.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="project.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pm.types.cpp">

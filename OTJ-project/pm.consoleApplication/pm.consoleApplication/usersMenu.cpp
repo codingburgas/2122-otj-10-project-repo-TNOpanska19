@@ -1,6 +1,4 @@
 #include "pch.h"
-#include <iostream>
-#include <windows.h>
 #include "mainMenu.h"
 #include "usersMenu.h"
 #include "teamsMenu.h"
@@ -11,7 +9,7 @@
 
 pm::bll::UserManager userManager;
 
-void userMenu::usersManagementView(pm::types::User activeUser)
+void usersMenu::usersManagementView(pm::types::User activeUser)
 {
 	system("CLS");
 
@@ -91,7 +89,7 @@ void userMenu::usersManagementView(pm::types::User activeUser)
 	}
 }
 
-void userMenu::createUserMenu(pm::types::User activeUser)
+void usersMenu::createUserMenu(pm::types::User activeUser)
 {
 	system("CLS");
 

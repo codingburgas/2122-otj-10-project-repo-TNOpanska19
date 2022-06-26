@@ -156,6 +156,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
+    <ClInclude Include="project.h" />
     <ClInclude Include="team.h" />
     <ClInclude Include="user.h" />
   </ItemGroup>

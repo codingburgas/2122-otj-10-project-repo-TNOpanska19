@@ -64,7 +64,7 @@ void pm::bll::UserManager::createUser(std::string username, std::string firstNam
 	newUser.passwordHash = password;
 
 	mUserStore.createNewUser(newUser);
-	userMenu::usersManagementView(activeUser);
+	usersMenu::usersManagementView(activeUser);
 }
 
 void pm::bll::UserManager::updateUser(pm::types::User activeUser)
@@ -122,7 +122,7 @@ void pm::bll::UserManager::updateUser(pm::types::User activeUser)
 	std::cout << std::endl << "  ======================================" << std::endl;
 	std::cout << std::endl << "  Press any key to go back to menu...";
 	_getch();
-	userMenu::usersManagementView(activeUser);
+	usersMenu::usersManagementView(activeUser);
 }
 
 void pm::bll::UserManager::removeUser(pm::types::User activeUser)
@@ -140,7 +140,7 @@ void pm::bll::UserManager::removeUser(pm::types::User activeUser)
 	std::cout << "  ======================================" << std::endl << std::endl;
 	std::cout << "  Press any key to go back to menu...";
 	_getch();
-	userMenu::usersManagementView(activeUser);
+	usersMenu::usersManagementView(activeUser);
 }
 
 std::vector<pm::types::User> pm::bll::UserManager::getRegisteredUsers()
@@ -187,5 +187,5 @@ void pm::bll::UserManager::displayUsers(pm::types::User activeUser)
 	std::cout << "  ========================================================" << std::endl << std::endl;
 	std::cout << "  Press any key to go back to menu...";
 	_getch();
-	userMenu::usersManagementView(activeUser);
+	usersMenu::usersManagementView(activeUser);
 }

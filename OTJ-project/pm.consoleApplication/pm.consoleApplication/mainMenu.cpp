@@ -4,6 +4,7 @@
 #include "mainMenu.h"
 #include "usersMenu.h"
 #include "teamsMenu.h"
+#include "projectsMenu.h"
 
 HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE); // used for goto
 COORD CursorPosition; // used for goto
@@ -105,17 +106,18 @@ void mainMenu::managementView()
 			{
 			case 0:
 				if (activeUser.privilege == 1)
-					userMenu::usersManagementView(activeUser);
+					usersMenu::usersManagementView(activeUser);
 				else
 					gotoXY(13, 16); std::cout << "Access restricted!";
 				break;
 			case 1:
 				if (activeUser.privilege == 1)
-					teamMenu::teamsManagementView(activeUser);
+					teamsMenu::teamsManagementView(activeUser);
 				else
 					gotoXY(13, 16); std::cout << "Access restricted!";
 				break;
 			case 2:
+				projectsMenu::projectsManagementView(activeUser);
 				break;
 			case 3:
 				break;

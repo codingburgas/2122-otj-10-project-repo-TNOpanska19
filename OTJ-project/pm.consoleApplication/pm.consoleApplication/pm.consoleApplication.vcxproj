@@ -146,12 +146,14 @@
     <ClCompile Include="mainMenu.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="pm.consoleApplication.cpp" />
+    <ClCompile Include="projectsMenu.cpp" />
     <ClCompile Include="teamsMenu.cpp" />
     <ClCompile Include="usersMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mainMenu.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="projectsMenu.h" />
     <ClInclude Include="teamsMenu.h" />
     <ClInclude Include="usersMenu.h" />
   </ItemGroup>
