@@ -31,7 +31,7 @@ void projectsMenu::projectsManagementView(pm::types::User activeUser)
 		mainMenu::gotoXY(11, 6); std::cout << "Create new project";
 		mainMenu::gotoXY(11, 7); std::cout << "Update project";
 		mainMenu::gotoXY(11, 8); std::cout << "Remove project";
-		mainMenu::gotoXY(11, 9); std::cout << "View your project";
+		mainMenu::gotoXY(11, 9); std::cout << "View your projects";
 		mainMenu::gotoXY(11, 10); std::cout << "Assign teams to project";
 		mainMenu::gotoXY(11, 11); std::cout << "Go back";
 
@@ -75,6 +75,7 @@ void projectsMenu::projectsManagementView(pm::types::User activeUser)
 				projectsMenu::createProjectMenu(activeUser);
 				break;
 			case 1:
+				pManager.updateProject(activeUser);
 				break;
 			case 2:
 				pManager.removeProject(activeUser);

@@ -26,6 +26,51 @@ void pm::bll::ProjectManager::createProject(std::string title, std::string descr
 	projectsMenu::projectsManagementView(activeUser);
 }
 
+void pm::bll::ProjectManager::updateProject(pm::types::User activeUser)
+{
+	system("CLS");
+
+	std::string title;
+	bool flag = false;
+
+	std::cout << "  ======================================" << std::endl;
+	std::cout << "             UPDATE PROJECT            " << std::endl;
+	std::cout << "  ======================================" << std::endl;
+	std::cout << "                                " << std::endl;
+	std::cout << "     Update project with title: "; std::getline(std::cin, title);
+	std::cout << std::endl;
+
+	mProjectStore.getData();
+	projectList.clear();
+	projectList = mProjectManager.getRegisteredProjects();
+
+	for (unsigned i = 0; i < projectList.size(); i++)
+	{
+		if (projectList[i].title == title && projectList[i].idOfCreator == activeUser.id)
+		{
+			std::cout << "                                " << std::endl;
+			std::cout << "     Update title: "; std::getline(std::cin, projectList[i].title);
+			std::cout << "     Update descritpion: "; std::getline(std::cin, projectList[i].description);
+			projectList[i].dateOfLastChange = time(NULL);
+			projectList[i].idOfChange = activeUser.id;
+
+			flag = true;
+			break;
+		}
+	}
+
+	if (flag)
+		mProjectStore.update(projectList);
+
+	else
+		std::cout << "     Project with title " << title << " does\n     not exist or does not belong to you!" << std::endl;
+
+	std::cout << std::endl << "  ======================================" << std::endl;
+	std::cout << std::endl << "  Press any key to go back to menu...";
+	_getch();
+	projectsMenu::projectsManagementView(activeUser);
+}
+
 void pm::bll::ProjectManager::removeProject(pm::types::User activeUser)
 {
 	system("CLS");

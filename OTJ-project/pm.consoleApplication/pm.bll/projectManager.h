@@ -12,6 +12,8 @@ namespace pm::bll
 	{
 		void createProject(std::string title, std::string description, pm::types::User activeUser);
 
+		void updateProject(pm::types::User activeUser);
+
 		void removeProject(pm::types::User activeUser);
 
 		void displayProjects(pm::types::User activeUser);
