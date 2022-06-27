@@ -16,6 +16,8 @@ namespace pm::bll
 
 		void displayProjects(pm::types::User activeUser);
 
+		void listProjects(pm::types::Project project);
+
 		std::vector<pm::types::Project> getRegisteredProjects();
 
 		/*

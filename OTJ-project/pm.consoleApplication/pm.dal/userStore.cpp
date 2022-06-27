@@ -12,18 +12,18 @@ void pm::dal::UserStore::getData()	// Starts reading the Records.txt file so it 
 
 	std::string id, userName, firstName, lastName, email, dateOfCreation, idOfCreator, dateOfLastChange, idOfChange, privilege, password, next;
 
-	while (std::getline(file, id, ','))
+	while (std::getline(file, id, '^'))
 	{
-		std::getline(file, userName, ',');
-		std::getline(file, firstName, ',');
-		std::getline(file, lastName, ',');
-		std::getline(file, email, ',');
-		std::getline(file, dateOfCreation, ',');
-		std::getline(file, idOfCreator, ',');
-		std::getline(file, dateOfLastChange, ',');
-		std::getline(file, idOfChange, ',');
-		std::getline(file, privilege, ',');
-		std::getline(file, password, ',');
+		std::getline(file, userName, '^');
+		std::getline(file, firstName, '^');
+		std::getline(file, lastName, '^');
+		std::getline(file, email, '^');
+		std::getline(file, dateOfCreation, '^');
+		std::getline(file, idOfCreator, '^');
+		std::getline(file, dateOfLastChange, '^');
+		std::getline(file, idOfChange, '^');
+		std::getline(file, privilege, '^');
+		std::getline(file, password, '^');
 		std::getline(file, next, '\n');
 
 		addToUsers(stoi(id), userName, firstName, lastName, email, stoi(dateOfCreation), stoi(idOfCreator), stoi(dateOfLastChange), stoi(idOfChange), stoi(privilege), password);
@@ -55,17 +55,17 @@ void pm::dal::UserStore::createNewUser(pm::types::User& user)
 {
 	std::ofstream file("../../data/Users.txt", std::ios::in | std::ios::ate);
 
-	file << user.id << ',';
-	file << user.username << ',';
-	file << user.firstName << ',';
-	file << user.lastName << ',';
-	file << user.email << ',';
-	file << user.dateOfCreation << ',';
-	file << user.idOfCreator << ',';
-	file << user.dateOfLastChange << ',';
-	file << user.idOfChange << ',';
-	file << user.privilege << ',';
-	file << user.passwordHash << ',' << '\n';
+	file << user.id << '^';
+	file << user.username << '^';
+	file << user.firstName << '^';
+	file << user.lastName << '^';
+	file << user.email << '^';
+	file << user.dateOfCreation << '^';
+	file << user.idOfCreator << '^';
+	file << user.dateOfLastChange << '^';
+	file << user.idOfChange << '^';
+	file << user.privilege << '^';
+	file << user.passwordHash << '^' << '\n';
 
 	file.close();
 }

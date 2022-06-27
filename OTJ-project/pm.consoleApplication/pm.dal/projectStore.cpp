@@ -14,14 +14,14 @@ void pm::dal::ProjectStore::getData()
 	std::string title, description, dateOfCreation, idOfCreator, dateOfLastChange, idOfChange, teamsLine, next;
 	std::vector<std::string> teams;
 
-	while (std::getline(file, title, ','))
+	while (std::getline(file, title, '^'))
 	{
 		teams.clear();
-		std::getline(file, description, ',');
-		std::getline(file, dateOfCreation, ',');
-		std::getline(file, idOfCreator, ',');
-		std::getline(file, dateOfLastChange, ',');
-		std::getline(file, idOfChange, ',');
+		std::getline(file, description, '^');
+		std::getline(file, dateOfCreation, '^');
+		std::getline(file, idOfCreator, '^');
+		std::getline(file, dateOfLastChange, '^');
+		std::getline(file, idOfChange, '^');
 		std::getline(file, teamsLine);
 		teamsLine = teamsLine + '\n';
 
@@ -61,12 +61,12 @@ void pm::dal::ProjectStore::createNewProject(pm::types::Project& project)
 {
 	std::ofstream file("../../data/Projects.txt", std::ios::in | std::ios::ate);
 
-	file << project.title << ',';
-	file << project.description << ',';
-	file << project.dateOfCreation << ',';
-	file << project.idOfCreator << ',';
-	file << project.dateOfLastChange << ',';
-	file << project.idOfChange << ',';
+	file << project.title << '^';
+	file << project.description << '^';
+	file << project.dateOfCreation << '^';
+	file << project.idOfCreator << '^';
+	file << project.dateOfLastChange << '^';
+	file << project.idOfChange << '^';
 
 	file << '\n';
 
@@ -81,12 +81,12 @@ void pm::dal::ProjectStore::update(std::vector<pm::types::Project> projects)
 	{
 		pm::types::Project project = projects[i];
 
-		file << project.title << ',';
-		file << project.description << ',';
-		file << project.dateOfCreation << ',';
-		file << project.idOfCreator << ',';
-		file << project.dateOfLastChange << ',';
-		file << project.idOfChange << ',';
+		file << project.title << '^';
+		file << project.description << '^';
+		file << project.dateOfCreation << '^';
+		file << project.idOfCreator << '^';
+		file << project.dateOfLastChange << '^';
+		file << project.idOfChange << '^';
 
 		for (auto team : project.teams)
 		{

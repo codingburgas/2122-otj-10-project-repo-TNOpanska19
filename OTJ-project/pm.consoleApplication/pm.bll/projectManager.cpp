@@ -55,10 +55,6 @@ void pm::bll::ProjectManager::displayProjects(pm::types::User activeUser)
 	std::vector<pm::types::Team> teams = mTeamsManager.getRegisteredTeams();
 	std::string teamIds = "";
 
-	char buffer[80];
-	struct tm time;
-	const time_t* rawTime;
-
 	for (auto team : teams)
 	{
 		if (std::count(team.members.begin(), team.members.end(), activeUser.id))
@@ -73,32 +69,16 @@ void pm::bll::ProjectManager::displayProjects(pm::types::User activeUser)
 
 	for (unsigned i = 0; i < projectList.size(); i++)
 	{
+		if (projectList[i].teams.empty() && projectList[i].idOfCreator == activeUser.id)
+		{
+			listProjects(projectList[i]);
+		}
+
 		for (auto team : projectList[i].teams)
 		{
-			if (teamIds.find(std::to_string(team)) != std::string::npos /* || projectList[i].idOfCreator == activeUser.id*/)
+			if (teamIds.find(std::to_string(team)) != std::string::npos || projectList[i].idOfCreator == activeUser.id)
 			{
-				std::cout << "   Title: " << projectList[i].title << std::endl;
-				std::cout << "   Description: " << projectList[i].title << std::endl;
-
-				rawTime = &projectList[i].dateOfCreation;
-				localtime_s(&time, rawTime);
-				strftime(buffer, 80, "%d/%m/%y | %I:%M %p", &time);
-				std::cout << "   Created on: " << buffer << std::endl;
-				std::cout << "   ID of creator: " << projectList[i].idOfCreator << std::endl;
-
-				rawTime = &projectList[i].dateOfLastChange;
-				localtime_s(&time, rawTime);
-				strftime(buffer, 80, "%d/%m/%y | %I:%M %p", &time);
-				std::cout << "   Last change on: " << buffer << std::endl;
-				std::cout << "   Id of user who made change: " << projectList[i].idOfChange << std::endl;
-				std::cout << "   Assigned teams ids: ";
-
-				for (auto teamId : projectList[i].teams)
-				{
-					std::cout << teamId << ", ";
-				}
-
-				std::cout << std::endl << std::endl;
+				listProjects(projectList[i]);
 				break;
 			}
 		}
@@ -108,6 +88,36 @@ void pm::bll::ProjectManager::displayProjects(pm::types::User activeUser)
 	std::cout << "  Press any key to go back to menu...";
 	_getch();
 	projectsMenu::projectsManagementView(activeUser);
+}
+
+void pm::bll::ProjectManager::listProjects(pm::types::Project project)
+{
+	char buffer[80];
+	struct tm time;
+	const time_t* rawTime;
+
+	std::cout << "   Title: " << project.title << std::endl;
+	std::cout << "   Description: " << project.description << std::endl;
+
+	rawTime = &project.dateOfCreation;
+	localtime_s(&time, rawTime);
+	strftime(buffer, 80, "%d/%m/%y | %I:%M %p", &time);
+	std::cout << "   Created on: " << buffer << std::endl;
+	std::cout << "   ID of creator: " << project.idOfCreator << std::endl;
+
+	rawTime = &project.dateOfLastChange;
+	localtime_s(&time, rawTime);
+	strftime(buffer, 80, "%d/%m/%y | %I:%M %p", &time);
+	std::cout << "   Last change on: " << buffer << std::endl;
+	std::cout << "   Id of user who made change: " << project.idOfChange << std::endl;
+	std::cout << "   Assigned teams ids: ";
+
+	for (auto teamId : project.teams)
+	{
+		std::cout << teamId << ", ";
+	}
+
+	std::cout << std::endl << std::endl;
 }
 
 std::vector<pm::types::Project> pm::bll::ProjectManager::getRegisteredProjects()

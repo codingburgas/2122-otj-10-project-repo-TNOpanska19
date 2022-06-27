@@ -13,14 +13,14 @@ void pm::dal::TeamStore::getData()	// Starts reading the Records.txt file so it 
 	std::string id, title, dateOfCreation, idOfCreator, dateOfLastChange, idOfChange, membersLine, next;
 	std::vector<std::string> members;
 
-	while (std::getline(file, id, ','))
+	while (std::getline(file, id, '^'))
 	{
 		members.clear();
-		std::getline(file, title, ',');
-		std::getline(file, dateOfCreation, ',');
-		std::getline(file, idOfCreator, ',');
-		std::getline(file, dateOfLastChange, ',');
-		std::getline(file, idOfChange, ',');
+		std::getline(file, title, '^');
+		std::getline(file, dateOfCreation, '^');
+		std::getline(file, idOfCreator, '^');
+		std::getline(file, dateOfLastChange, '^');
+		std::getline(file, idOfChange, '^');
 		std::getline(file, membersLine);
 		membersLine = membersLine + '\n';
 
@@ -60,12 +60,12 @@ void pm::dal::TeamStore::createNewTeam(pm::types::Team& team)
 {
 	std::ofstream file("../../data/Teams.txt", std::ios::in | std::ios::ate);
 
-	file << team.id << ',';
-	file << team.title << ',';
-	file << team.dateOfCreation << ',';
-	file << team.idOfCreator << ',';
-	file << team.dateOfLastChange << ',';
-	file << team.idOfChange << ',';
+	file << team.id << '^';
+	file << team.title << '^';
+	file << team.dateOfCreation << '^';
+	file << team.idOfCreator << '^';
+	file << team.dateOfLastChange << '^';
+	file << team.idOfChange << '^';
 
 	file << '\n';
 
@@ -104,12 +104,12 @@ void pm::dal::TeamStore::update(std::vector<pm::types::Team> teams)
 	{
 		pm::types::Team team = teams[i];
 
-		file << team.id << ',';
-		file << team.title << ',';
-		file << team.dateOfCreation << ',';
-		file << team.idOfCreator << ',';
-		file << team.dateOfLastChange << ',';
-		file << team.idOfChange << ',';
+		file << team.id << '^';
+		file << team.title << '^';
+		file << team.dateOfCreation << '^';
+		file << team.idOfCreator << '^';
+		file << team.dateOfLastChange << '^';
+		file << team.idOfChange << '^';
 
 		for (auto member : team.members)
 		{
