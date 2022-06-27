@@ -53,7 +53,7 @@ void pm::bll::ProjectManager::displayProjects(pm::types::User activeUser)
 	projectList = mProjectManager.getRegisteredProjects();
 
 	std::vector<pm::types::Team> teams = mTeamsManager.getRegisteredTeams();
-	std::string inTeams = "";
+	std::string teamIds = "";
 
 	char buffer[80];
 	struct tm time;
@@ -61,10 +61,9 @@ void pm::bll::ProjectManager::displayProjects(pm::types::User activeUser)
 
 	for (auto team : teams)
 	{
-		std::cout << team.title << std::endl;
-		if (std::count(team.members.begin(), team.members.end(), activeUser.username))
+		if (std::count(team.members.begin(), team.members.end(), activeUser.id))
 		{
-			inTeams += team.title + ",";
+			teamIds += std::to_string(team.id) + ",";
 		}
 	}
 
@@ -76,7 +75,7 @@ void pm::bll::ProjectManager::displayProjects(pm::types::User activeUser)
 	{
 		for (auto team : projectList[i].teams)
 		{
-			if (inTeams.find(team) != std::string::npos || projectList[i].idOfCreator == activeUser.id)
+			if (teamIds.find(std::to_string(team)) != std::string::npos /* || projectList[i].idOfCreator == activeUser.id*/)
 			{
 				std::cout << "   Title: " << projectList[i].title << std::endl;
 				std::cout << "   Description: " << projectList[i].title << std::endl;
@@ -92,14 +91,15 @@ void pm::bll::ProjectManager::displayProjects(pm::types::User activeUser)
 				strftime(buffer, 80, "%d/%m/%y | %I:%M %p", &time);
 				std::cout << "   Last change on: " << buffer << std::endl;
 				std::cout << "   Id of user who made change: " << projectList[i].idOfChange << std::endl;
-				std::cout << "   Teams: ";
+				std::cout << "   Assigned teams ids: ";
 
-				for (auto teamD : projectList[i].teams)
+				for (auto teamId : projectList[i].teams)
 				{
-					std::cout << teamD << ", ";
+					std::cout << teamId << ", ";
 				}
 
 				std::cout << std::endl << std::endl;
+				break;
 			}
 		}
 	}

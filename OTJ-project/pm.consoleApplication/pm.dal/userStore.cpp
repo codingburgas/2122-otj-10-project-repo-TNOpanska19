@@ -99,11 +99,11 @@ pm::types::User pm::dal::UserStore::getById(size_t id)
 	}
 }
 
-bool pm::dal::UserStore::getByUsername(std::string username)
+bool pm::dal::UserStore::checkExistanceById(int userId)
 {
 	for (unsigned i = 0; i < users.size(); i++)
 	{
-		if (users[i].username == username)
+		if (users[i].id == userId)
 		{
 			return true;
 		}

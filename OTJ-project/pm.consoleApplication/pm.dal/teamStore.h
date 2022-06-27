@@ -21,6 +21,6 @@ namespace pm::dal
 
 		void remove(int delId);
 
-		void assignUsers(int id, std::string user);
+		void assignUsers(int id, int userId);
 	};
 }

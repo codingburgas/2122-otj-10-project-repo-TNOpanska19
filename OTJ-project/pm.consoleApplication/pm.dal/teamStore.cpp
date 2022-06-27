@@ -50,7 +50,7 @@ void pm::dal::TeamStore::addToTeams(int id, std::string title, time_t dateOfCrea
 
 	for (auto member : members)
 	{
-		team.members.push_back(member);
+		team.members.push_back(stoi(member));
 	}
 
 	teams.push_back(team);
@@ -149,7 +149,7 @@ void pm::dal::TeamStore::remove(int delId)
 	teamStore.update(teams);
 }
 
-void pm::dal::TeamStore::assignUsers(int id, std::string user)
+void pm::dal::TeamStore::assignUsers(int id, int userId)
 {
 	teams.clear();
 	teams = teamStore.getAllTeams();
@@ -158,7 +158,7 @@ void pm::dal::TeamStore::assignUsers(int id, std::string user)
 	{
 		if (teams[i].id == id)
 		{
-			teams[i].members.push_back(user);
+			teams[i].members.push_back(userId);
 		}
 	}
 

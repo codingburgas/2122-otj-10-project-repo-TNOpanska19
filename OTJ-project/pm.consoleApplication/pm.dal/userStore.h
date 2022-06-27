@@ -16,7 +16,7 @@ namespace pm::dal
 
 		pm::types::User getById(size_t id);
 
-		bool getByUsername(std::string username);
+		bool checkExistanceById(int userId);
 
 		std::vector<pm::types::User> getAllUsers();
 

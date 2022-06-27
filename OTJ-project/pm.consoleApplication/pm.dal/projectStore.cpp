@@ -51,7 +51,7 @@ void pm::dal::ProjectStore::addToProjects(std::string title, std::string descrip
 
 	for (auto team : teams)
 	{
-		project.teams.push_back(team);
+		project.teams.push_back(stoi(team));
 	}
 
 	projects.push_back(project);

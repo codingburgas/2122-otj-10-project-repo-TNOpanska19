@@ -117,26 +117,25 @@ bool pm::bll::TeamManager::getTeamById(int id)
 void pm::bll::TeamManager::assignUsersToTeam(pm::types::User activeUser)
 {
 	system("CLS");
-	int id;
-	std::string username;
+	int teamId, userId;
 
 	std::cout << "  ======================================" << std::endl;
 	std::cout << "               ASSIGN USERS            " << std::endl;
 	std::cout << "  ======================================" << std::endl;
 	std::cout << "                                " << std::endl;
-	std::cout << "     Choose team with Id: "; std::cin >> id;
+	std::cout << "     Choose team with Id: "; std::cin >> teamId;
 
-	if (mTeamManager.getTeamById(id))
+	if (mTeamManager.getTeamById(teamId))
 	{
 		std::cin.clear();
 		std::cin.ignore(1000, '\n');
-		std::cout << std::endl << "     Add user: "; std::getline(std::cin, username);
+		std::cout << std::endl << "     Add user by Id: "; std::cin >> userId;
 		std::cout << std::endl;
 
-		if (mUserStore.getByUsername(username))
+		if (mUserStore.checkExistanceById(userId))
 		{
 			std::cout << "     User added to team!" << std::endl;
-			mTeamStore.assignUsers(id, username);
+			mTeamStore.assignUsers(teamId, userId);
 		}
 
 		else
@@ -171,7 +170,7 @@ void pm::bll::TeamManager::displayTeams(pm::types::User activeUser)
 	{
 		std::cout << "   Id: " << teamList[i].id << std::endl;
 		std::cout << "   Title: " << teamList[i].title << std::endl;
-		std::cout << "   Members: ";
+		std::cout << "   Assigned members IDs: ";
 
 		for (auto member : teamList[i].members)
 		{
