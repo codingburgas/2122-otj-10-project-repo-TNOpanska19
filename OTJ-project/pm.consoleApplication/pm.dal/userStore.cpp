@@ -137,7 +137,7 @@ void pm::dal::UserStore::remove(int delId)
 	int index = -1;
 	userStore.getData();
 
-	for (int i = 0; i < users.size(); i++)
+	for (unsigned i = 0; i < users.size(); i++)
 	{
 		if (users[i].id == delId)
 		{
