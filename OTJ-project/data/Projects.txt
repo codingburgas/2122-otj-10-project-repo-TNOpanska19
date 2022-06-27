@@ -1,2 +1,2 @@
-OTJ-2022,School project,1656267881,2,1656267881,2,
-String Project,C++ project with strings,1656271540,3,1656271540,3,
+OTJ-2022,School project,1656267881,2,1656267881,2,Kodene;Kod;
+String Project,C++ project with strings,1656271540,3,1656271540,3,Kod;

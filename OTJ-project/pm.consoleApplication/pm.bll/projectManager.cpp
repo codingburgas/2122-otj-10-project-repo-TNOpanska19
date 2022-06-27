@@ -59,10 +59,9 @@ void pm::bll::ProjectManager::displayProjects(pm::types::User activeUser)
 	struct tm time;
 	const time_t* rawTime;
 
-	// nqkude s inTeams sstring-a e problema trqbva da se domisli
-
 	for (auto team : teams)
 	{
+		std::cout << team.title << std::endl;
 		if (std::count(team.members.begin(), team.members.end(), activeUser.username))
 		{
 			inTeams += team.title + ",";
@@ -72,8 +71,6 @@ void pm::bll::ProjectManager::displayProjects(pm::types::User activeUser)
 	std::cout << "  ========================================================" << std::endl;
 	std::cout << "                       PROJECT LIST                    " << std::endl;
 	std::cout << "  ========================================================" << std::endl << std::endl;
-
-	std::cout << " " << inTeams << std::endl;
 
 	for (unsigned i = 0; i < projectList.size(); i++)
 	{
@@ -95,6 +92,14 @@ void pm::bll::ProjectManager::displayProjects(pm::types::User activeUser)
 				strftime(buffer, 80, "%d/%m/%y | %I:%M %p", &time);
 				std::cout << "   Last change on: " << buffer << std::endl;
 				std::cout << "   Id of user who made change: " << projectList[i].idOfChange << std::endl;
+				std::cout << "   Teams: ";
+
+				for (auto teamD : projectList[i].teams)
+				{
+					std::cout << teamD << ", ";
+				}
+
+				std::cout << std::endl << std::endl;
 			}
 		}
 	}
