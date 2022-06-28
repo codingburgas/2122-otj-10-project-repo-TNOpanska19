@@ -20,7 +20,11 @@ namespace pm::bll
 
 		void listProjects(pm::types::Project project);
 
-		std::vector<pm::types::Project> getRegisteredProjects();
+		void getRegisteredProjects();
+
+		void assignTeamsToProject(pm::types::User activeUser);
+
+		bool getProjectByTitle(std::string title);
 
 		/*
 		pm::dal::UserStore mUserStore;

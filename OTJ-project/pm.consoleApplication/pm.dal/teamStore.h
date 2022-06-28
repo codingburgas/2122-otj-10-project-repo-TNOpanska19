@@ -22,5 +22,7 @@ namespace pm::dal
 		void remove(int delId);
 
 		void assignUsers(int id, int userId);
+
+		bool checkExistanceById(int teamId);
 	};
 }

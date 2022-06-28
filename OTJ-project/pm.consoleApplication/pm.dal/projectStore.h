@@ -20,6 +20,8 @@ namespace pm::dal
 
 		std::vector<pm::types::Project> getAllProjects();
 
+		void assignTeams(std::string title, int teamId);
+
 		/*
 		void getData();
 

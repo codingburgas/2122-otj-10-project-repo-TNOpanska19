@@ -106,7 +106,7 @@ void pm::dal::ProjectStore::remove(std::string title, pm::types::User activeUser
 
 	for (unsigned i = 0; i < projects.size(); i++)
 	{
-		if (projects[i].title == title && projects[i].idOfCreator == activeUser.id)
+		if (projects[i].title == title && (projects[i].idOfCreator == activeUser.id || activeUser.privilege == 1))
 		{
 			index = i;
 			break;
@@ -129,4 +129,21 @@ void pm::dal::ProjectStore::remove(std::string title, pm::types::User activeUser
 std::vector<pm::types::Project> pm::dal::ProjectStore::getAllProjects()
 {
 	return std::vector<pm::types::Project>(projects);
+}
+
+void pm::dal::ProjectStore::assignTeams(std::string title, int teamId)
+{
+	projects.clear();
+	projectStore.getData();
+	projects = projectStore.getAllProjects();
+
+	for (unsigned i = 0; i < projects.size(); i++)
+	{
+		if (projects[i].title == title)
+		{
+			projects[i].teams.push_back(teamId);
+		}
+	}
+
+	projectStore.update(projects);
 }

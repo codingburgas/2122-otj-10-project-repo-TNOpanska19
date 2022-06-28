@@ -164,3 +164,19 @@ void pm::dal::TeamStore::assignUsers(int id, int userId)
 
 	teamStore.update(teams);
 }
+
+bool pm::dal::TeamStore::checkExistanceById(int teamId)
+{
+	teams.clear();
+	teams = teamStore.getAllTeams();
+
+	for (unsigned i = 0; i < teams.size(); i++)
+	{
+		if (teams[i].id == teamId)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}

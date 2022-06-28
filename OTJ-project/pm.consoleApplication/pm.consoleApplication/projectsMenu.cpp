@@ -84,6 +84,7 @@ void projectsMenu::projectsManagementView(pm::types::User activeUser)
 				pManager.displayProjects(activeUser);
 				break;
 			case 4:
+				pManager.assignTeamsToProject(activeUser);
 				break;
 			case 5:
 				mainMenu::managementView();
