@@ -18,37 +18,31 @@ void teamsMenu::teamsManagementView(pm::types::User activeUser)
 	mainMenu::gotoXY(13, 1); std::cout << "TEAMS MANAGEMENT";
 	mainMenu::gotoXY(2, 2); std::cout << "======================================";
 	mainMenu::gotoXY(15, 4); std::cout << "Choose option";
-
 	mainMenu::gotoXY(2, 13); std::cout << "======================================";
-
-	mainMenu::gotoXY(10, 6); std::cout << "->";
+	mainMenu::gotoXY(8, 6); std::cout << "->";
 
 	while (running)
 	{
-		mainMenu::gotoXY(13, 6); std::cout << "Create new team";
-		mainMenu::gotoXY(13, 7); std::cout << "Update team";
-		mainMenu::gotoXY(13, 8); std::cout << "Remove team";
-		mainMenu::gotoXY(13, 9); std::cout << "View all teams";
-		mainMenu::gotoXY(13, 10); std::cout << "Assign users to team";
-		mainMenu::gotoXY(13, 11); std::cout << "Go back";
+		mainMenu::gotoXY(11, 6); std::cout << "Create new team";
+		mainMenu::gotoXY(11, 7); std::cout << "Update team";
+		mainMenu::gotoXY(11, 8); std::cout << "Remove team";
+		mainMenu::gotoXY(11, 9); std::cout << "View all teams";
+		mainMenu::gotoXY(11, 10); std::cout << "Assign users to team";
+		mainMenu::gotoXY(11, 11); std::cout << "Go back";
 
 		system("pause>nul"); // the >nul bit causes it the print no message
 
 		if (GetAsyncKeyState(VK_DOWN) && y + 1 > 11)
-		{
 			continue;
-		}
 
 		if (GetAsyncKeyState(VK_UP) && y - 1 < 6)
-		{
 			continue;
-		}
 
 		if (GetAsyncKeyState(VK_DOWN) && y != 11) //down button pressed
 		{
-			mainMenu::gotoXY(10, y); std::cout << "  ";
+			mainMenu::gotoXY(8, y); std::cout << "  ";
 			y++;
-			mainMenu::gotoXY(10, y); std::cout << "->";
+			mainMenu::gotoXY(8, y); std::cout << "->";
 			menuItem++;
 			continue;
 
@@ -56,16 +50,15 @@ void teamsMenu::teamsManagementView(pm::types::User activeUser)
 
 		if (GetAsyncKeyState(VK_UP) && y != 6) //up button pressed
 		{
-			mainMenu::gotoXY(10, y); std::cout << "  ";
+			mainMenu::gotoXY(8, y); std::cout << "  ";
 			y--;
-			mainMenu::gotoXY(10, y); std::cout << "->";
+			mainMenu::gotoXY(8, y); std::cout << "->";
 			menuItem--;
 			continue;
 		}
 
 		if (GetAsyncKeyState(VK_RETURN))
 		{ // Enter key pressed
-
 			switch (menuItem)
 			{
 			case 0:

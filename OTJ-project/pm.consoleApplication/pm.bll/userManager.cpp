@@ -3,7 +3,7 @@
 #include "../pm.consoleApplication/usersMenu.h"
 #include "userManager.h"
 
-pm::bll::UserManager mUserManager;
+pm::bll::UserManager uUserManager;
 std::vector<pm::types::User> userList;
 
 std::string pm::bll::UserManager::hashString(std::string password)
@@ -14,37 +14,24 @@ std::string pm::bll::UserManager::hashString(std::string password)
 
 bool pm::bll::UserManager::loginUser(std::string username, std::string password)
 {
-	mUserStore.getData();
-	userList = mUserManager.getRegisteredUsers();
+	userList = uUserManager.getRegisteredUsers();
 
 	std::string passHash = pm::bll::UserManager::hashString(password);
 
 	for (unsigned i = 0; i < userList.size(); i++)
-	{
-		if (userList[i].username == username)
-		{
-			if (userList[i].passwordHash == passHash)
-			{
-				return true;
-			}
-		}
-	}
+		if (userList[i].username == username && userList[i].passwordHash == passHash)
+			return true;
 
 	return false;
 }
 
 pm::types::User pm::bll::UserManager::getActiveUser(std::string username)
 {
-	mUserStore.getData();
-	userList = mUserManager.getRegisteredUsers();
+	userList = uUserManager.getRegisteredUsers();
 
 	for (unsigned i = 0; i < userList.size(); i++)
-	{
 		if (userList[i].username == username)
-		{
 			return userList[i];
-		}
-	}
 }
 
 void pm::bll::UserManager::createUser(std::string username, std::string firstName, std::string lastName, std::string email, bool privilege, std::string password, pm::types::User activeUser)
@@ -81,8 +68,7 @@ void pm::bll::UserManager::updateUser(pm::types::User activeUser)
 	std::cout << "     Update user with id: "; std::cin >> id;
 	std::cout << std::endl;
 
-	userList.clear();
-	userList = mUserManager.getRegisteredUsers();
+	userList = uUserManager.getRegisteredUsers();
 
 	for (unsigned i = 0; i < userList.size(); i++)
 	{
@@ -100,7 +86,6 @@ void pm::bll::UserManager::updateUser(pm::types::User activeUser)
 			std::cin.ignore(1000, '\n');
 			std::cout << "     Update password: ";  std::getline(std::cin, password);
 			userList[i].passwordHash = hashString(password);
-
 			userList[i].dateOfLastChange = time(NULL);
 			userList[i].idOfChange = activeUser.id;
 
@@ -110,14 +95,10 @@ void pm::bll::UserManager::updateUser(pm::types::User activeUser)
 	}
 
 	if (flag)
-	{
 		mUserStore.update(userList);
-	}
 
 	else
-	{
 		std::cout << "     User with ID " << id << " does not exist!" << std::endl;
-	}
 
 	std::cout << std::endl << "  ======================================" << std::endl;
 	std::cout << std::endl << "  Press any key to go back to menu...";
@@ -134,6 +115,7 @@ void pm::bll::UserManager::removeUser(pm::types::User activeUser)
 	std::cout << "               REMOVE USER            " << std::endl;
 	std::cout << "  ======================================" << std::endl << std::endl;
 	std::cout << "     Remove user with Id: "; std::cin >> id;
+
 	mUserStore.remove(id);
 	std::cout << std::endl << std::endl;
 
@@ -145,14 +127,15 @@ void pm::bll::UserManager::removeUser(pm::types::User activeUser)
 
 std::vector<pm::types::User> pm::bll::UserManager::getRegisteredUsers()
 {
-   return mUserStore.getAllUsers();
+	mUserStore.getData();
+	userList.clear();
+	return mUserStore.getAllUsers();
 }
 
 void pm::bll::UserManager::displayUsers(pm::types::User activeUser)
 {
 	system("CLS");
-	mUserStore.getData();
-	userList = mUserManager.getRegisteredUsers();
+	userList = uUserManager.getRegisteredUsers();
 
 	char buffer[80];
 	struct tm time;

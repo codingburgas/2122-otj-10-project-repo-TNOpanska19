@@ -3,23 +3,23 @@
 #include "../pm.consoleApplication/teamsMenu.h"
 #include "../pm.dal/userStore.h"
 
-pm::bll::TeamManager mTeamManager;
-pm::dal::TeamStore mTeamStore;
-pm::dal::UserStore mUserStore;
+pm::bll::TeamManager tTeamManager;
+pm::dal::TeamStore tTeamStore;
+pm::dal::UserStore tUserStore;
 std::vector<pm::types::Team> teamList;
 
 void pm::bll::TeamManager::createTeam(std::string title, pm::types::User activeUser)
 {
 	pm::types::Team newTeam;
 
-	newTeam.id = mTeamStore.generateNewId();
+	newTeam.id = tTeamStore.generateNewId();
 	newTeam.title = title;
 	newTeam.dateOfCreation = time(NULL);
 	newTeam.idOfCreator = activeUser.id;
 	newTeam.dateOfLastChange = time(NULL);
 	newTeam.idOfChange = activeUser.id;
 
-	mTeamStore.createNewTeam(newTeam);
+	tTeamStore.createNewTeam(newTeam);
 
 	teamsMenu::teamsManagementView(activeUser);
 }
@@ -38,8 +38,7 @@ void pm::bll::TeamManager::updateTeam(pm::types::User activeUser)
 	std::cout << "     Update team with id: "; std::cin >> id;
 	std::cout << std::endl;
 
-	teamList.clear();
-	teamList = mTeamManager.getRegisteredTeams();
+	teamList = tTeamManager.getRegisteredTeams();
 
 	for (unsigned i = 0; i < teamList.size(); i++)
 	{
@@ -58,14 +57,10 @@ void pm::bll::TeamManager::updateTeam(pm::types::User activeUser)
 	}
 
 	if (flag)
-	{
-		mTeamStore.update(teamList);
-	}
+		tTeamStore.update(teamList);
 
 	else
-	{
 		std::cout << "     Team with ID " << id << " does not exist!" << std::endl;
-	}
 
 	std::cout << std::endl << "  ======================================" << std::endl;
 	std::cout << std::endl << "  Press any key to go back to menu...";
@@ -84,7 +79,7 @@ void pm::bll::TeamManager::removeTeam(pm::types::User activeUser)
 	std::cout << "                                " << std::endl;
 
 	std::cout << "     Remove team with Id: "; std::cin >> id;
-	mTeamStore.remove(id);
+	tTeamStore.remove(id);
 	std::cout << std::endl << std::endl;
 
 	std::cout << "  ======================================" << std::endl << std::endl;
@@ -95,21 +90,18 @@ void pm::bll::TeamManager::removeTeam(pm::types::User activeUser)
 
 std::vector<pm::types::Team> pm::bll::TeamManager::getRegisteredTeams()
 {
-	return mTeamStore.getAllTeams();
+	teamList.clear();
+	tTeamStore.getData();
+	return tTeamStore.getAllTeams();
 }
 
 bool pm::bll::TeamManager::getTeamById(int id)
 {
-	mTeamStore.getData();
-	teamList = mTeamManager.getRegisteredTeams();
+	teamList = tTeamManager.getRegisteredTeams();
 
 	for (unsigned i = 0; i < teamList.size(); i++)
-	{
 		if (teamList[i].id == id)
-		{
 			return true;
-		}
-	}
 
 	return false;
 }
@@ -125,7 +117,7 @@ void pm::bll::TeamManager::assignUsersToTeam(pm::types::User activeUser)
 	std::cout << "                                " << std::endl;
 	std::cout << "     Choose team with Id: "; std::cin >> teamId;
 
-	if (mTeamManager.getTeamById(teamId))
+	if (tTeamManager.getTeamById(teamId))
 	{
 		std::cin.clear();
 		std::cin.ignore(1000, '\n');
@@ -135,19 +127,15 @@ void pm::bll::TeamManager::assignUsersToTeam(pm::types::User activeUser)
 		if (mUserStore.checkExistanceById(userId))
 		{
 			std::cout << "     User added to team!" << std::endl;
-			mTeamStore.assignUsers(teamId, userId);
+			tTeamStore.assignUsers(teamId, userId);
 		}
 
 		else
-		{
 			std::cout << "     User does not exist!" << std::endl;
-		}
 	}
 
 	else
-	{
 		std::cout << std::endl << "     Team does not exist!" << std::endl;
-	}
 
 	std::cout << std::endl << "  ======================================" << std::endl << std::endl;
 	std::cout << "  Press any key to go back to menu...";
@@ -158,8 +146,7 @@ void pm::bll::TeamManager::assignUsersToTeam(pm::types::User activeUser)
 void pm::bll::TeamManager::displayTeams(pm::types::User activeUser)
 {
 	system("CLS");
-	mTeamStore.getData();
-	teamList = mTeamManager.getRegisteredTeams();
+	teamList = tTeamManager.getRegisteredTeams();
 
 	std::cout << "  ========================================================" << std::endl;
 	std::cout << "                         TEAM LIST                    " << std::endl;
@@ -173,9 +160,7 @@ void pm::bll::TeamManager::displayTeams(pm::types::User activeUser)
 		std::cout << "   Assigned members IDs: ";
 
 		for (auto member : teamList[i].members)
-		{
 			std::cout << member << ", ";
-		}
 
 		std::cout << std::endl << std::endl;
 	}

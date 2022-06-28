@@ -2,15 +2,15 @@
 #include "userStore.h"
 #include "../pm.types/user.h"
 
+pm::dal::UserStore uStore;
 std::vector<pm::types::User> users;
-pm::dal::UserStore userStore;
 
 void pm::dal::UserStore::getData()	// Starts reading the Records.txt file so it can input information into it
 {
+	std::string id, userName, firstName, lastName, email, dateOfCreation, idOfCreator, dateOfLastChange, idOfChange, privilege, password, next;
+	
 	std::ifstream file("../../data/Users.txt", std::fstream::in);
 	users.clear();
-
-	std::string id, userName, firstName, lastName, email, dateOfCreation, idOfCreator, dateOfLastChange, idOfChange, privilege, password, next;
 
 	while (std::getline(file, id, '^'))
 	{
@@ -74,16 +74,12 @@ int pm::dal::UserStore::generateNewId()
 {
 	int maxId = 0;
 
-	userStore.getData();
-	users = userStore.getAllUsers();
+	uStore.getData();
+	users = uStore.getAllUsers();
 
 	for (auto user : users)
-	{
 		if (user.id > maxId)
-		{
 			maxId = user.id;
-		}
-	}
 
 	return maxId + 1;
 }
@@ -91,23 +87,15 @@ int pm::dal::UserStore::generateNewId()
 pm::types::User pm::dal::UserStore::getById(size_t id)
 {
 	for (unsigned i = 0; i < users.size(); i++)
-	{
 		if (users[i].id == id)
-		{
 			return users[i];
-		}
-	}
 }
 
 bool pm::dal::UserStore::checkExistanceById(int userId)
 {
 	for (unsigned i = 0; i < users.size(); i++)
-	{
 		if (users[i].id == userId)
-		{
 			return true;
-		}
-	}
 
 	return false;
 }
@@ -121,12 +109,11 @@ void pm::dal::UserStore::update(std::vector<pm::types::User> users)
 {
 	std::ofstream file("../../data/Users.txt", std::ios::in | std::ios::trunc);
 
-
 	for (unsigned i = 0; i < users.size(); i++)
 	{
 		pm::types::User user = users[i];
 
-		userStore.createNewUser(user);
+		uStore.createNewUser(user);
 	}
 
 	file.close();
@@ -135,7 +122,7 @@ void pm::dal::UserStore::update(std::vector<pm::types::User> users)
 void pm::dal::UserStore::remove(int delId)
 {
 	int index = -1;
-	userStore.getData();
+	uStore.getData();
 
 	for (unsigned i = 0; i < users.size(); i++)
 	{
@@ -163,7 +150,7 @@ void pm::dal::UserStore::remove(int delId)
 	{
 		pm::types::User user = users[i];
 
-		userStore.createNewUser(user);
+		uStore.createNewUser(user);
 	}
 
 	file.close();

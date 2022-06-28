@@ -20,27 +20,10 @@ namespace pm::bll
 
 		void listProjects(pm::types::Project project);
 
-		void getRegisteredProjects();
+		std::vector<pm::types::Project> getRegisteredProjects();
 
 		void assignTeamsToProject(pm::types::User activeUser);
 
 		bool getProjectByTitle(std::string title);
-
-		/*
-		pm::dal::UserStore mUserStore;
-
-		void createTeam(std::string title, pm::types::User activeUser);
-
-		void updateTeam(pm::types::User activeUser);
-
-
-		std::vector<pm::types::Team> getRegisteredTeams();
-
-		bool getTeamById(int id);
-
-		void assignUsersToTeam(pm::types::User activeUser);
-
-		void displayTeams(pm::types::User activeUser);
-		*/
 	};
 }

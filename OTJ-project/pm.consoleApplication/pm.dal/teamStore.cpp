@@ -7,11 +7,11 @@ pm::dal::TeamStore teamStore;
 
 void pm::dal::TeamStore::getData()	// Starts reading the Records.txt file so it can input information into it
 {
-	std::ifstream file("../../data/Teams.txt", std::fstream::in);
-	teams.clear();
-
 	std::string id, title, dateOfCreation, idOfCreator, dateOfLastChange, idOfChange, membersLine, next;
 	std::vector<std::string> members;
+
+	std::ifstream file("../../data/Teams.txt", std::fstream::in);
+	teams.clear();
 
 	while (std::getline(file, id, '^'))
 	{
@@ -49,9 +49,7 @@ void pm::dal::TeamStore::addToTeams(int id, std::string title, time_t dateOfCrea
 	team.idOfChange = idOfChange;
 
 	for (auto member : members)
-	{
 		team.members.push_back(stoi(member));
-	}
 
 	teams.push_back(team);
 }
@@ -80,12 +78,8 @@ int pm::dal::TeamStore::generateNewId()
 	teams = teamStore.getAllTeams();
 
 	for (auto team : teams)
-	{
 		if (team.id > maxId)
-		{
 			maxId = team.id;
-		}
-	}
 
 	return maxId + 1;
 }

@@ -5,10 +5,10 @@
 #include "../pm.dal/userStore.h"
 #include "../pm.dal/projectStore.h"
 
-pm::bll::TeamManager mTeamsManager;
-pm::bll::ProjectManager mProjectManager;
+pm::bll::TeamManager pTeamManager;
+pm::bll::ProjectManager pProjectManager;
 pm::dal::TeamStore pTeamStore;
-pm::dal::ProjectStore mProjectStore;
+pm::dal::ProjectStore pProjectStore;
 std::vector<pm::types::Project> projectList;
 
 void pm::bll::ProjectManager::createProject(std::string title, std::string description, pm::types::User activeUser)
@@ -22,7 +22,7 @@ void pm::bll::ProjectManager::createProject(std::string title, std::string descr
 	newProject.dateOfLastChange = time(NULL);
 	newProject.idOfChange = activeUser.id;
 
-	mProjectStore.createNewProject(newProject);
+	pProjectStore.createNewProject(newProject);
 
 	projectsMenu::projectsManagementView(activeUser);
 }
@@ -41,15 +41,14 @@ void pm::bll::ProjectManager::updateProject(pm::types::User activeUser)
 	std::cout << "     Update project with title: "; std::getline(std::cin, title);
 	std::cout << std::endl;
 
-	getRegisteredProjects();
+	projectList = pProjectManager.getRegisteredProjects();
 
 	for (unsigned i = 0; i < projectList.size(); i++)
 	{
 		if (projectList[i].title == title && (projectList[i].idOfCreator == activeUser.id || activeUser.privilege == 1))
 		{
-			std::cout << "                                " << std::endl;
 			std::cout << "     Update title: "; std::getline(std::cin, projectList[i].title);
-			std::cout << "     Update descritpion: "; std::getline(std::cin, projectList[i].description);
+			std::cout << "\n     Update descritpion: "; std::getline(std::cin, projectList[i].description);
 			projectList[i].dateOfLastChange = time(NULL);
 			projectList[i].idOfChange = activeUser.id;
 
@@ -59,7 +58,7 @@ void pm::bll::ProjectManager::updateProject(pm::types::User activeUser)
 	}
 
 	if (flag)
-		mProjectStore.update(projectList);
+		pProjectStore.update(projectList);
 
 	else
 		std::cout << "     Project with title " << title << " does\n     not exist or does not belong to you!" << std::endl;
@@ -81,7 +80,7 @@ void pm::bll::ProjectManager::removeProject(pm::types::User activeUser)
 	std::cout << "                                " << std::endl;
 
 	std::cout << "    Remove project with title: "; std::getline(std::cin, title);
-	mProjectStore.remove(title, activeUser);
+	pProjectStore.remove(title, activeUser);
 	std::cout << std::endl << std::endl;
 
 	std::cout << "  ======================================" << std::endl << std::endl;
@@ -93,17 +92,15 @@ void pm::bll::ProjectManager::removeProject(pm::types::User activeUser)
 void pm::bll::ProjectManager::displayProjects(pm::types::User activeUser)
 {
 	system("CLS");
-	getRegisteredProjects();
+	projectList = pProjectManager.getRegisteredProjects();
 
-	std::vector<pm::types::Team> teams = mTeamsManager.getRegisteredTeams();
+	std::vector<pm::types::Team> teams = pTeamManager.getRegisteredTeams();
 	std::string teamIds = "";
 
 	for (auto team : teams)
 	{
 		if (std::count(team.members.begin(), team.members.end(), activeUser.id))
-		{
 			teamIds += std::to_string(team.id) + ",";
-		}
 	}
 
 	std::cout << "  ========================================================" << std::endl;
@@ -157,23 +154,22 @@ void pm::bll::ProjectManager::listProjects(pm::types::Project project)
 	std::cout << "   Assigned teams ids: ";
 
 	for (auto teamId : project.teams)
-	{
 		std::cout << teamId << ", ";
-	}
 
 	std::cout << std::endl << std::endl;
 }
 
-void pm::bll::ProjectManager::getRegisteredProjects()
+std::vector<pm::types::Project> pm::bll::ProjectManager::getRegisteredProjects()
 {
-	mProjectStore.getData();
+	pProjectStore.getData();
 	projectList.clear();
-	projectList = mProjectStore.getAllProjects();
+	return pProjectStore.getAllProjects();
 }
 
 void pm::bll::ProjectManager::assignTeamsToProject(pm::types::User activeUser)
 {
 	system("CLS");
+
 	int teamId;
 	bool flag = false;
 	std::string projectTitle;
@@ -184,7 +180,7 @@ void pm::bll::ProjectManager::assignTeamsToProject(pm::types::User activeUser)
 	std::cout << "                                " << std::endl;
 	std::cout << "     Choose project with title: "; std::getline(std::cin, projectTitle);
 
-	getRegisteredProjects();
+	projectList = pProjectManager.getRegisteredProjects();
 
 	for (unsigned i = 0; i < projectList.size(); i++)
 	{
@@ -197,13 +193,11 @@ void pm::bll::ProjectManager::assignTeamsToProject(pm::types::User activeUser)
 			if (pTeamStore.checkExistanceById(teamId))
 			{
 				std::cout << "     Team added to project!" << std::endl;
-				mProjectStore.assignTeams(projectTitle, teamId);
+				pProjectStore.assignTeams(projectTitle, teamId);
 			}
 
 			else
-			{
 				std::cout << "     Team with id " << teamId << " does not exist!" << std::endl;
-			}
 
 			flag = true;
 			break;
@@ -211,9 +205,7 @@ void pm::bll::ProjectManager::assignTeamsToProject(pm::types::User activeUser)
 	}
 
 	if (!flag)
-	{
 		std::cout << "\n     Project with title " << projectTitle << " does\n     not exist or does not belong to you!" << std::endl;
-	}
 
 	std::cout << std::endl << "  ======================================" << std::endl << std::endl;
 	std::cout << "  Press any key to go back to menu...";
@@ -223,15 +215,12 @@ void pm::bll::ProjectManager::assignTeamsToProject(pm::types::User activeUser)
 
 bool pm::bll::ProjectManager::getProjectByTitle(std::string title)
 {
-	getRegisteredProjects();
+	pProjectStore.getData();
+	projectList = pProjectManager.getRegisteredProjects();
 
 	for (unsigned i = 0; i < projectList.size(); i++)
-	{
 		if (projectList[i].title == title)
-		{
 			return true;
-		}
-	}
 
 	return false;
 }

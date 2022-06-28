@@ -21,18 +21,5 @@ namespace pm::dal
 		std::vector<pm::types::Project> getAllProjects();
 
 		void assignTeams(std::string title, int teamId);
-
-		/*
-		void getData();
-
-		int generateNewId();
-
-
-		void update(std::vector<pm::types::Team> teams);
-
-		void remove(int delId);
-
-		void assignUsers(int id, std::string user);
-		*/
 	};
 }

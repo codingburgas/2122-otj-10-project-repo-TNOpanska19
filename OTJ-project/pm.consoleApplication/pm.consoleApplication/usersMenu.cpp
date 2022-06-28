@@ -20,9 +20,7 @@ void usersMenu::usersManagementView(pm::types::User activeUser)
 	mainMenu::gotoXY(13, 1); std::cout << "USERS MANAGEMENT";
 	mainMenu::gotoXY(2, 2); std::cout << "======================================";
 	mainMenu::gotoXY(15, 4); std::cout << "Choose option";
-
 	mainMenu::gotoXY(2, 12); std::cout << "======================================";
-
 	mainMenu::gotoXY(10, 6); std::cout << "->";
 
 	while (running)
@@ -36,14 +34,10 @@ void usersMenu::usersManagementView(pm::types::User activeUser)
 		system("pause>nul"); // the >nul bit causes it the print no message
 
 		if (GetAsyncKeyState(VK_DOWN) && y + 1 > 10)
-		{
 			continue;
-		}
 
 		if (GetAsyncKeyState(VK_UP) && y - 1 < 6)
-		{
 			continue;
-		}
 
 		if (GetAsyncKeyState(VK_DOWN) && y != 10) //down button pressed
 		{
@@ -52,7 +46,6 @@ void usersMenu::usersManagementView(pm::types::User activeUser)
 			mainMenu::gotoXY(10, y); std::cout << "->";
 			menuItem++;
 			continue;
-
 		}
 
 		if (GetAsyncKeyState(VK_UP) && y != 6) //up button pressed
@@ -66,7 +59,6 @@ void usersMenu::usersManagementView(pm::types::User activeUser)
 
 		if (GetAsyncKeyState(VK_RETURN))
 		{ // Enter key pressed
-
 			switch (menuItem)
 			{
 			case 0:

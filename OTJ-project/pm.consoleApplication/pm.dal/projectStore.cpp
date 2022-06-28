@@ -3,16 +3,16 @@
 #include "../pm.types/user.h"
 #include "../pm.types/project.h"
 
+pm::dal::ProjectStore pStore;
 std::vector<pm::types::Project> projects;
-pm::dal::ProjectStore projectStore;
 
 void pm::dal::ProjectStore::getData()
 {
-	std::ifstream file("../../data/Projects.txt", std::fstream::in);
-	projects.clear();
-
 	std::string title, description, dateOfCreation, idOfCreator, dateOfLastChange, idOfChange, teamsLine, next;
 	std::vector<std::string> teams;
+
+	std::ifstream file("../../data/Projects.txt", std::fstream::in);
+	projects.clear();
 
 	while (std::getline(file, title, '^'))
 	{
@@ -102,7 +102,7 @@ void pm::dal::ProjectStore::update(std::vector<pm::types::Project> projects)
 void pm::dal::ProjectStore::remove(std::string title, pm::types::User activeUser)
 {
 	int index = -1;
-	projectStore.getData();
+	projects = pStore.getAllProjects();
 
 	for (unsigned i = 0; i < projects.size(); i++)
 	{
@@ -123,27 +123,22 @@ void pm::dal::ProjectStore::remove(std::string title, pm::types::User activeUser
 
 	std::cout << std::endl << "    Project successfully removed!";
 
-	projectStore.update(projects);
+	pStore.update(projects);
 }
 
 std::vector<pm::types::Project> pm::dal::ProjectStore::getAllProjects()
 {
+	pStore.getData();
 	return std::vector<pm::types::Project>(projects);
 }
 
 void pm::dal::ProjectStore::assignTeams(std::string title, int teamId)
 {
-	projects.clear();
-	projectStore.getData();
-	projects = projectStore.getAllProjects();
+	projects = pStore.getAllProjects();
 
 	for (unsigned i = 0; i < projects.size(); i++)
-	{
 		if (projects[i].title == title)
-		{
 			projects[i].teams.push_back(teamId);
-		}
-	}
 
-	projectStore.update(projects);
+	pStore.update(projects);
 }

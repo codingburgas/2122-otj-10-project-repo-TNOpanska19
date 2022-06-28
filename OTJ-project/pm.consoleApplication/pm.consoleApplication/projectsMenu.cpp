@@ -21,9 +21,7 @@ void projectsMenu::projectsManagementView(pm::types::User activeUser)
 	mainMenu::gotoXY(11, 1); std::cout << "PROJECTS MANAGEMENT";
 	mainMenu::gotoXY(2, 2); std::cout << "======================================";
 	mainMenu::gotoXY(15, 4); std::cout << "Choose option";
-
 	mainMenu::gotoXY(2, 13); std::cout << "======================================";
-
 	mainMenu::gotoXY(8, 6); std::cout << "->";
 
 	while (running)
@@ -38,14 +36,10 @@ void projectsMenu::projectsManagementView(pm::types::User activeUser)
 		system("pause>nul"); // the >nul bit causes it the print no message
 
 		if (GetAsyncKeyState(VK_DOWN) && y + 1 > 11)
-		{
 			continue;
-		}
 
 		if (GetAsyncKeyState(VK_UP) && y - 1 < 6)
-		{
 			continue;
-		}
 
 		if (GetAsyncKeyState(VK_DOWN) && y != 11) //down button pressed
 		{
@@ -68,7 +62,6 @@ void projectsMenu::projectsManagementView(pm::types::User activeUser)
 
 		if (GetAsyncKeyState(VK_RETURN))
 		{ // Enter key pressed
-
 			switch (menuItem)
 			{
 			case 0:
