@@ -4,6 +4,7 @@
 #include "mainMenu.h"
 #include "usersMenu.h"
 #include "teamsMenu.h"
+#include "tasksMenu.h"
 #include "projectsMenu.h"
 
 HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE); // used for goto
@@ -111,6 +112,7 @@ void mainMenu::managementView()
 				projectsMenu::projectsManagementView(activeUser);
 				break;
 			case 3:
+				tasksMenu::tasksManagementView();
 				break;
 			case 4:
 				break;
