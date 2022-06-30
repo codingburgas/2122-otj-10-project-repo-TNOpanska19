@@ -33,9 +33,23 @@ void pm::bll::TeamManager::updateTeam(pm::types::User activeUser)
 
 	std::cout << "  ======================================" << std::endl;
 	std::cout << "               UPDATE TEAM            " << std::endl;
-	std::cout << "  ======================================" << std::endl;
-	std::cout << "                                " << std::endl;
-	std::cout << "     Update team with id: "; std::cin >> id;
+	std::cout << "  ======================================" << std::endl << std::endl;
+	std::cout << "     Update team with id: ";
+	
+	while (!(std::cin >> id))
+	{
+		system("CLS");
+
+		std::cout << " ID needs to be a number!" << std::endl << std::endl;
+		std::cout << "  ======================================" << std::endl;
+		std::cout << "               UPDATE TEAM            " << std::endl;
+		std::cout << "  ======================================" << std::endl << std::endl;
+		std::cout << "     Update team with id: "; std::cin >> id;
+
+		std::cin.clear();
+		std::cin.ignore(1000, '\n');
+	}
+	
 	std::cout << std::endl;
 
 	teamList = tTeamManager.getRegisteredTeams();
@@ -77,8 +91,23 @@ void pm::bll::TeamManager::removeTeam(pm::types::User activeUser)
 	std::cout << "               REMOVE TEAM            " << std::endl;
 	std::cout << "  ======================================" << std::endl;
 	std::cout << "                                " << std::endl;
+	std::cout << "     Remove team with Id: "; 
+	
+	while (!(std::cin >> id))
+	{
+		system("CLS");
 
-	std::cout << "     Remove team with Id: "; std::cin >> id;
+		std::cout << " ID needs to be a number!" << std::endl << std::endl;
+		std::cout << "  ======================================" << std::endl;
+		std::cout << "               REMOVE TEAM            " << std::endl;
+		std::cout << "  ======================================" << std::endl;
+		std::cout << "                                " << std::endl;
+		std::cout << "     Remove team with Id: ";
+
+		std::cin.clear();
+		std::cin.ignore(1000, '\n');
+	}
+
 	tTeamStore.remove(id);
 	std::cout << std::endl << std::endl;
 
@@ -113,9 +142,22 @@ void pm::bll::TeamManager::assignUsersToTeam(pm::types::User activeUser)
 
 	std::cout << "  ======================================" << std::endl;
 	std::cout << "               ASSIGN USERS            " << std::endl;
-	std::cout << "  ======================================" << std::endl;
-	std::cout << "                                " << std::endl;
-	std::cout << "     Choose team with Id: "; std::cin >> teamId;
+	std::cout << "  ======================================" << std::endl << std::endl;
+	std::cout << "     Choose team with Id: ";
+
+	while (!(std::cin >> teamId))
+	{
+		system("CLS");
+
+		std::cout << " ID needs to be a number!" << std::endl << std::endl;
+		std::cout << "  ======================================" << std::endl;
+		std::cout << "               ASSIGN USERS            " << std::endl;
+		std::cout << "  ======================================" << std::endl << std::endl;
+		std::cout << "     Choose team with Id: ";
+
+		std::cin.clear();
+		std::cin.ignore(1000, '\n');
+	}
 
 	if (tTeamManager.getTeamById(teamId))
 	{

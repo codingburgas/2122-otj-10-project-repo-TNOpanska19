@@ -73,7 +73,22 @@ void pm::bll::UserManager::updateUser(pm::types::User activeUser)
 	std::cout << "  ======================================" << std::endl;
 	std::cout << "               UPDATE USER            " << std::endl;
 	std::cout << "  ======================================" << std::endl << std::endl;
-	std::cout << "     Update user with id: "; std::cin >> id;
+	std::cout << "     Update user with id: ";
+
+	while (!(std::cin >> id))
+	{
+		system("CLS");
+
+		std::cout << " ID needs to be a number!" << std::endl << std::endl;
+		std::cout << "  ======================================" << std::endl;
+		std::cout << "               UPDATE USER            " << std::endl;
+		std::cout << "  ======================================" << std::endl << std::endl;
+		std::cout << "     Update user with id: ";
+
+		std::cin.clear();
+		std::cin.ignore(1000, '\n');
+	}
+
 	std::cout << std::endl;
 
 	userList = uUserManager.getRegisteredUsers();
@@ -122,7 +137,21 @@ void pm::bll::UserManager::removeUser(pm::types::User activeUser)
 	std::cout << "  ======================================" << std::endl;
 	std::cout << "               REMOVE USER            " << std::endl;
 	std::cout << "  ======================================" << std::endl << std::endl;
-	std::cout << "     Remove user with Id: "; std::cin >> id;
+	std::cout << "     Remove user with Id: ";
+
+	while (!(std::cin >> id))
+	{
+		system("CLS");
+
+		std::cout << " ID needs to be a number!" << std::endl << std::endl;
+		std::cout << "  ======================================" << std::endl;
+		std::cout << "               REMOVE USER            " << std::endl;
+		std::cout << "  ======================================" << std::endl << std::endl;
+		std::cout << "     Remove user with Id: ";
+
+		std::cin.clear();
+		std::cin.ignore(1000, '\n');
+	}
 
 	mUserStore.remove(id);
 	std::cout << std::endl << std::endl;
