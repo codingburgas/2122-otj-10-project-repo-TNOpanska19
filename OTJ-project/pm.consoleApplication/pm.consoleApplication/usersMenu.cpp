@@ -62,6 +62,7 @@ void usersMenu::usersManagementView(pm::types::User activeUser)
 			switch (menuItem)
 			{
 			case 0:
+				system("CLS");
 				createUserMenu(activeUser);
 				break;
 			case 1:
@@ -83,10 +84,8 @@ void usersMenu::usersManagementView(pm::types::User activeUser)
 
 void usersMenu::createUserMenu(pm::types::User activeUser)
 {
-	system("CLS");
-
 	std::string username, firstName, lastName, email, password;
-	bool privilege;
+	int privilege;
 
 	std::cout << "  ======================================" << std::endl;
 	std::cout << "               CREATE USER            " << std::endl;
@@ -102,6 +101,13 @@ void usersMenu::createUserMenu(pm::types::User activeUser)
 	std::cin.clear();
 	std::cin.ignore(1000, '\n');
 	std::cout << "       Password: ";  std::getline(std::cin, password); std::cout << std::endl;
+
+	if (userManager.checkEmail(email) || (privilege != 0 && privilege != 1))
+	{
+		system("CLS"); 
+		std::cout << " Some of the entered data was incorrect please try again!" << std::endl << std::endl;
+		createUserMenu(activeUser); 
+	}
 
 	userManager.createUser(username, firstName, lastName, email, privilege, userManager.hashString(password), activeUser);
 }

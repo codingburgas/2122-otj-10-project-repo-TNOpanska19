@@ -54,6 +54,14 @@ void pm::bll::UserManager::createUser(std::string username, std::string firstNam
 	usersMenu::usersManagementView(activeUser);
 }
 
+bool pm::bll::UserManager::checkEmail(std::string email)
+{
+	if (email.find('@') != std::string::npos)
+		return false;
+
+	return true;
+}
+
 void pm::bll::UserManager::updateUser(pm::types::User activeUser)
 {
 	system("CLS");
