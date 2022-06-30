@@ -150,6 +150,7 @@
     <ClCompile Include="tasksMenu.cpp" />
     <ClCompile Include="teamsMenu.cpp" />
     <ClCompile Include="usersMenu.cpp" />
+    <ClCompile Include="workLogsMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mainMenu.h" />
@@ -158,6 +159,7 @@
     <ClInclude Include="tasksMenu.h" />
     <ClInclude Include="teamsMenu.h" />
     <ClInclude Include="usersMenu.h" />
+    <ClInclude Include="workLogsMenu.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\pm.bll\pm.bll.vcxproj">

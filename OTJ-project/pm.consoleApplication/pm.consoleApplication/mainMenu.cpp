@@ -4,8 +4,9 @@
 #include "mainMenu.h"
 #include "usersMenu.h"
 #include "teamsMenu.h"
-#include "tasksMenu.h"
 #include "projectsMenu.h"
+#include "tasksMenu.h"
+#include "workLogsMenu.h"
 
 HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE); // used for goto
 COORD CursorPosition; // used for goto
@@ -115,6 +116,7 @@ void mainMenu::managementView()
 				tasksMenu::tasksManagementView();
 				break;
 			case 4:
+				workLogsMenu::workLogsManagementView();
 				break;
 			case 5:
 				currentUserInformation();
