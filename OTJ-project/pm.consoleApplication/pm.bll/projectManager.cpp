@@ -24,7 +24,7 @@ void pm::bll::ProjectManager::createProject(std::string title, std::string descr
 
 	pProjectStore.createNewProject(newProject);
 
-	projectsMenu::projectsManagementView(activeUser);
+	menu::projectsMenu::projectsManagementView(activeUser);
 }
 
 void pm::bll::ProjectManager::updateProject(pm::types::User activeUser)
@@ -66,7 +66,7 @@ void pm::bll::ProjectManager::updateProject(pm::types::User activeUser)
 	std::cout << std::endl << "  ======================================" << std::endl;
 	std::cout << std::endl << "  Press any key to go back to menu...";
 	_getch();
-	projectsMenu::projectsManagementView(activeUser);
+	menu::projectsMenu::projectsManagementView(activeUser);
 }
 
 void pm::bll::ProjectManager::removeProject(pm::types::User activeUser)
@@ -86,7 +86,7 @@ void pm::bll::ProjectManager::removeProject(pm::types::User activeUser)
 	std::cout << "  ======================================" << std::endl << std::endl;
 	std::cout << "  Press any key to go back to menu...";
 	_getch();
-	projectsMenu::projectsManagementView(activeUser);
+	menu::projectsMenu::projectsManagementView(activeUser);
 }
 
 void pm::bll::ProjectManager::displayProjects(pm::types::User activeUser)
@@ -128,7 +128,7 @@ void pm::bll::ProjectManager::displayProjects(pm::types::User activeUser)
 	std::cout << "  ========================================================" << std::endl << std::endl;
 	std::cout << "  Press any key to go back to menu...";
 	_getch();
-	projectsMenu::projectsManagementView(activeUser);
+	menu::projectsMenu::projectsManagementView(activeUser);
 }
 
 void pm::bll::ProjectManager::listProjects(pm::types::Project project)
@@ -210,7 +210,7 @@ void pm::bll::ProjectManager::assignTeamsToProject(pm::types::User activeUser)
 	std::cout << std::endl << "  ======================================" << std::endl << std::endl;
 	std::cout << "  Press any key to go back to menu...";
 	_getch();
-	projectsMenu::projectsManagementView(activeUser);
+	menu::projectsMenu::projectsManagementView(activeUser);
 }
 
 bool pm::bll::ProjectManager::getProjectByTitle(std::string title)

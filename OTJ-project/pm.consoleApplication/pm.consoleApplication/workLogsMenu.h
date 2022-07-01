@@ -2,7 +2,7 @@
 
 #include "pch.h"
 
-namespace workLogsMenu
+namespace menu::workLogsMenu
 {
 	void workLogsManagementView();
 }

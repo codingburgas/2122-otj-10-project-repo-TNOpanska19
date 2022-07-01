@@ -8,5 +8,5 @@ int main()
 {
 	SetConsoleTextAttribute(hConsole, 11);
 
-	mainMenu::loginMenu();
+	menu::mainMenu::loginMenu();
 }

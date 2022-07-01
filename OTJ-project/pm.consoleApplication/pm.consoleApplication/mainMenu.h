@@ -2,7 +2,7 @@
 
 #include "pch.h"
 
-namespace mainMenu
+namespace menu::mainMenu
 {
 	void loginMenu();
 

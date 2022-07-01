@@ -9,27 +9,27 @@
 
 pm::bll::UserManager userManager;
 
-void usersMenu::usersManagementView(pm::types::User activeUser)
+void menu::usersMenu::usersManagementView(pm::types::User activeUser)
 {
 	system("CLS");
 
 	int menuItem = 0, y = 6;
 	bool running = true;
 
-	mainMenu::gotoXY(2, 0); std::cout << "======================================";
-	mainMenu::gotoXY(13, 1); std::cout << "USERS MANAGEMENT";
-	mainMenu::gotoXY(2, 2); std::cout << "======================================";
-	mainMenu::gotoXY(15, 4); std::cout << "Choose option";
-	mainMenu::gotoXY(2, 12); std::cout << "======================================";
-	mainMenu::gotoXY(10, 6); std::cout << "->";
+	menu::mainMenu::gotoXY(2, 0); std::cout << "======================================";
+	menu::mainMenu::gotoXY(13, 1); std::cout << "USERS MANAGEMENT";
+	menu::mainMenu::gotoXY(2, 2); std::cout << "======================================";
+	menu::mainMenu::gotoXY(15, 4); std::cout << "Choose option";
+	menu::mainMenu::gotoXY(2, 12); std::cout << "======================================";
+	menu::mainMenu::gotoXY(10, 6); std::cout << "->";
 
 	while (running)
 	{
-		mainMenu::gotoXY(13, 6); std::cout << "Create new user";
-		mainMenu::gotoXY(13, 7); std::cout << "Update user";
-		mainMenu::gotoXY(13, 8); std::cout << "Remove user";
-		mainMenu::gotoXY(13, 9); std::cout << "View all users";
-		mainMenu::gotoXY(13, 10); std::cout << "Go back";
+		menu::mainMenu::gotoXY(13, 6); std::cout << "Create new user";
+		menu::mainMenu::gotoXY(13, 7); std::cout << "Update user";
+		menu::mainMenu::gotoXY(13, 8); std::cout << "Remove user";
+		menu::mainMenu::gotoXY(13, 9); std::cout << "View all users";
+		menu::mainMenu::gotoXY(13, 10); std::cout << "Go back";
 
 		system("pause>nul"); // the >nul bit causes it the print no message
 
@@ -41,18 +41,18 @@ void usersMenu::usersManagementView(pm::types::User activeUser)
 
 		if (GetAsyncKeyState(VK_DOWN) && y != 10) //down button pressed
 		{
-			mainMenu::gotoXY(10, y); std::cout << "  ";
+			menu::mainMenu::gotoXY(10, y); std::cout << "  ";
 			y++;
-			mainMenu::gotoXY(10, y); std::cout << "->";
+			menu::mainMenu::gotoXY(10, y); std::cout << "->";
 			menuItem++;
 			continue;
 		}
 
 		if (GetAsyncKeyState(VK_UP) && y != 6) //up button pressed
 		{
-			mainMenu::gotoXY(10, y); std::cout << "  ";
+			menu::mainMenu::gotoXY(10, y); std::cout << "  ";
 			y--;
-			mainMenu::gotoXY(10, y); std::cout << "->";
+			menu::mainMenu::gotoXY(10, y); std::cout << "->";
 			menuItem--;
 			continue;
 		}
@@ -75,14 +75,14 @@ void usersMenu::usersManagementView(pm::types::User activeUser)
 				userManager.displayUsers(activeUser);
 				break;
 			case 4:
-				mainMenu::managementView();
+				menu::mainMenu::managementView();
 				break;
 			}
 		}
 	}
 }
 
-void usersMenu::createUserMenu(pm::types::User activeUser)
+void menu::usersMenu::createUserMenu(pm::types::User activeUser)
 {
 	std::string username, firstName, lastName, email, password;
 	int privilege;

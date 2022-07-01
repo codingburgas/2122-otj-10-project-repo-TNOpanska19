@@ -7,28 +7,28 @@
 
 pm::bll::TeamManager tManager;
 
-void teamsMenu::teamsManagementView(pm::types::User activeUser)
+void menu::teamsMenu::teamsManagementView(pm::types::User activeUser)
 {
 	system("CLS");
 
 	int menuItem = 0, y = 6;
 	bool running = true;
 
-	mainMenu::gotoXY(2, 0); std::cout << "======================================";
-	mainMenu::gotoXY(13, 1); std::cout << "TEAMS MANAGEMENT";
-	mainMenu::gotoXY(2, 2); std::cout << "======================================";
-	mainMenu::gotoXY(15, 4); std::cout << "Choose option";
-	mainMenu::gotoXY(2, 13); std::cout << "======================================";
-	mainMenu::gotoXY(8, 6); std::cout << "->";
+	menu::mainMenu::gotoXY(2, 0); std::cout << "======================================";
+	menu::mainMenu::gotoXY(13, 1); std::cout << "TEAMS MANAGEMENT";
+	menu::mainMenu::gotoXY(2, 2); std::cout << "======================================";
+	menu::mainMenu::gotoXY(15, 4); std::cout << "Choose option";
+	menu::mainMenu::gotoXY(2, 13); std::cout << "======================================";
+	menu::mainMenu::gotoXY(8, 6); std::cout << "->";
 
 	while (running)
 	{
-		mainMenu::gotoXY(11, 6); std::cout << "Create new team";
-		mainMenu::gotoXY(11, 7); std::cout << "Update team";
-		mainMenu::gotoXY(11, 8); std::cout << "Remove team";
-		mainMenu::gotoXY(11, 9); std::cout << "View all teams";
-		mainMenu::gotoXY(11, 10); std::cout << "Assign users to team";
-		mainMenu::gotoXY(11, 11); std::cout << "Go back";
+		menu::mainMenu::gotoXY(11, 6); std::cout << "Create new team";
+		menu::mainMenu::gotoXY(11, 7); std::cout << "Update team";
+		menu::mainMenu::gotoXY(11, 8); std::cout << "Remove team";
+		menu::mainMenu::gotoXY(11, 9); std::cout << "View all teams";
+		menu::mainMenu::gotoXY(11, 10); std::cout << "Assign users to team";
+		menu::mainMenu::gotoXY(11, 11); std::cout << "Go back";
 
 		system("pause>nul"); // the >nul bit causes it the print no message
 
@@ -40,9 +40,9 @@ void teamsMenu::teamsManagementView(pm::types::User activeUser)
 
 		if (GetAsyncKeyState(VK_DOWN) && y != 11) //down button pressed
 		{
-			mainMenu::gotoXY(8, y); std::cout << "  ";
+			menu::mainMenu::gotoXY(8, y); std::cout << "  ";
 			y++;
-			mainMenu::gotoXY(8, y); std::cout << "->";
+			menu::mainMenu::gotoXY(8, y); std::cout << "->";
 			menuItem++;
 			continue;
 
@@ -50,9 +50,9 @@ void teamsMenu::teamsManagementView(pm::types::User activeUser)
 
 		if (GetAsyncKeyState(VK_UP) && y != 6) //up button pressed
 		{
-			mainMenu::gotoXY(8, y); std::cout << "  ";
+			menu::mainMenu::gotoXY(8, y); std::cout << "  ";
 			y--;
-			mainMenu::gotoXY(8, y); std::cout << "->";
+			menu::mainMenu::gotoXY(8, y); std::cout << "->";
 			menuItem--;
 			continue;
 		}
@@ -77,14 +77,14 @@ void teamsMenu::teamsManagementView(pm::types::User activeUser)
 				tManager.assignUsersToTeam(activeUser);
 				break;
 			case 5:
-				mainMenu::managementView();
+				menu::mainMenu::managementView();
 				break;
 			}
 		}
 	}
 }
 
-void teamsMenu::createTeamMenu(pm::types::User activeUser)
+void menu::teamsMenu::createTeamMenu(pm::types::User activeUser)
 {
 	system("CLS");
 

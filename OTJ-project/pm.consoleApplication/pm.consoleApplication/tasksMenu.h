@@ -2,7 +2,7 @@
 
 #include "pch.h"
 
-namespace tasksMenu
+namespace menu::tasksMenu
 {
 	void tasksManagementView();
 }

@@ -14,7 +14,7 @@ COORD CursorPosition; // used for goto
 pm::bll::UserManager uManager;
 pm::types::User activeUser;
 
-void mainMenu::loginMenu()
+void menu::mainMenu::loginMenu()
 {
 	std::string username, password;
 
@@ -42,7 +42,7 @@ void mainMenu::loginMenu()
 	mainMenu::managementView();
 }
 
-void mainMenu::managementView()
+void menu::mainMenu::managementView()
 {
 	system("CLS");
 
@@ -131,14 +131,14 @@ void mainMenu::managementView()
 	}
 }
 
-void mainMenu::gotoXY(int x, int y)
+void menu::mainMenu::gotoXY(int x, int y)
 {
 	CursorPosition.X = x;
 	CursorPosition.Y = y;
 	SetConsoleCursorPosition(console, CursorPosition);
 }
 
-void mainMenu::currentUserInformation()
+void menu::mainMenu::currentUserInformation()
 {
 	system("CLS");
 
@@ -179,5 +179,5 @@ void mainMenu::currentUserInformation()
 	std::cout << std::endl << std::endl << "  ======================================" << std::endl;
 	std::cout << std::endl << "  Press any key to go back to menu...";
 	_getch();
-	mainMenu::managementView();
+	menu::mainMenu::managementView();
 }
