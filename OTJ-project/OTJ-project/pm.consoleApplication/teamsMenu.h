@@ -12,11 +12,17 @@
 #include "../pm.types/user.h"
 
 /// <summary>
-/// Namespace for team management view
+/// Namespace for menu
 /// </summary>
-namespace menu::teamsMenu
+namespace menu
 {
-	void teamsManagementView(pm::types::User activeUser);
+	/// <summary>
+	/// Structure for teams menu
+	/// </summary>
+	struct teamsMenu
+	{
+		void teamsManagementView(pm::types::User activeUser);
 
-	void createTeamMenu(pm::types::User activeUser);
+		void createTeamMenu(pm::types::User activeUser);
+	};
 }

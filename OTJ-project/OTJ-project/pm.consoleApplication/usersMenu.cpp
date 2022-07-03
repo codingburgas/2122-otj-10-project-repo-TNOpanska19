@@ -16,6 +16,11 @@
 #include "../pm.bll/userManager.h"
 
 /// <summary>
+/// Object of mainMenu structure
+/// </summary>
+menu::mainMenu uMainMenu;
+
+/// <summary>
 /// Object of UserManager structure
 /// </summary>
 pm::bll::UserManager userManager;
@@ -31,20 +36,20 @@ void menu::usersMenu::usersManagementView(pm::types::User activeUser)
 	int menuItem = 0, y = 6;
 	bool running = true;
 
-	menu::mainMenu::gotoXY(2, 0); std::cout << "======================================";
-	menu::mainMenu::gotoXY(13, 1); std::cout << "USERS MANAGEMENT";
-	menu::mainMenu::gotoXY(2, 2); std::cout << "======================================";
-	menu::mainMenu::gotoXY(15, 4); std::cout << "Choose option";
-	menu::mainMenu::gotoXY(2, 12); std::cout << "======================================";
-	menu::mainMenu::gotoXY(10, 6); std::cout << "->";
+	uMainMenu.gotoXY(2, 0); std::cout << "======================================";
+	uMainMenu.gotoXY(13, 1); std::cout << "USERS MANAGEMENT";
+	uMainMenu.gotoXY(2, 2); std::cout << "======================================";
+	uMainMenu.gotoXY(15, 4); std::cout << "Choose option";
+	uMainMenu.gotoXY(2, 12); std::cout << "======================================";
+	uMainMenu.gotoXY(10, 6); std::cout << "->";
 
 	while (running)
 	{
-		menu::mainMenu::gotoXY(13, 6); std::cout << "Create new user";
-		menu::mainMenu::gotoXY(13, 7); std::cout << "Update user";
-		menu::mainMenu::gotoXY(13, 8); std::cout << "Remove user";
-		menu::mainMenu::gotoXY(13, 9); std::cout << "View all users";
-		menu::mainMenu::gotoXY(13, 10); std::cout << "Go back";
+		uMainMenu.gotoXY(13, 6); std::cout << "Create new user";
+		uMainMenu.gotoXY(13, 7); std::cout << "Update user";
+		uMainMenu.gotoXY(13, 8); std::cout << "Remove user";
+		uMainMenu.gotoXY(13, 9); std::cout << "View all users";
+		uMainMenu.gotoXY(13, 10); std::cout << "Go back";
 
 		system("pause>nul"); // The >nul bit causes it to print no message
 
@@ -56,18 +61,18 @@ void menu::usersMenu::usersManagementView(pm::types::User activeUser)
 
 		if (GetAsyncKeyState(VK_DOWN) && y != 10) // Down arrow was pressed
 		{
-			menu::mainMenu::gotoXY(10, y); std::cout << "  ";
+			uMainMenu.gotoXY(10, y); std::cout << "  ";
 			y++;
-			menu::mainMenu::gotoXY(10, y); std::cout << "->";
+			uMainMenu.gotoXY(10, y); std::cout << "->";
 			menuItem++;
 			continue;
 		}
 
 		if (GetAsyncKeyState(VK_UP) && y != 6) // Up arrow was pressed
 		{
-			menu::mainMenu::gotoXY(10, y); std::cout << "  ";
+			uMainMenu.gotoXY(10, y); std::cout << "  ";
 			y--;
-			menu::mainMenu::gotoXY(10, y); std::cout << "->";
+			uMainMenu.gotoXY(10, y); std::cout << "->";
 			menuItem--;
 			continue;
 		}
@@ -90,7 +95,7 @@ void menu::usersMenu::usersManagementView(pm::types::User activeUser)
 				userManager.displayUsers(activeUser);
 				break;
 			case 4:
-				menu::mainMenu::managementView();
+				uMainMenu.managementView();
 				break;
 			}
 		}

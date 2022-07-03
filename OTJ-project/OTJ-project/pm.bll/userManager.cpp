@@ -12,6 +12,11 @@
 #include "userManager.h"
 
 /// <summary>
+/// Object of usersMenu structure
+/// </summary>
+menu::usersMenu uMenuManager;
+
+/// <summary>
 /// Object of UserManager structure
 /// </summary>
 pm::bll::UserManager uUserManager;
@@ -91,7 +96,7 @@ void pm::bll::UserManager::createUser(std::string username, std::string firstNam
 	newUser.passwordHash = password;
 
 	mUserStore.createNewUser(newUser);
-	menu::usersMenu::usersManagementView(activeUser);
+	uMenuManager.usersManagementView(activeUser);
 }
 
 /// <summary>
@@ -176,7 +181,7 @@ void pm::bll::UserManager::updateUser(pm::types::User activeUser)
 	std::cout << std::endl << "  ======================================" << std::endl;
 	std::cout << std::endl << "  Press any key to go back to menu...";
 	(void)_getch();
-	menu::usersMenu::usersManagementView(activeUser);
+	uMenuManager.usersManagementView(activeUser);
 }
 
 /// <summary>
@@ -213,7 +218,7 @@ void pm::bll::UserManager::removeUser(pm::types::User activeUser)
 	std::cout << "  ======================================" << std::endl << std::endl;
 	std::cout << "  Press any key to go back to menu...";
 	(void)_getch();
-	menu::usersMenu::usersManagementView(activeUser);
+	uMenuManager.usersManagementView(activeUser);
 }
 
 /// <summary>
@@ -271,5 +276,5 @@ void pm::bll::UserManager::displayUsers(pm::types::User activeUser)
 	std::cout << "  ========================================================" << std::endl << std::endl;
 	std::cout << "  Press any key to go back to menu...";
 	(void)_getch();
-	menu::usersMenu::usersManagementView(activeUser);
+	uMenuManager.usersManagementView(activeUser);
 }

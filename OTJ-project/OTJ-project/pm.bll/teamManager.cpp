@@ -12,6 +12,11 @@
 #include "../pm.dal/userStore.h"
 
 /// <summary>
+/// Object of teamsMenu structure
+/// </summary>
+menu::teamsMenu tMenuManager;
+
+/// <summary>
 /// Object of TeamManager structure
 /// </summary>
 pm::bll::TeamManager tTeamManager;
@@ -46,7 +51,7 @@ void pm::bll::TeamManager::createTeam(std::string title, pm::types::User activeU
 
 	tTeamStore.createNewTeam(newTeam);
 
-	menu::teamsMenu::teamsManagementView(activeUser);
+	tMenuManager.teamsManagementView(activeUser);
 }
 
 /// <summary>
@@ -109,7 +114,7 @@ void pm::bll::TeamManager::updateTeam(pm::types::User activeUser)
 	std::cout << std::endl << "  ======================================" << std::endl;
 	std::cout << std::endl << "  Press any key to go back to menu...";
 	(void)_getch();
-	menu::teamsMenu::teamsManagementView(activeUser);
+	tMenuManager.teamsManagementView(activeUser);
 }
 
 /// <summary>
@@ -148,7 +153,7 @@ void pm::bll::TeamManager::removeTeam(pm::types::User activeUser)
 	std::cout << "  ======================================" << std::endl << std::endl;
 	std::cout << "  Press any key to go back to menu...";
 	(void)_getch();
-	menu::teamsMenu::teamsManagementView(activeUser);
+	tMenuManager.teamsManagementView(activeUser);
 }
 
 /// <summary>
@@ -229,7 +234,7 @@ void pm::bll::TeamManager::assignUsersToTeam(pm::types::User activeUser)
 	std::cout << std::endl << "  ======================================" << std::endl << std::endl;
 	std::cout << "  Press any key to go back to menu...";
 	(void)_getch();
-	menu::teamsMenu::teamsManagementView(activeUser);
+	tMenuManager.teamsManagementView(activeUser);
 }
 
 /// <summary>
@@ -261,5 +266,5 @@ void pm::bll::TeamManager::displayTeams(pm::types::User activeUser)
 	std::cout << "  ========================================================" << std::endl << std::endl;
 	std::cout << "  Press any key to go back to menu...";
 	(void)_getch();
-	menu::teamsMenu::teamsManagementView(activeUser);
+	tMenuManager.teamsManagementView(activeUser);
 }

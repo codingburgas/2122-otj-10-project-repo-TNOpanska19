@@ -11,6 +11,11 @@
 #include "workLogsMenu.h"
 
 /// <summary>
+/// Object of mainMenu structure
+/// </summary>
+menu::mainMenu wMainMenu;
+
+/// <summary>
 /// Prints work log management view
 /// </summary>
 void menu::workLogsMenu::workLogsManagementView()
@@ -20,19 +25,19 @@ void menu::workLogsMenu::workLogsManagementView()
 	int menuItem = 0, y = 6;
 	bool running = true;
 
-	menu::mainMenu::gotoXY(2, 0); std::cout << "======================================";
-	menu::mainMenu::gotoXY(12, 1); std::cout << "WORK LOG MANAGEMENT";
-	menu::mainMenu::gotoXY(2, 2); std::cout << "======================================";
-	menu::mainMenu::gotoXY(15, 4); std::cout << "Choose option";
-	menu::mainMenu::gotoXY(2, 11); std::cout << "======================================";
-	menu::mainMenu::gotoXY(11, 6); std::cout << "->";
+	wMainMenu.gotoXY(2, 0); std::cout << "======================================";
+	wMainMenu.gotoXY(12, 1); std::cout << "WORK LOG MANAGEMENT";
+	wMainMenu.gotoXY(2, 2); std::cout << "======================================";
+	wMainMenu.gotoXY(15, 4); std::cout << "Choose option";
+	wMainMenu.gotoXY(2, 11); std::cout << "======================================";
+	wMainMenu.gotoXY(11, 6); std::cout << "->";
 
 	while (running)
 	{
-		menu::mainMenu::gotoXY(14, 6); std::cout << "Create work log";
-		menu::mainMenu::gotoXY(14, 7); std::cout << "Update work log";
-		menu::mainMenu::gotoXY(14, 8); std::cout << "Remove work log";
-		menu::mainMenu::gotoXY(14, 9); std::cout << "Go back";
+		wMainMenu.gotoXY(14, 6); std::cout << "Create work log";
+		wMainMenu.gotoXY(14, 7); std::cout << "Update work log";
+		wMainMenu.gotoXY(14, 8); std::cout << "Remove work log";
+		wMainMenu.gotoXY(14, 9); std::cout << "Go back";
 
 		system("pause>nul"); // The >nul bit causes it to print no message
 
@@ -44,18 +49,18 @@ void menu::workLogsMenu::workLogsManagementView()
 
 		if (GetAsyncKeyState(VK_DOWN) && y != 9) // Down arrow was pressed
 		{
-			menu::mainMenu::gotoXY(11, y); std::cout << "  ";
+			wMainMenu.gotoXY(11, y); std::cout << "  ";
 			y++;
-			menu::mainMenu::gotoXY(11, y); std::cout << "->";
+			wMainMenu.gotoXY(11, y); std::cout << "->";
 			menuItem++;
 			continue;
 		}
 
 		if (GetAsyncKeyState(VK_UP) && y != 6) // Up arrow was pressed
 		{
-			menu::mainMenu::gotoXY(11, y); std::cout << "  ";
+			wMainMenu.gotoXY(11, y); std::cout << "  ";
 			y--;
-			menu::mainMenu::gotoXY(11, y); std::cout << "->";
+			wMainMenu.gotoXY(11, y); std::cout << "->";
 			menuItem--;
 			continue;
 		}
@@ -65,9 +70,9 @@ void menu::workLogsMenu::workLogsManagementView()
 			switch (menuItem)
 			{
 			case 3:
-				menu::mainMenu::managementView();
+				wMainMenu.managementView();
 			default:
-				menu::mainMenu::gotoXY(5, 13);  std::cout << "Feature currently unavailable!";
+				wMainMenu.gotoXY(5, 13);  std::cout << "Feature currently unavailable!";
 			}
 		}
 	}

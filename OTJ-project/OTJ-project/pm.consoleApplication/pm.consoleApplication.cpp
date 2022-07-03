@@ -12,6 +12,11 @@
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
 /// <summary>
+/// Object of mainMenu structure
+/// </summary>
+menu::mainMenu app;
+
+/// <summary>
 /// Main entry point of the application
 /// </summary>
 /// <returns></returns>
@@ -19,5 +24,5 @@ int main()
 {
 	SetConsoleTextAttribute(hConsole, 11);
 
-	menu::mainMenu::loginMenu();
+	app.loginMenu();
 }

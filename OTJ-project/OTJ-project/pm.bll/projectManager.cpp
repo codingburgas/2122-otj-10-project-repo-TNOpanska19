@@ -14,6 +14,11 @@
 #include "../pm.dal/projectStore.h"
 
 /// <summary>
+/// Object of projectsMenu structure
+/// </summary>
+menu::projectsMenu pMenuManager;
+
+/// <summary>
 /// Object of TeamManager structure
 /// </summary>
 pm::bll::TeamManager pTeamManager;
@@ -53,7 +58,7 @@ void pm::bll::ProjectManager::createProject(std::string title, std::string descr
 
 	pProjectStore.createNewProject(newProject);
 
-	menu::projectsMenu::projectsManagementView(activeUser);
+	pMenuManager.projectsManagementView(activeUser);
 }
 
 /// <summary>
@@ -100,7 +105,7 @@ void pm::bll::ProjectManager::updateProject(pm::types::User activeUser)
 	std::cout << std::endl << "  ======================================" << std::endl;
 	std::cout << std::endl << "  Press any key to go back to menu...";
 	(void)_getch();
-	menu::projectsMenu::projectsManagementView(activeUser);
+	pMenuManager.projectsManagementView(activeUser);
 }
 
 /// <summary>
@@ -124,7 +129,7 @@ void pm::bll::ProjectManager::removeProject(pm::types::User activeUser)
 	std::cout << "  ======================================" << std::endl << std::endl;
 	std::cout << "  Press any key to go back to menu...";
 	(void)_getch();
-	menu::projectsMenu::projectsManagementView(activeUser);
+	pMenuManager.projectsManagementView(activeUser);
 }
 
 /// <summary>
@@ -185,7 +190,7 @@ void pm::bll::ProjectManager::displayProjects(pm::types::User activeUser)
 	std::cout << "  ========================================================" << std::endl << std::endl;
 	std::cout << "  Press any key to go back to menu...";
 	(void)_getch();
-	menu::projectsMenu::projectsManagementView(activeUser);
+	pMenuManager.projectsManagementView(activeUser);
 }
 
 /// <summary>
@@ -271,7 +276,7 @@ void pm::bll::ProjectManager::assignTeamsToProject(pm::types::User activeUser)
 	std::cout << std::endl << "  ======================================" << std::endl << std::endl;
 	std::cout << "  Press any key to go back to menu...";
 	(void)_getch();
-	menu::projectsMenu::projectsManagementView(activeUser);
+	pMenuManager.projectsManagementView(activeUser);
 }
 
 /// <summary>

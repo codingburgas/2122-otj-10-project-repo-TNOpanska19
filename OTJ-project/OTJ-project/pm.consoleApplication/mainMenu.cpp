@@ -20,6 +20,31 @@ HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE); // Used for gotoXY
 COORD CursorPosition; // Used for gotoXY
 
 /// <summary>
+/// Object of usersMenu structure
+/// </summary>
+menu::usersMenu uMenu;
+
+/// <summary>
+/// Object of teamsMenu structure
+/// </summary>
+menu::teamsMenu tMenu;
+
+/// <summary>
+/// Object of projectsMenu structure
+/// </summary>
+menu::projectsMenu pMenu;
+
+/// <summary>
+/// Object of tasksMenu structure
+/// </summary>
+menu::tasksMenu tsMenu;
+
+/// <summary>
+/// Object of workLogsMenu structure
+/// </summary>
+menu::workLogsMenu wMenu;
+
+/// <summary>
 /// Object of UserManager structure
 /// </summary>
 pm::bll::UserManager uManager;
@@ -120,24 +145,24 @@ void menu::mainMenu::managementView()
 			{
 			case 0:
 				if (activeUser.privilege == 1)		// Only admins can access user management
-					usersMenu::usersManagementView(activeUser);
+					uMenu.usersManagementView(activeUser);
 				else
 					gotoXY(13, 16); std::cout << "Access restricted!";
 				break;
 			case 1:
 				if (activeUser.privilege == 1)		// Only admins can access teams management
-					teamsMenu::teamsManagementView(activeUser);
+					tMenu.teamsManagementView(activeUser);
 				else
 					gotoXY(13, 16); std::cout << "Access restricted!";
 				break;
 			case 2:
-				projectsMenu::projectsManagementView(activeUser);
+				pMenu.projectsManagementView(activeUser);
 				break;
 			case 3:
-				tasksMenu::tasksManagementView();
+				tsMenu.tasksManagementView();
 				break;
 			case 4:
-				workLogsMenu::workLogsManagementView();
+				wMenu.workLogsManagementView();
 				break;
 			case 5:
 				currentUserInformation();

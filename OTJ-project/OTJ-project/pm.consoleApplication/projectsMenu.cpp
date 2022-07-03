@@ -17,6 +17,11 @@
 #include "../pm.bll/projectManager.h"
 
 /// <summary>
+/// Object of mainMenu structure
+/// </summary>
+menu::mainMenu pMainMenu;
+
+/// <summary>
 /// Object of ProjectManager structure
 /// </summary>
 pm::bll::ProjectManager pManager;
@@ -32,21 +37,21 @@ void menu::projectsMenu::projectsManagementView(pm::types::User activeUser)
 	int menuItem = 0, y = 6;
 	bool running = true;
 
-	menu::mainMenu::gotoXY(2, 0); std::cout << "======================================";
-	menu::mainMenu::gotoXY(11, 1); std::cout << "PROJECTS MANAGEMENT";
-	menu::mainMenu::gotoXY(2, 2); std::cout << "======================================";
-	menu::mainMenu::gotoXY(15, 4); std::cout << "Choose option";
-	menu::mainMenu::gotoXY(2, 13); std::cout << "======================================";
-	menu::mainMenu::gotoXY(8, 6); std::cout << "->";
+	pMainMenu.gotoXY(2, 0); std::cout << "======================================";
+	pMainMenu.gotoXY(11, 1); std::cout << "PROJECTS MANAGEMENT";
+	pMainMenu.gotoXY(2, 2); std::cout << "======================================";
+	pMainMenu.gotoXY(15, 4); std::cout << "Choose option";
+	pMainMenu.gotoXY(2, 13); std::cout << "======================================";
+	pMainMenu.gotoXY(8, 6); std::cout << "->";
 
 	while (running)
 	{
-		menu::mainMenu::gotoXY(11, 6); std::cout << "Create new project";
-		menu::mainMenu::gotoXY(11, 7); std::cout << "Update project";
-		menu::mainMenu::gotoXY(11, 8); std::cout << "Remove project";
-		menu::mainMenu::gotoXY(11, 9); std::cout << "View your projects";
-		menu::mainMenu::gotoXY(11, 10); std::cout << "Assign teams to project";
-		menu::mainMenu::gotoXY(11, 11); std::cout << "Go back";
+		pMainMenu.gotoXY(11, 6); std::cout << "Create new project";
+		pMainMenu.gotoXY(11, 7); std::cout << "Update project";
+		pMainMenu.gotoXY(11, 8); std::cout << "Remove project";
+		pMainMenu.gotoXY(11, 9); std::cout << "View your projects";
+		pMainMenu.gotoXY(11, 10); std::cout << "Assign teams to project";
+		pMainMenu.gotoXY(11, 11); std::cout << "Go back";
 
 		system("pause>nul"); // The >nul bit causes it to print no message
 
@@ -58,9 +63,9 @@ void menu::projectsMenu::projectsManagementView(pm::types::User activeUser)
 
 		if (GetAsyncKeyState(VK_DOWN) && y != 11) // Down arrow was pressed
 		{
-			menu::mainMenu::gotoXY(8, y); std::cout << "  ";
+			pMainMenu.gotoXY(8, y); std::cout << "  ";
 			y++;
-			menu::mainMenu::gotoXY(8, y); std::cout << "->";
+			pMainMenu.gotoXY(8, y); std::cout << "->";
 			menuItem++;
 			continue;
 
@@ -68,9 +73,9 @@ void menu::projectsMenu::projectsManagementView(pm::types::User activeUser)
 
 		if (GetAsyncKeyState(VK_UP) && y != 6) // Up arrow was pressed
 		{
-			menu::mainMenu::gotoXY(8, y); std::cout << "  ";
+			pMainMenu.gotoXY(8, y); std::cout << "  ";
 			y--;
-			menu::mainMenu::gotoXY(8, y); std::cout << "->";
+			pMainMenu.gotoXY(8, y); std::cout << "->";
 			menuItem--;
 			continue;
 		}
@@ -80,7 +85,7 @@ void menu::projectsMenu::projectsManagementView(pm::types::User activeUser)
 			switch (menuItem)
 			{
 			case 0:
-				projectsMenu::createProjectMenu(activeUser);
+				createProjectMenu(activeUser);
 				break;
 			case 1:
 				pManager.updateProject(activeUser);
@@ -95,7 +100,7 @@ void menu::projectsMenu::projectsManagementView(pm::types::User activeUser)
 				pManager.assignTeamsToProject(activeUser);
 				break;
 			case 5:
-				menu::mainMenu::managementView();
+				pMainMenu.managementView();
 				break;
 			}
 		}

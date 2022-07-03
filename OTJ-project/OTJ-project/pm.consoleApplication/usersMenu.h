@@ -12,11 +12,17 @@
 #include "../pm.types/user.h"
 
 /// <summary>
-/// Namespace for user management view
+/// Namespace for menu
 /// </summary>
-namespace menu::usersMenu
+namespace menu
 {
-	void usersManagementView(pm::types::User activeUser);
+	/// <summary>
+	/// Structure for users menu
+	/// </summary>
+	struct usersMenu
+	{
+		void usersManagementView(pm::types::User activeUser);
 
-	void createUserMenu(pm::types::User activeUser);
+		void createUserMenu(pm::types::User activeUser);
+	};
 }
