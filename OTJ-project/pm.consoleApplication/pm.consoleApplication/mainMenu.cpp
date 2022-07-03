@@ -1,3 +1,11 @@
+/*****************************************************************//**
+ * \file   mainMenu.cpp
+ * \brief  Source file for login and management view
+ * 
+ * \author Tereza
+ * \date   July 2022
+ *********************************************************************/
+
 #include "pch.h"
 #include "../pm.types/user.h"
 #include "../pm.bll/userManager.h"
@@ -8,12 +16,22 @@
 #include "tasksMenu.h"
 #include "workLogsMenu.h"
 
-HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE); // used for goto
-COORD CursorPosition; // used for goto
+HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE); // Used for gotoXY
+COORD CursorPosition; // Used for gotoXY
 
+/// <summary>
+/// Object of UserManager structure
+/// </summary>
 pm::bll::UserManager uManager;
+
+/// <summary>
+/// Object of User structure
+/// </summary>
 pm::types::User activeUser;
 
+/// <summary>
+/// Prints login prompt
+/// </summary>
 void menu::mainMenu::loginMenu()
 {
 	std::string username, password;
@@ -29,10 +47,10 @@ void menu::mainMenu::loginMenu()
 	std::cout << "                                " << std::endl;
 	std::cout << "  ======================================" << std::endl;
 
-	if (uManager.loginUser(username, password))
+	if (uManager.loginUser(username, password))			// Checks if there is a user with such name and password, after which (if true) stores user
 		activeUser = uManager.getActiveUser(username);
 
-	else
+	else	// No such user exists
 	{
 		system("CLS");
 		std::cout << " User does not exist. Please try to log in again." << std::endl << std::endl;
@@ -42,6 +60,9 @@ void menu::mainMenu::loginMenu()
 	mainMenu::managementView();
 }
 
+/// <summary>
+/// Prints management view menu
+/// </summary>
 void menu::mainMenu::managementView()
 {
 	system("CLS");
@@ -66,7 +87,7 @@ void menu::mainMenu::managementView()
 		gotoXY(12, 11); std::cout << "View your profile";
 		gotoXY(12, 12); std::cout << "Exit";
 
-		system("pause>nul"); // the >nul bit causes it the print no message
+		system("pause>nul"); // The >nul bit causes it to print no message
 
 		if (GetAsyncKeyState(VK_DOWN) && y + 1 > 12)
 			continue;
@@ -74,7 +95,7 @@ void menu::mainMenu::managementView()
 		if (GetAsyncKeyState(VK_UP) && y - 1 < 6)
 			continue;
 
-		if (GetAsyncKeyState(VK_DOWN) && y != 12) //down button pressed
+		if (GetAsyncKeyState(VK_DOWN) && y != 12) // Down arrow was pressed
 		{
 			gotoXY(9, y); std::cout << "  ";
 			y++;
@@ -84,7 +105,7 @@ void menu::mainMenu::managementView()
 
 		}
 
-		if (GetAsyncKeyState(VK_UP) && y != 6) //up button pressed
+		if (GetAsyncKeyState(VK_UP) && y != 6) // Up arrow was pressed
 		{
 			gotoXY(9, y); std::cout << "  ";
 			y--;
@@ -93,18 +114,18 @@ void menu::mainMenu::managementView()
 			continue;
 		}
 
-		if (GetAsyncKeyState(VK_RETURN))
-		{ // Enter key pressed
+		if (GetAsyncKeyState(VK_RETURN))	// Enter key was pressed
+		{ 
 			switch (menuItem)
 			{
 			case 0:
-				if (activeUser.privilege == 1)
+				if (activeUser.privilege == 1)		// Only admins can access user management
 					usersMenu::usersManagementView(activeUser);
 				else
 					gotoXY(13, 16); std::cout << "Access restricted!";
 				break;
 			case 1:
-				if (activeUser.privilege == 1)
+				if (activeUser.privilege == 1)		// Only admins can access teams management
 					teamsMenu::teamsManagementView(activeUser);
 				else
 					gotoXY(13, 16); std::cout << "Access restricted!";
@@ -131,6 +152,11 @@ void menu::mainMenu::managementView()
 	}
 }
 
+/// <summary>
+/// Used to position character output at a particular place
+/// </summary>
+/// <param name="x">Used for X coord</param>
+/// <param name="y">Used for Y coord</param>
 void menu::mainMenu::gotoXY(int x, int y)
 {
 	CursorPosition.X = x;
@@ -138,6 +164,9 @@ void menu::mainMenu::gotoXY(int x, int y)
 	SetConsoleCursorPosition(console, CursorPosition);
 }
 
+/// <summary>
+/// Prints the current user's information
+/// </summary>
 void menu::mainMenu::currentUserInformation()
 {
 	system("CLS");
@@ -156,12 +185,14 @@ void menu::mainMenu::currentUserInformation()
 	std::cout << "     First name: " << activeUser.firstName << std::endl;
 	std::cout << "     Last name: " << activeUser.lastName << std::endl;
 
+	// Transform time_t to a readable format
 	rawTime = &activeUser.dateOfCreation;
 	localtime_s(&time, rawTime);
 	strftime(buffer, 80, "%d/%m/%y | %I:%M %p", &time);
 	std::cout << "     Created on: " << buffer << std::endl;
 	std::cout << "     Id of creator: " << activeUser.idOfCreator << std::endl;
 
+	// Transform time_t to a readable format
 	rawTime = &activeUser.dateOfLastChange;
 	localtime_s(&time, rawTime);
 	strftime(buffer, 80, "%d/%m/%y | %I:%M %p", &time);
@@ -178,6 +209,6 @@ void menu::mainMenu::currentUserInformation()
 
 	std::cout << std::endl << std::endl << "  ======================================" << std::endl;
 	std::cout << std::endl << "  Press any key to go back to menu...";
-	_getch();
+	(void)_getch();
 	menu::mainMenu::managementView();
 }

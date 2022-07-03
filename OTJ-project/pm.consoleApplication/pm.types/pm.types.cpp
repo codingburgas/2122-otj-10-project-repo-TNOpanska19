@@ -1,5 +1,10 @@
-// pm.types.cpp : Defines the functions for the static library.
-//
+/*****************************************************************//**
+ * \file   pm.types.cpp
+ * \brief  Source file used to define functions for pm.types static library
+ *
+ * \author Tereza
+ * \date   July 2022
+ *********************************************************************/
 
 #include "pch.h"
 

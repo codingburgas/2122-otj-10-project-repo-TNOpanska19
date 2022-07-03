@@ -1,3 +1,11 @@
+/*****************************************************************//**
+ * \file   usersMenu.cpp
+ * \brief  Source file for users management view
+ * 
+ * \author Tereza
+ * \date   July 2022
+ *********************************************************************/
+
 #include "pch.h"
 #include "mainMenu.h"
 #include "usersMenu.h"
@@ -7,8 +15,15 @@
 #include "../pm.bll/teamManager.h"
 #include "../pm.bll/userManager.h"
 
+/// <summary>
+/// Object of UserManager structure
+/// </summary>
 pm::bll::UserManager userManager;
 
+/// <summary>
+/// Prints users management view
+/// </summary>
+/// <param name="activeUser">Logged-in user</param>
 void menu::usersMenu::usersManagementView(pm::types::User activeUser)
 {
 	system("CLS");
@@ -31,7 +46,7 @@ void menu::usersMenu::usersManagementView(pm::types::User activeUser)
 		menu::mainMenu::gotoXY(13, 9); std::cout << "View all users";
 		menu::mainMenu::gotoXY(13, 10); std::cout << "Go back";
 
-		system("pause>nul"); // the >nul bit causes it the print no message
+		system("pause>nul"); // The >nul bit causes it to print no message
 
 		if (GetAsyncKeyState(VK_DOWN) && y + 1 > 10)
 			continue;
@@ -39,7 +54,7 @@ void menu::usersMenu::usersManagementView(pm::types::User activeUser)
 		if (GetAsyncKeyState(VK_UP) && y - 1 < 6)
 			continue;
 
-		if (GetAsyncKeyState(VK_DOWN) && y != 10) //down button pressed
+		if (GetAsyncKeyState(VK_DOWN) && y != 10) // Down arrow was pressed
 		{
 			menu::mainMenu::gotoXY(10, y); std::cout << "  ";
 			y++;
@@ -48,7 +63,7 @@ void menu::usersMenu::usersManagementView(pm::types::User activeUser)
 			continue;
 		}
 
-		if (GetAsyncKeyState(VK_UP) && y != 6) //up button pressed
+		if (GetAsyncKeyState(VK_UP) && y != 6) // Up arrow was pressed
 		{
 			menu::mainMenu::gotoXY(10, y); std::cout << "  ";
 			y--;
@@ -57,8 +72,8 @@ void menu::usersMenu::usersManagementView(pm::types::User activeUser)
 			continue;
 		}
 
-		if (GetAsyncKeyState(VK_RETURN))
-		{ // Enter key pressed
+		if (GetAsyncKeyState(VK_RETURN))	// Enter key was pressed
+		{
 			switch (menuItem)
 			{
 			case 0:
@@ -82,6 +97,10 @@ void menu::usersMenu::usersManagementView(pm::types::User activeUser)
 	}
 }
 
+/// <summary>
+/// Prints create user prompt
+/// </summary>
+/// <param name="activeUser">Logged-in user</param>
 void menu::usersMenu::createUserMenu(pm::types::User activeUser)
 {
 	std::string username, firstName, lastName, email, password;

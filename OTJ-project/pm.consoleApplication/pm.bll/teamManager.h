@@ -1,3 +1,11 @@
+/*****************************************************************//**
+ * \file   teamManager.h
+ * \brief  Header file for team management
+ * 
+ * \author Tereza
+ * \date   July 2022
+ *********************************************************************/
+
 #pragma once
 
 #include "pch.h"
@@ -6,8 +14,14 @@
 #include "../pm.dal/userStore.h"
 #include "../pm.dal/teamStore.h"
 
+/// <summary>
+/// Namespace for business logic layer
+/// </summary>
 namespace pm::bll
 {
+	/// <summary>
+	/// Structure for team management
+	/// </summary>
 	struct TeamManager
 	{
 		pm::dal::UserStore mUserStore;

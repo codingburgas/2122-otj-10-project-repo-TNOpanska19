@@ -1,3 +1,11 @@
+/*****************************************************************//**
+ * \file   teamsMenu.cpp
+ * \brief  Source file for teams management view
+ * 
+ * \author Tereza
+ * \date   July 2022
+ *********************************************************************/
+
 #include "pch.h"
 #include "mainMenu.h"
 #include "teamsMenu.h"
@@ -5,8 +13,15 @@
 #include "../pm.types/user.h"
 #include "../pm.bll/teamManager.h"
 
+/// <summary>
+/// Object of TeamManager structure
+/// </summary>
 pm::bll::TeamManager tManager;
 
+/// <summary>
+/// Prints teams management view
+/// </summary>
+/// <param name="activeUser">Logged-in user</param>
 void menu::teamsMenu::teamsManagementView(pm::types::User activeUser)
 {
 	system("CLS");
@@ -84,6 +99,10 @@ void menu::teamsMenu::teamsManagementView(pm::types::User activeUser)
 	}
 }
 
+/// <summary>
+/// Prints create team prompt
+/// </summary>
+/// <param name="activeUser">Logged-in user</param>
 void menu::teamsMenu::createTeamMenu(pm::types::User activeUser)
 {
 	system("CLS");

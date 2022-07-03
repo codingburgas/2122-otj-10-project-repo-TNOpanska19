@@ -1,3 +1,11 @@
+/*****************************************************************//**
+ * \file   userManager.h
+ * \brief  Header file for user management
+ * 
+ * \author Tereza
+ * \date   July 2022
+ *********************************************************************/
+
 #pragma once
 
 #include "pch.h"
@@ -5,8 +13,14 @@
 #include "../pm.types/user.h"
 #include "../pm.dal/userStore.h"
 
+/// <summary>
+/// Namespace for business logic layer
+/// </summary>
 namespace pm::bll
 {
+	/// <summary>
+	/// Structure for user management
+	/// </summary>
 	struct UserManager
 	{
 		pm::dal::UserStore mUserStore;

@@ -1,9 +1,23 @@
+/*****************************************************************//**
+ * \file   userStore.h
+ * \brief  Header file for user storing
+ * 
+ * \author Tereza
+ * \date   July 2022
+ *********************************************************************/
+
 #pragma once
 
 #include "../pm.types/user.h"
 
+ /// <summary>
+ /// Namespace for data access layer
+ /// </summary>
 namespace pm::dal
 {
+	/// <summary>
+	/// Structure for user storing
+	/// </summary>
 	struct UserStore
 	{
 		void getData();
@@ -13,8 +27,6 @@ namespace pm::dal
 		void createNewUser(pm::types::User& user);
 
 		int generateNewId();
-
-		pm::types::User getById(size_t id);
 
 		bool checkExistanceById(int userId);
 

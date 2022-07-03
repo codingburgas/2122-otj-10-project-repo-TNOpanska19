@@ -1,10 +1,12 @@
-#include "pch.h"
+/*****************************************************************//**
+ * \file   md5.cpp
+ * \brief  Source file for md5 hashing. Copyright (c) 2014 Stephan Brumme. All rights reserved. See http://create.stephan-brumme.com/disclaimer.html
+ * 
+ * \author Tereza
+ * \date   July 2022
+ *********************************************************************/
 
-// //////////////////////////////////////////////////////////
-// md5.cpp
-// Copyright (c) 2014,2015 Stephan Brumme. All rights reserved.
-// see http://create.stephan-brumme.com/disclaimer.html
-//
+#include "pch.h"
 
 #include "md5.h"
 
@@ -13,14 +15,14 @@
 #endif
 
 
-/// same as reset()
+/// Same as reset()
 MD5::MD5()
 {
     reset();
 }
 
 
-/// restart
+/// Restart
 void MD5::reset()
 {
     m_numBytes = 0;
@@ -81,7 +83,7 @@ namespace
 }
 
 
-/// process 64 bytes
+/// Process 64 bytes
 void MD5::processBlock(const void* data)
 {
     // get last hash
@@ -208,7 +210,7 @@ void MD5::processBlock(const void* data)
 }
 
 
-/// add arbitrary number of bytes
+/// Add arbitrary number of bytes
 void MD5::add(const void* data, size_t numBytes)
 {
     const uint8_t* current = (const uint8_t*)data;
@@ -252,7 +254,7 @@ void MD5::add(const void* data, size_t numBytes)
 }
 
 
-/// process final block, less than 64 bytes
+/// Process final block, less than 64 bytes
 void MD5::processBuffer()
 {
     // the input bytes are considered as bits strings, where the first bit is the most significant bit of the byte
@@ -318,7 +320,7 @@ void MD5::processBuffer()
 }
 
 
-/// return latest hash as 32 hex characters
+/// Return latest hash as 32 hex characters
 std::string MD5::getHash()
 {
     // compute hash (as raw bytes)
@@ -339,7 +341,7 @@ std::string MD5::getHash()
 }
 
 
-/// return latest hash as bytes
+/// Return latest hash as bytes
 void MD5::getHash(unsigned char buffer[MD5::HashBytes])
 {
     // save old hash if buffer is partially filled
@@ -364,7 +366,7 @@ void MD5::getHash(unsigned char buffer[MD5::HashBytes])
 }
 
 
-/// compute MD5 of a memory block
+/// Compute MD5 of a memory block
 std::string MD5::operator()(const void* data, size_t numBytes)
 {
     reset();
@@ -373,7 +375,7 @@ std::string MD5::operator()(const void* data, size_t numBytes)
 }
 
 
-/// compute MD5 of a string, excluding final zero
+/// Compute MD5 of a string, excluding final zero
 std::string MD5::operator()(const std::string& text)
 {
     reset();

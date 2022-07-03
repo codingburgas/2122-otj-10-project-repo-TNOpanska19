@@ -1,10 +1,23 @@
+/*****************************************************************//**
+ * \file   teamStore.h
+ * \brief  Header file for team storing
+ * 
+ * \author Tereza
+ * \date   July 2022
+ *********************************************************************/
 #pragma once
 
 #include "pch.h"
 #include "../pm.types/team.h"
 
+/// <summary>
+/// Namespace for data access layer
+/// </summary>
 namespace pm::dal
 {
+	/// <summary>
+	/// Structure for team storing
+	/// </summary>
 	struct TeamStore
 	{
 		void getData();

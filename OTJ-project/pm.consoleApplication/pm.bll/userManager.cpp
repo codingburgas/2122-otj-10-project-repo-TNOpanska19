@@ -1,9 +1,23 @@
+/*****************************************************************//**
+ * \file   userManager.cpp
+ * \brief  Source file for user management
+ * 
+ * \author Tereza
+ * \date   July 2022
+ *********************************************************************/
+
 #include "pch.h"
 #include "../pm.consoleApplication/mainMenu.h"
 #include "../pm.consoleApplication/usersMenu.h"
 #include "userManager.h"
 
+/// <summary>
+/// Object of UserManager structure
+/// </summary>
 pm::bll::UserManager uUserManager;
+/// <summary>
+/// Vector of type User. Used to store users.
+/// </summary>
 std::vector<pm::types::User> userList;
 
 /// <summary>
@@ -17,11 +31,17 @@ std::string pm::bll::UserManager::hashString(std::string password)
 	return md5(password);
 }
 
+/// <summary>
+/// Checks if the given username and password belong to one of the existing users
+/// </summary>
+/// <param name="username">A string argument of entered username</param>
+/// <param name="password">A string argument of entered password</param>
+/// <returns>True or false A string argument the user exists and the entered information is correct</returns>
 bool pm::bll::UserManager::loginUser(std::string username, std::string password)
 {
 	userList = uUserManager.getRegisteredUsers();
 
-	std::string passHash = pm::bll::UserManager::hashString(password);
+	std::string passHash = pm::bll::UserManager::hashString(password);	// Hashes entered password to compare to the hashed password from the file
 
 	for (unsigned i = 0; i < userList.size(); i++)
 		if (userList[i].username == username && userList[i].passwordHash == passHash)
@@ -30,6 +50,11 @@ bool pm::bll::UserManager::loginUser(std::string username, std::string password)
 	return false;
 }
 
+/// <summary>
+/// Returns the current logged in user
+/// </summary>
+/// <param name="username">A string argument username of current logged in user</param>
+/// <returns>Current logged in user</returns>
 pm::types::User pm::bll::UserManager::getActiveUser(std::string username)
 {
 	userList = uUserManager.getRegisteredUsers();
@@ -39,18 +64,28 @@ pm::types::User pm::bll::UserManager::getActiveUser(std::string username)
 			return userList[i];
 }
 
+/// <summary>
+/// Used to create a new user
+/// </summary>
+/// <param name="username">A string argument username of new user</param>
+/// <param name="firstName">A string argument first name of new user</param>
+/// <param name="lastName">A string argument last name of new user</param>
+/// <param name="email">A string argument email of new user</param>
+/// <param name="privilege">A bool argument that shows privilege of new user. 0 - normal user and 1 - admin</param>
+/// <param name="password">A string argument password of new user</param>
+/// <param name="activeUser">Logged-in user</param>
 void pm::bll::UserManager::createUser(std::string username, std::string firstName, std::string lastName, std::string email, bool privilege, std::string password, pm::types::User activeUser)
 {
 	pm::types::User newUser;
 
-	newUser.id = mUserStore.generateNewId();
+	newUser.id = mUserStore.generateNewId();	// Generates new Id for new user
 	newUser.username = username;
 	newUser.firstName = firstName;
 	newUser.lastName = lastName;
 	newUser.email = email;
-	newUser.dateOfCreation = time(NULL);
+	newUser.dateOfCreation = time(NULL);	// Current time
 	newUser.idOfCreator = activeUser.id;
-	newUser.dateOfLastChange = time(NULL);
+	newUser.dateOfLastChange = time(NULL);	// Current time
 	newUser.idOfChange = activeUser.id;
 	newUser.privilege = privilege;
 	newUser.passwordHash = password;
@@ -59,6 +94,11 @@ void pm::bll::UserManager::createUser(std::string username, std::string firstNam
 	menu::usersMenu::usersManagementView(activeUser);
 }
 
+/// <summary>
+/// Checks whether the entered email fits criteria
+/// </summary>
+/// <param name="email">A string argument email for new user creation</param>
+/// <returns>True or false depending on whether email fits criteria</returns>
 bool pm::bll::UserManager::checkEmail(std::string email)
 {
 	if (email.find('@') != std::string::npos)
@@ -67,6 +107,10 @@ bool pm::bll::UserManager::checkEmail(std::string email)
 	return true;
 }
 
+/// <summary>
+/// Used for updating user data with given ID
+/// </summary>
+/// <param name="activeUser">Logged-in user</param>
 void pm::bll::UserManager::updateUser(pm::types::User activeUser)
 {
 	system("CLS");
@@ -80,7 +124,7 @@ void pm::bll::UserManager::updateUser(pm::types::User activeUser)
 	std::cout << "  ======================================" << std::endl << std::endl;
 	std::cout << "     Update user with id: ";
 
-	while (!(std::cin >> id))
+	while (!(std::cin >> id))	// Checks whether entered ID is a number
 	{
 		system("CLS");
 
@@ -98,6 +142,7 @@ void pm::bll::UserManager::updateUser(pm::types::User activeUser)
 
 	userList = uUserManager.getRegisteredUsers();
 
+	// Goes through all users to see whether entered one exists
 	for (unsigned i = 0; i < userList.size(); i++)
 	{
 		if (userList[i].id == id)
@@ -114,26 +159,30 @@ void pm::bll::UserManager::updateUser(pm::types::User activeUser)
 			std::cin.ignore(1000, '\n');
 			std::cout << "     Update password: ";  std::getline(std::cin, password);
 			userList[i].passwordHash = hashString(password);
-			userList[i].dateOfLastChange = time(NULL);
-			userList[i].idOfChange = activeUser.id;
+			userList[i].dateOfLastChange = time(NULL);	// Change time of last change to current time
+			userList[i].idOfChange = activeUser.id;		// Change id of person who made the last change to the currently logged-in user's
 
 			flag = true;
 			break;
 		}
 	}
 
-	if (flag)
+	if (flag)	// User with given ID exists
 		mUserStore.update(userList);
-
-	else
+		
+	else		// User with given ID does not exist
 		std::cout << "     User with ID " << id << " does not exist!" << std::endl;
 
 	std::cout << std::endl << "  ======================================" << std::endl;
 	std::cout << std::endl << "  Press any key to go back to menu...";
-	_getch();
+	(void)_getch();
 	menu::usersMenu::usersManagementView(activeUser);
 }
 
+/// <summary>
+/// Used to remove user with given ID
+/// </summary>
+/// <param name="activeUser">Logged-in user</param>
 void pm::bll::UserManager::removeUser(pm::types::User activeUser)
 {
 	system("CLS");
@@ -144,7 +193,7 @@ void pm::bll::UserManager::removeUser(pm::types::User activeUser)
 	std::cout << "  ======================================" << std::endl << std::endl;
 	std::cout << "     Remove user with Id: ";
 
-	while (!(std::cin >> id))
+	while (!(std::cin >> id))	// Checks whether entered ID is a number
 	{
 		system("CLS");
 
@@ -163,10 +212,14 @@ void pm::bll::UserManager::removeUser(pm::types::User activeUser)
 
 	std::cout << "  ======================================" << std::endl << std::endl;
 	std::cout << "  Press any key to go back to menu...";
-	_getch();
+	(void)_getch();
 	menu::usersMenu::usersManagementView(activeUser);
 }
 
+/// <summary>
+/// Used to get all registered users
+/// </summary>
+/// <returns>Vector of all registered users</returns>
 std::vector<pm::types::User> pm::bll::UserManager::getRegisteredUsers()
 {
 	mUserStore.getData();
@@ -174,6 +227,10 @@ std::vector<pm::types::User> pm::bll::UserManager::getRegisteredUsers()
 	return mUserStore.getAllUsers();
 }
 
+/// <summary>
+/// Used to display all registered users
+/// </summary>
+/// <param name="activeUser">Logged-in user</param>
 void pm::bll::UserManager::displayUsers(pm::types::User activeUser)
 {
 	system("CLS");
@@ -194,12 +251,14 @@ void pm::bll::UserManager::displayUsers(pm::types::User activeUser)
 		std::cout << "   First name: " << userList[i].firstName << std::endl;
 		std::cout << "   Last name: " << userList[i].lastName << std::endl;
 
+		// Transform time_t to a readable format
 		rawTime = &userList[i].dateOfCreation;
 		localtime_s(&time, rawTime);
 		strftime(buffer, 80, "%d/%m/%y | %I:%M %p", &time);
 		std::cout << "   Created on: " << buffer << std::endl;
 		std::cout << "   Id of creator: " << userList[i].idOfCreator << std::endl;
-
+		
+		// Transform time_t to a readable format
 		rawTime = &userList[i].dateOfLastChange;
 		localtime_s(&time, rawTime);
 		strftime(buffer, 80, "%d/%m/%y | %I:%M %p", &time);
@@ -211,6 +270,6 @@ void pm::bll::UserManager::displayUsers(pm::types::User activeUser)
 
 	std::cout << "  ========================================================" << std::endl << std::endl;
 	std::cout << "  Press any key to go back to menu...";
-	_getch();
+	(void)_getch();
 	menu::usersMenu::usersManagementView(activeUser);
 }

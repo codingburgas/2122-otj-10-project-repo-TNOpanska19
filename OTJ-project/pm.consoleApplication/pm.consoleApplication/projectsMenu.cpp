@@ -1,3 +1,11 @@
+/*****************************************************************//**
+ * \file   projectsMenu.cpp
+ * \brief  Source file for projects management view
+ * 
+ * \author Tereza
+ * \date   July 2022
+ *********************************************************************/
+
 #include "projectsMenu.h"
 #include "mainMenu.h"
 #include "usersMenu.h"
@@ -8,8 +16,15 @@
 #include "../pm.bll/userManager.h"
 #include "../pm.bll/projectManager.h"
 
+/// <summary>
+/// Object of ProjectManager structure
+/// </summary>
 pm::bll::ProjectManager pManager;
 
+/// <summary>
+/// Prints projects management view
+/// </summary>
+/// <param name="activeUser">Logged-in user</param>
 void menu::projectsMenu::projectsManagementView(pm::types::User activeUser)
 {
 	system("CLS");
@@ -33,7 +48,7 @@ void menu::projectsMenu::projectsManagementView(pm::types::User activeUser)
 		menu::mainMenu::gotoXY(11, 10); std::cout << "Assign teams to project";
 		menu::mainMenu::gotoXY(11, 11); std::cout << "Go back";
 
-		system("pause>nul"); // the >nul bit causes it the print no message
+		system("pause>nul"); // The >nul bit causes it to print no message
 
 		if (GetAsyncKeyState(VK_DOWN) && y + 1 > 11)
 			continue;
@@ -41,7 +56,7 @@ void menu::projectsMenu::projectsManagementView(pm::types::User activeUser)
 		if (GetAsyncKeyState(VK_UP) && y - 1 < 6)
 			continue;
 
-		if (GetAsyncKeyState(VK_DOWN) && y != 11) //down button pressed
+		if (GetAsyncKeyState(VK_DOWN) && y != 11) // Down arrow was pressed
 		{
 			menu::mainMenu::gotoXY(8, y); std::cout << "  ";
 			y++;
@@ -51,7 +66,7 @@ void menu::projectsMenu::projectsManagementView(pm::types::User activeUser)
 
 		}
 
-		if (GetAsyncKeyState(VK_UP) && y != 6) //up button pressed
+		if (GetAsyncKeyState(VK_UP) && y != 6) // Up arrow was pressed
 		{
 			menu::mainMenu::gotoXY(8, y); std::cout << "  ";
 			y--;
@@ -60,8 +75,8 @@ void menu::projectsMenu::projectsManagementView(pm::types::User activeUser)
 			continue;
 		}
 
-		if (GetAsyncKeyState(VK_RETURN))
-		{ // Enter key pressed
+		if (GetAsyncKeyState(VK_RETURN))	// Enter key was pressed
+		{ 
 			switch (menuItem)
 			{
 			case 0:
@@ -87,6 +102,10 @@ void menu::projectsMenu::projectsManagementView(pm::types::User activeUser)
 	}
 }
 
+/// <summary>
+/// Prints create project prompt
+/// </summary>
+/// <param name="activeUser">Logged-in user</param>
 void menu::projectsMenu::createProjectMenu(pm::types::User activeUser)
 {
 	system("CLS");

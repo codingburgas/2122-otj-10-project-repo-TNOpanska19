@@ -1,8 +1,10 @@
-// //////////////////////////////////////////////////////////
-// md5.h
-// Copyright (c) 2014 Stephan Brumme. All rights reserved.
-// see http://create.stephan-brumme.com/disclaimer.html
-//
+/*****************************************************************//**
+ * \file   md5.h
+ * \brief  Header file for md5 hashing. Copyright (c) 2014 Stephan Brumme. All rights reserved. See http://create.stephan-brumme.com/disclaimer.html
+ * 
+ * \author Tereza
+ * \date   July 2022
+ *********************************************************************/
 
 #pragma once
 

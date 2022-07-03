@@ -1,7 +1,18 @@
+/*****************************************************************//**
+ * \file   tasksMenu.cpp
+ * \brief  Source file for tasks management view
+ * 
+ * \author Tereza
+ * \date   July 2022
+ *********************************************************************/
+
 #include "pch.h"
 #include "mainMenu.h"
 #include "tasksMenu.h"
 
+/// <summary>
+/// Prints tasks management view
+/// </summary>
 void menu::tasksMenu::tasksManagementView()
 {
 	system("CLS");
@@ -26,7 +37,7 @@ void menu::tasksMenu::tasksManagementView()
 		menu::mainMenu::gotoXY(12, 11); std::cout << "Task details view";
 		menu::mainMenu::gotoXY(12, 12); std::cout << "Go back";
 
-		system("pause>nul"); // the >nul bit causes it the print no message
+		system("pause>nul"); // The >nul bit causes it to print no message
 
 		if (GetAsyncKeyState(VK_DOWN) && y + 1 > 12)
 			continue;
@@ -34,32 +45,32 @@ void menu::tasksMenu::tasksManagementView()
 		if (GetAsyncKeyState(VK_UP) && y - 1 < 6)
 			continue;
 
-		if (GetAsyncKeyState(VK_DOWN) && y != 12) //down button pressed
+		if (GetAsyncKeyState(VK_DOWN) && y != 12) // Down arrow was pressed
 		{
-			mainMenu::gotoXY(9, y); std::cout << "  ";
+			menu::mainMenu::gotoXY(9, y); std::cout << "  ";
 			y++;
-			mainMenu::gotoXY(9, y); std::cout << "->";
+			menu::mainMenu::gotoXY(9, y); std::cout << "->";
 			menuItem++;
 			continue;
 		}
 
-		if (GetAsyncKeyState(VK_UP) && y != 6) //up button pressed
+		if (GetAsyncKeyState(VK_UP) && y != 6) // Up arrow was pressed
 		{
-			mainMenu::gotoXY(9, y); std::cout << "  ";
+			menu::mainMenu::gotoXY(9, y); std::cout << "  ";
 			y--;
-			mainMenu::gotoXY(9, y); std::cout << "->";
+			menu::mainMenu::gotoXY(9, y); std::cout << "->";
 			menuItem--;
 			continue;
 		}
 
-		if (GetAsyncKeyState(VK_RETURN))
-		{ // Enter key pressed
+		if (GetAsyncKeyState(VK_RETURN))	// Enter key was pressed
+		{ 
 			switch (menuItem)
 			{
 			case 6:
-				mainMenu::managementView();
+				menu::mainMenu::managementView();
 			default:
-				mainMenu::gotoXY(5, 16);  std::cout << "Feature currently unavailable!";
+				menu::mainMenu::gotoXY(5, 16);  std::cout << "Feature currently unavailable!";
 			}
 		}
 	}

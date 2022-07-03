@@ -1,4 +1,10 @@
-// pch.cpp: source file corresponding to the pre-compiled header
+/*****************************************************************//**
+ * \file   pch.cpp
+ * \brief  Source file corresponding to the pre-compiled header
+ * 
+ * \author Tereza
+ * \date   July 2022
+ *********************************************************************/
 
 #include "pch.h"
 

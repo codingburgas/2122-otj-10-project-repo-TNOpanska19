@@ -1,7 +1,18 @@
+/*****************************************************************//**
+ * \file   workLogsMenu.cpp
+ * \brief  Source file for work log management view
+ * 
+ * \author Tereza
+ * \date   July 2022
+ *********************************************************************/
+
 #include "pch.h"
 #include "mainMenu.h"
 #include "workLogsMenu.h"
 
+/// <summary>
+/// Prints work log management view
+/// </summary>
 void menu::workLogsMenu::workLogsManagementView()
 {
 	system("CLS");
@@ -23,7 +34,7 @@ void menu::workLogsMenu::workLogsManagementView()
 		menu::mainMenu::gotoXY(14, 8); std::cout << "Remove work log";
 		menu::mainMenu::gotoXY(14, 9); std::cout << "Go back";
 
-		system("pause>nul"); // the >nul bit causes it the print no message
+		system("pause>nul"); // The >nul bit causes it to print no message
 
 		if (GetAsyncKeyState(VK_DOWN) && y + 1 > 9)
 			continue;
@@ -31,7 +42,7 @@ void menu::workLogsMenu::workLogsManagementView()
 		if (GetAsyncKeyState(VK_UP) && y - 1 < 6)
 			continue;
 
-		if (GetAsyncKeyState(VK_DOWN) && y != 9) //down button pressed
+		if (GetAsyncKeyState(VK_DOWN) && y != 9) // Down arrow was pressed
 		{
 			menu::mainMenu::gotoXY(11, y); std::cout << "  ";
 			y++;
@@ -40,7 +51,7 @@ void menu::workLogsMenu::workLogsManagementView()
 			continue;
 		}
 
-		if (GetAsyncKeyState(VK_UP) && y != 6) //up button pressed
+		if (GetAsyncKeyState(VK_UP) && y != 6) // Up arrow was pressed
 		{
 			menu::mainMenu::gotoXY(11, y); std::cout << "  ";
 			y--;
@@ -49,8 +60,8 @@ void menu::workLogsMenu::workLogsManagementView()
 			continue;
 		}
 
-		if (GetAsyncKeyState(VK_RETURN))
-		{ // Enter key pressed
+		if (GetAsyncKeyState(VK_RETURN))	// Enter key was pressed
+		{
 			switch (menuItem)
 			{
 			case 3:
