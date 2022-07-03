@@ -17,9 +17,12 @@ You're required to follow and implement the bare minimum of functionality. You'r
 ## About 💻 <a name = "about"></a>
 A Project Management application that would manage the operations of an IT company. It should bring visibility to an organization of multiple teams, working on multiple projects. It is a platform for project management and time tracking.
 
-## Demo of project 🎥 <a name = "demo"></a>
-<img src = "assets/demo1.png" alt = "demo img 1">
-<img src = "assets/demo2.png" alt = "demo img 2">
+## Preview of project 🎥 <a name = "preview"></a>
+<div align = "center">
+   <img src = "assets/demo1.png" alt = "preview img 1" width="500px">
+   <br>
+   <img src = "assets/demo2.png" alt = "preview img 2" width="500px">
+</div>
 
 ## Related documents 📄 <a name = "docs"></a>
    + [Doxygen documentation]()
