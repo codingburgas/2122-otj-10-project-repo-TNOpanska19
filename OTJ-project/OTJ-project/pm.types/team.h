@@ -20,12 +20,12 @@ namespace pm::types
 	/// </summary>
 	struct Team
 	{
-		int id;
+		int id{};
 		std::string title;
-		time_t dateOfCreation;
-		int idOfCreator;
-		time_t dateOfLastChange;
-		int idOfChange;
+		time_t dateOfCreation{};
+		int idOfCreator{};
+		time_t dateOfLastChange{};
+		int idOfChange{};
 		std::vector<int> members;
 	};
 }

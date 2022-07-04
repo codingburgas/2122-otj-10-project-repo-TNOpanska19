@@ -28,7 +28,6 @@ namespace pm::dal
 
 		void createNewProject(pm::types::Project& project);
 
-
 		std::vector<pm::types::Project> getAllProjects();
 
 		void update(std::vector<pm::types::Project> project);

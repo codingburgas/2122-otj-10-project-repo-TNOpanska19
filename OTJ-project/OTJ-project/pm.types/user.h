@@ -20,15 +20,15 @@ namespace pm::types
 	/// </summary>
 	struct User
 	{
-		int id;
+		int id{};
 		std::string username;
 		std::string firstName;
 		std::string lastName;
 		std::string email;
-		time_t dateOfCreation;
-		size_t idOfCreator;
-		time_t dateOfLastChange;
-		size_t idOfChange;
+		time_t dateOfCreation{};
+		int idOfCreator{};
+		time_t dateOfLastChange{};
+		int idOfChange{};
 		bool privilege;
 		std::string passwordHash;
 	};

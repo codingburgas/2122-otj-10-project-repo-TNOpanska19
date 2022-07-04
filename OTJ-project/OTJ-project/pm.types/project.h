@@ -22,10 +22,10 @@ namespace pm::types
 	{
 		std::string title;
 		std::string description;
-		time_t dateOfCreation;
-		int idOfCreator;
-		time_t dateOfLastChange;
-		int idOfChange;
+		time_t dateOfCreation{};
+		int idOfCreator{};
+		time_t dateOfLastChange{};
+		int idOfChange{};
 		std::vector<int> teams;
 	};
 }

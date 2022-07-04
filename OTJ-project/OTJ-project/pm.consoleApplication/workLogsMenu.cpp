@@ -71,8 +71,10 @@ void menu::workLogsMenu::workLogsManagementView()
 			{
 			case 3:
 				wMainMenu.managementView();
+				break;
 			default:
 				wMainMenu.gotoXY(5, 13);  std::cout << "Feature currently unavailable!";
+				break;
 			}
 		}
 	}

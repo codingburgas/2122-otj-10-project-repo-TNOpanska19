@@ -199,12 +199,8 @@ void pm::dal::TeamStore::assignUsers(int id, int userId)
 	teams = teamStore.getAllTeams();
 
 	for (unsigned i = 0; i < teams.size(); i++)
-	{
 		if (teams[i].id == id)
-		{
 			teams[i].members.push_back(userId);
-		}
-	}
 
 	teamStore.update(teams);
 }

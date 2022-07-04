@@ -184,6 +184,38 @@ bool pm::bll::TeamManager::getTeamById(int id)
 }
 
 /// <summary>
+/// Used to display all registered teams
+/// </summary>
+/// <param name="activeUser">Logged-in user</param>
+void pm::bll::TeamManager::displayTeams(pm::types::User activeUser)
+{
+	system("CLS");
+	teamList = tTeamManager.getRegisteredTeams();
+
+	std::cout << "  ========================================================" << std::endl;
+	std::cout << "                         TEAM LIST                    " << std::endl;
+	std::cout << "  ========================================================" << std::endl << std::endl;
+	std::cout << "                     id, title, members" << std::endl << std::endl << std::endl;
+
+	for (unsigned i = 0; i < teamList.size(); i++)
+	{
+		std::cout << "   Id: " << teamList[i].id << std::endl;
+		std::cout << "   Title: " << teamList[i].title << std::endl;
+		std::cout << "   Assigned members IDs: ";
+
+		for (auto member : teamList[i].members)
+			std::cout << member << ", ";
+
+		std::cout << std::endl << std::endl;
+	}
+
+	std::cout << "  ========================================================" << std::endl << std::endl;
+	std::cout << "  Press any key to go back to menu...";
+	(void)_getch();
+	tMenuManager.teamsManagementView(activeUser);
+}
+
+/// <summary>
 /// Used to assign users to a team
 /// </summary>
 /// <param name="activeUser">Logged-in user</param>
@@ -232,38 +264,6 @@ void pm::bll::TeamManager::assignUsersToTeam(pm::types::User activeUser)
 		std::cout << std::endl << "     Team does not exist!" << std::endl;
 
 	std::cout << std::endl << "  ======================================" << std::endl << std::endl;
-	std::cout << "  Press any key to go back to menu...";
-	(void)_getch();
-	tMenuManager.teamsManagementView(activeUser);
-}
-
-/// <summary>
-/// Used to display all registered teams
-/// </summary>
-/// <param name="activeUser">Logged-in user</param>
-void pm::bll::TeamManager::displayTeams(pm::types::User activeUser)
-{
-	system("CLS");
-	teamList = tTeamManager.getRegisteredTeams();
-
-	std::cout << "  ========================================================" << std::endl;
-	std::cout << "                         TEAM LIST                    " << std::endl;
-	std::cout << "  ========================================================" << std::endl << std::endl;
-	std::cout << "                     id, title, members" << std::endl << std::endl << std::endl;
-
-	for (unsigned i = 0; i < teamList.size(); i++)
-	{
-		std::cout << "   Id: " << teamList[i].id << std::endl;
-		std::cout << "   Title: " << teamList[i].title << std::endl;
-		std::cout << "   Assigned members IDs: ";
-
-		for (auto member : teamList[i].members)
-			std::cout << member << ", ";
-
-		std::cout << std::endl << std::endl;
-	}
-
-	std::cout << "  ========================================================" << std::endl << std::endl;
 	std::cout << "  Press any key to go back to menu...";
 	(void)_getch();
 	tMenuManager.teamsManagementView(activeUser);

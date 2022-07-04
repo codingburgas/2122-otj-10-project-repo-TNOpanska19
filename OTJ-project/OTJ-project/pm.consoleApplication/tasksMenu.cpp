@@ -74,8 +74,10 @@ void menu::tasksMenu::tasksManagementView()
 			{
 			case 6:
 				tsMainMenu.managementView();
+				break;
 			default:
 				tsMainMenu.gotoXY(5, 16);  std::cout << "Feature currently unavailable!";
+				break;
 			}
 		}
 	}

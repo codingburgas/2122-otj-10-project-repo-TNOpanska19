@@ -36,8 +36,8 @@ namespace pm::bll
 
 		bool getTeamById(int id);
 
-		void assignUsersToTeam(pm::types::User activeUser);
-
 		void displayTeams(pm::types::User activeUser);
+
+		void assignUsersToTeam(pm::types::User activeUser);
 	};
 }

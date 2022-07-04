@@ -157,10 +157,8 @@ void pm::bll::ProjectManager::displayProjects(pm::types::User activeUser)
 
 	// If the current user's id appears in a team's members, that team's id gets added to a string
 	for (auto team : teams)
-	{
 		if (std::count(team.members.begin(), team.members.end(), activeUser.id))
 			teamIds += std::to_string(team.id) + ",";
-	}
 
 	std::cout << "  ========================================================" << std::endl;
 	std::cout << "                       PROJECT LIST                    " << std::endl;
