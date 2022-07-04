@@ -25,7 +25,7 @@ A Project Management application that would manage the operations of an IT compa
 </div>
 
 ## Related documents 📄 <a name = "docs"></a>
-   + [Doxygen documentation]()
+   + [Doxygen documentation](https://github.com/TNOpanska19/OTJ-2022-doxygen-documentation)
 
 ## Usage 🖱️ <a name = "usage"></a>
 The user can create or be added to different teams and projects where they can find tasks to be done. The overall concept is that the application is used for project management.
