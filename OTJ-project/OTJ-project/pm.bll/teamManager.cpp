@@ -195,7 +195,6 @@ void pm::bll::TeamManager::displayTeams(pm::types::User activeUser)
 	std::cout << "  ========================================================" << std::endl;
 	std::cout << "                         TEAM LIST                    " << std::endl;
 	std::cout << "  ========================================================" << std::endl << std::endl;
-	std::cout << "                     id, title, members" << std::endl << std::endl << std::endl;
 
 	for (unsigned i = 0; i < teamList.size(); i++)
 	{
